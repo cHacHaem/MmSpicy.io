@@ -45,23 +45,23 @@ function insertHTMLFromFile(filePath) {
   init: function () {
     const el = this.el;
     const sceneEl = el.sceneEl;
-    const pointer = new THREE.Vector2(0, 0); // reuse Vector2 for center pointer
+    const pointer = new THREE.Vector2(0, 0);
 
     window.addEventListener('click', () => {
       const raycaster = el.components.raycaster;
       if (!raycaster) return;
 
-      // Only refresh if your raycastable objects changed (do once or on-demand)
-      // raycaster.refreshObjects();
-
-      // Set ray from center of screen
+      raycaster.refreshObjects(); // Refresh objects to ensure we have latest shootable elements
       raycaster.raycaster.setFromCamera(pointer, sceneEl.camera);
-      raycaster.intersections = raycaster.raycaster.intersectObjects(raycaster.objects, true);
+      
+      // Filter to only get shootable objects or players
+      const allIntersections = raycaster.raycaster.intersectObjects(raycaster.objects, true);
+      const intersects = allIntersections.filter(intersection => {
+        const el = intersection.object.el;
+        return el && (el.classList.contains('shootable') || el.classList.contains('player'));
+      });
 
-      const intersects = raycaster.intersections;
-      console.log(intersects);
-
-      if (intersects && intersects.length > 0) {
+      if (intersects.length > 0) {
         const worldPos2 = new THREE.Vector3();
         el.object3D.getWorldPosition(worldPos2);
 
