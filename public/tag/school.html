@@ -1,0 +1,476 @@
+    <a-scene physics="debug: false; resitution: 0; gravity: -20">
+    <a-assets>
+      
+      <img src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tileFloor.png?v=1744815782696" id="tile" >
+      <img src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tileRoof.png?v=1744900957819" id="roof" >
+     <img src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/basketBallCourt.png?v=1745783434418" id="bBallCourt" >
+<a-asset-item id="basketballHoopModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/basketballHoop.glb?v=1746392992086"></a-asset-item>
+      <a-asset-item id="lockerModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/locker.glb?v=1744757506090"></a-asset-item>
+      <a-asset-item id="chairModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/chair.glb?v=1744913358111"></a-asset-item> 
+    <a-asset-item id="benchModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/bench.glb?v=1739402500239"></a-asset-item>
+      <a-asset-item id="doorClosedModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/schoolDoorClosed.glb?v=1744916910201"></a-asset-item>
+      <a-asset-item id="doorOpenModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/schoolDoorOpen.glb?v=1745009455882"></a-asset-item>
+      <a-asset-item id="carModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/car.glb?v=1740160365174"></a-asset-item>
+      <a-asset-item id="wallModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/whiteCinderBlockWall.glb?v=1744818477842"></a-asset-item>
+      <a-asset-item id="arrow" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/arrow.glb?v=1726321834583"></a-asset-item>
+      <a-asset-item src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/desk.glb?v=1744901162775" id="deskModel"></a-asset-item> 
+     <a-asset-item id="windowModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/cinderBlockWindow.glb?v=1746485753222"></a-asset-item>
+      <a-asset-item id="windowOpenModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/cinderBlockWindowOpen.glb?v=1746485930758"></a-asset-item>
+      <a-asset-item id="treeModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tree.glb?v=1725820185520"></a-asset-item>
+<a-mixin id="car" static-body="shape:none" shape__main="shape:box;offset:0 1.4 1.7;halfExtents:1.5 1.4 2.1" shape__hood="shape:box;offset:0 1.3 -1.7;halfExtents:1.5 0.1 0.2;orientation:2 0 0 1" shape__hood2="shape:box;offset:0 0.9 -3;halfExtents:1.5 0.9 0.7" ></a-mixin>
+      <img id="grass" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/grass.png?v=1739312061476">
+      <a-asset-item src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/smartBoard.glb?v=1745100937867" id="smartBoardModel"></a-asset-item>
+      <a-asset-item id="hoopModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/basketballHoop.glb?v=1746392992086"></a-asset-item>
+      <a-mixin id="lockers"  instanced-mesh-member="mesh:#lockersIn" static-body="shape:none" shape__main="shape:box;offset:-0.3 2.1 0.1;halfExtents:0.4 2.1 3.6"></a-mixin>
+   <img id="concrete" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/concrete.png?v=1739042861945" >
+      <a-mixin id="chair"  instanced-mesh-member="mesh:#chairIn" static-body="shape:none" shape__main="offset: 0 0.4 0; halfExtents: 0.5 0.4 0.5" shape__back="offset: -0.45 1.2 0; halfExtents: 0.05 0.5 0.3"></a-mixin>
+ <a-mixin id="smartBoard"  instanced-mesh-member="mesh:#smartBoardIn" static-body="shape:none" shape__main="offset: 0 1.1 0.15; halfExtents: 2 1 0.05"></a-mixin>
+ 
+      <a-mixin id="tree" instanced-mesh-member="mesh:#treeIn" position="0 0 5" static-body="shape: none; sphereRadius: NaN" shape__trunk="shape: cylinder; offset: 0 2.5 0; height: 5" shape__leaves="shape: sphere; offset: 0 6.3 0; radius: 2"  ></a-mixin>
+   <a-mixin id="wall"  instanced-mesh-member="mesh:#wallIn" static-body="shape:none" shape__main="offset: 0 3 0; halfExtents: 5 3 0.25"></a-mixin>
+<a-mixin id="window" instanced-mesh-member="mesh:#windowIn" static-body="shape:none" shape__main="offset: 0 3 0; halfExtents: 5 3 0.25"></a-mixin>
+<a-mixin id="windowOpen" instanced-mesh-member="mesh:#windowOpenIn" static-body="shape:none" shape__main="offset: -2.5 3 0; halfExtents: 2.5 3 0.25" shape__bottom="offset: 0 0.5 0; halfExtents: 5 0.5 0.25" shape__right="offset: 4 3 0; halfExtents: 1 3 0.25"></a-mixin>
+
+      <a-mixin id="desk" instanced-mesh-member="mesh:#deskIn"  static-body="shape:none" shape__main="offset: 0 0.75 0; halfExtents: 0.6 0.75 1"></a-mixin>
+<a-mixin id="doorOpen" instanced-mesh-member="mesh:#doorOpenIn"   static-body="shape:none" shape__right="offset: 3 3 0; halfExtents: 2 3 0.25" shape__left="offset: -3 3 0; halfExtents: 2 3 0.25" shape__top="offset: 0 4.8 0; halfExtents: 1 1.2 0.25" shape__door="offset: 1.2 1.75 0.75; halfExtents: 0.7 1.75 0.1; orientation: 0 0.75 0 1"></a-mixin>
+ <a-mixin id="doorClosed" instanced-mesh-member="mesh:#doorClosedIn"  static-body="shape:none" shape__right="offset: 3 3 0; halfExtents: 2 3 0.25" shape__left="offset: -3 3 0; halfExtents: 2 3 0.25" shape__top="offset: 0 4.8 0; halfExtents: 1 1.2 0.25" shape__door="offset: 0 1.75 0; halfExtents: 1 1.75 0.1;"></a-mixin>
+
+  </a-assets>
+    <a-sky color="lightblue"></a-sky>
+    <a-sphere id="player" position="0 5 0" visible="false" player-controls>
+      <a-camera position="0 1.6 0" look-controls="pointerLockEnabled: true" wasd-controls="enabled: false" id="cam" ></a-camera>
+    </a-sphere>
+       <a-entity gltf-model="#carModel" id="carIn" instanced-mesh="positioning: world;drainColor:true;decompose:true" ></a-entity>
+  <a-entity gltf-model="#lockerModel" id="lockersIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+      <a-entity gltf-model="#treeModel" id="treeIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+
+  <a-entity gltf-model="#windowModel" id="windowIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+      <a-entity gltf-model="#smartBoardModel" id="smartBoardIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+  <a-entity gltf-model="#doorOpenModel" id="doorOpenIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+  <a-entity gltf-model="#chairModel" id="chairIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+  <a-entity gltf-model="#wallModel" id="wallIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+  <a-entity gltf-model="#deskModel" id="deskIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+    <a-entity gltf-model="#doorClosedModel" id="doorClosedIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+ <a-entity gltf-model="#windowOpenModel" id="windowOpenIn" instanced-mesh="positioning: world;capacity:150"></a-entity>
+ <a-entity gltf-model="#hoopModel" id="hoopIn" instanced-mesh="positioning: world;capacity:2"></a-entity>
+      <a-entity id="map">
+        <a-entity mixin="car" instanced-mesh-member="mesh: #carIn; colors: red" position="-15.92098 0.5 -51.9679" velocity="" static-body="sphereRadius: NaN" rotation="0 -100 0"></a-entity>
+        <a-entity mixin="car" instanced-mesh-member="mesh: #carIn; colors: gray" position="-30.01208 0.5 -51.60011" velocity="" static-body="sphereRadius: NaN" rotation="0 -90 0"></a-entity>
+        <a-entity mixin="car" instanced-mesh-member="mesh: #carIn; colors: red" position="-46.93998 0.5 -51.60011" velocity="" static-body="sphereRadius: NaN" rotation="0 -90 0"></a-entity>
+        <a-entity mixin="car" instanced-mesh-member="mesh: #carIn; colors: gray" position="-40.12276 0.5 -38.75876" velocity="" static-body="sphereRadius: NaN"></a-entity>
+        <a-entity mixin="car" instanced-mesh-member="mesh: #carIn; colors: orange" position="-49.3678 0.5 -38.75876" velocity="" static-body="sphereRadius: NaN"></a-entity>
+        <a-entity mixin="car" instanced-mesh-member="mesh: #carIn; colors: black" position="-11.58714 0.5 -38.75876" velocity="" static-body="sphereRadius: NaN"></a-entity>
+        <a-entity mixin="car" instanced-mesh-member="mesh: #carIn; colors: black" position="-23.04965 0.5 -38.75876" velocity="" static-body="sphereRadius: NaN"></a-entity>
+        <a-entity mixin="car" instanced-mesh-member="mesh: #carIn; colors: gray" position="-32.04847 0.5 -38.75876" velocity="" static-body="sphereRadius: NaN"></a-entity>
+        <a-entity mixin="car" instanced-mesh-member="mesh: #carIn; colors: black" position="-1.0297 0.5 -38.75876" velocity="" static-body="sphereRadius: NaN"></a-entity>
+          <a-entity position="14.24689 0 -40.57982" mixin="tree" scale="1.1 1.1 1.1"></a-entity>
+      <a-entity position="25.89911 0 -50.31102" mixin="tree" scale="1.5 1.5 1.5"></a-entity>
+      <a-entity position="30.7567 0 -36.32104" mixin="tree" scale="1 1 1"></a-entity>
+      <a-entity position="22.09102 0 -24.4028" mixin="tree" scale="1.2 1.2 1.2"></a-entity>
+      <a-entity position="22.36075 0 -5.65239" mixin="tree" scale="0.9 0.9 0.9"></a-entity>
+      <a-entity position="33.52293 0 -12.01056" mixin="tree" scale="1.1 1.1 1.1"></a-entity>
+      <a-entity position="35.1052 0 4.00706" mixin="tree" scale="1.9 1.9 1.9"></a-entity>
+      <a-entity position="27.44004 0 15.09878" mixin="tree" scale="0.9 0.9 0.9"></a-entity>
+      <a-entity position="35.68366 0 27.07856" mixin="tree" ></a-entity>
+      <a-entity position="26.74156 0 38.55503" mixin="tree" scale="1.3 1.3 1.3"></a-entity>
+      <a-entity position="24.63707 0 54.86216" mixin="tree" scale="1.4 1.4 1.4"></a-entity>
+      <a-entity position="2.93473 0 47.85113" mixin="tree" scale="1.3 1.3 1.3"></a-entity>
+      <a-entity position="-7.73201 0 55.9408" mixin="tree" ></a-entity>
+      <a-entity position="-17.01156 0 53.39998" mixin="tree"></a-entity>
+      <a-entity position="-25.72239 0 46.74419" mixin="tree" scale="2.3 2.3 2.3"></a-entity>
+      <a-entity position="-37.20472 0 54.01623" mixin="tree" ></a-entity>
+      <a-entity position="-47.27334 0 45.87167" mixin="tree" scale="1.5 1.5 1.5"></a-entity>
+      <a-entity position="-59.63221 0 46.32932" mixin="tree" scale="1.3 1.3 1.3"></a-entity>
+      <a-entity position="-67.90841 0 56.96075" mixin="tree" scale="0.9 0.9 0.9"></a-entity>
+      <a-entity position="-76.24963 0 46.68905" mixin="tree" ></a-entity>
+      <a-entity position="-69.6511 0 16.28548" mixin="tree" scale="1.2 1.2 1.2"></a-entity>
+   
+<a-box scale="120 100 1" position="-20 50 -60" static-body visible="false"></a-box>
+  <a-box scale="1 100 120" position="40 50 0" static-body visible="false"></a-box>
+  <a-box scale="1 100 120" position="-80 50 0" static-body visible="false"></a-box>
+  <a-box scale="120 100 1" position="-20 50 60" static-body visible="false"></a-box>
+  <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="60 1 30" velocity="" position="-25 0 -45"></a-box>
+  <a-box scale="120 1 120" position="-20 -0.5 0" src="#grass" static-body material="repeat: 4 4" roughness="1" ></a-box>  <a-entity mixin="lockers" position="-10 0.5 -1" rotation="0 90 0"></a-entity>
+  <a-entity mixin="lockers" position="-34 0.5 -1" rotation="0 90 0"></a-entity>
+   <a-entity mixin="lockers" position="-28 0.5 -1" rotation="0 90 0"></a-entity>
+  <a-entity mixin="lockers" position="-10 0.5 -9" rotation="0 -90 0"></a-entity>
+   <a-entity mixin="wall" position="-10 0.5 0"></a-entity>
+  <a-entity mixin="wall" position="-10 0.5 -10"></a-entity>
+  <a-entity mixin="wall" position="13.0459 0.5 34.77"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="1 0.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="11 0.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="-9.8 0.5 -29.38094"  ></a-entity>
+  <a-entity mixin="wall" position="0.21074 0.5 -29.38094"  ></a-entity>
+  <a-entity mixin="wall" position="0.21074 6.5 -29.38094"  ></a-entity>
+  <a-entity mixin="wall" position="-9.8 6.5 -29.38094"  ></a-entity>
+  <a-entity mixin="wall" position="-19 0.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="-19 0.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="-54.24538 6.5 34.337"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-29 0.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="-39 0.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="-49 0.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="-54.24538 0.5 34.337"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-54.5258 0.5 24.33674"   rotation="0 90 0"></a-entity>
+<a-entity mixin="wall" position="-39 6.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="-54.5258 6.5 24.33674"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-49 6.5 39.69092"  ></a-entity>
+  <a-entity position="9.3 6 19.8" stairs-generator="length: 6"> </a-entity>
+  <a-box src="#tile"  position="-20.01 0 4.99" material="repeat: 20 20" scale="70 1 70" static-body></a-box>
+<a-entity position="-66.73891 0 32.70068" mixin="tree" scale="1 1 1"></a-entity>
+        <a-entity position="-73.18072 0 -26.92708" mixin="tree" scale="1.2 1.2 1.2"></a-entity>
+        <a-entity position="-64.67852 0 -19.14164" mixin="tree" scale="0.9 0.9 0.9"></a-entity>
+        <a-entity position="-66.17225 0 -47.34343" mixin="tree" scale="3 3 3"></a-entity>
+        <a-entity position="-75.69958 0 -54.95574" mixin="tree" scale="1.3 1.3 1.3"></a-entity>
+        <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="20.49011 1.72693 0.92537" velocity="" position="-5.32203 6.07479 -29.93526"></a-box>
+        <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="20.49011 1.72693 0.92537" velocity="" position="5.34165 6.11067 -20.09058" rotation="0 90 0"></a-box>
+        <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="50.82949 1.72693 0.92537" velocity="" position="-54.90158 6.11067 14.57652" rotation="0 90 0"></a-box>
+  <a-entity instanced-mesh-member="mesh:#hoopIn" static-body="shape: none; sphereRadius: NaN" shape__main="shape:box;offset: 0 1 -1; halfExtents: 2 1 1" shape__hoop="shape:box;offset:0 0 0.7;halfExtents:0.5 0.5 0.5"  position="-17 5 -20" rotation="0 -90 0"></a-entity> <a-entity instanced-mesh-member="mesh:#hoopIn"  static-body="shape: none; sphereRadius: NaN" shape__main="offset: 0 1 -1; halfExtents: 2 1 1" shape__hoop="offset: 0 0 0.7"  position="-52.55892 5 -20" rotation="0 90 0"></a-entity> 
+  <a-entity mixin="wall" position="4.74337 0.5 4.76969"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="4.74337 0.5 14.76969"   rotation="0 90 0"></a-entity>
+   <a-entity mixin="wall" position="4.74337 0.5 24.76969"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="9.56571 0.5 25.48986"  ></a-entity>
+   <a-box src="#bBallCourt"  position="-35 0.14241 -20" scale="20 1.0728 40"  rotation="0 90 0"></a-box>  <a-box src="#roof"  position="-25 6 14.78393" material="repeat: 6 5" roughness="1" scale="60 1 50" static-body></a-box>
+  <a-box src="#tile"  position="-25 6.1 15.08" material="repeat: 6 5" roughness="1" scale="60 1 50" static-body></a-box>
+   <a-entity mixin="wall" position="13.0459 0.5 24.76969"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="13.0459 0.5 14.76969"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="3.0459 0.5 14.76969"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="13.0459 6.5 4.77"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="windowOpen" position="13.0459 6.5 34.77"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="8.12795 6.5 39.69092"  ></a-entity>
+ <a-box src="#roof"  position="-5 6 -20" material="repeat: 2 2" roughness="1" scale="20 1 20" static-body></a-box>
+  <a-entity mixin="window" position="13.0459 6.5 24.76969"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="13.0459 6.5 14.76969"   rotation="0 90 0"></a-entity>
+ <a-box src="#tile"  position="10 6.1 30" material="repeat: 1 2" roughness="1" scale="10 1 20" static-body></a-box>
+  <a-entity mixin="doorOpen" position="0 0.5 -10"></a-entity>
+   <a-entity mixin="doorClosed" position="0 0.5 0"></a-entity>
+  <a-entity id="desks and chairs 1">
+  <a-entity mixin="desk"  position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-3.82902 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.64932 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-3.78503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.60503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-3.77079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.57079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-7.08779 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80935 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-6.88699 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.60855 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-6.76185 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.46393 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-7.18053 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80253 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+  </a-entity>
+  <a-entity id="desks and chairs 2" position="-33 0 -9.8" rotation="0 180 0">
+    
+  <a-entity mixin="desk"  position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-3.82902 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.64932 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-3.78503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.60503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-3.77079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.57079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-7.08779 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80935 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-6.88699 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.60855 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-6.76185 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.46393 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-7.18053 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80253 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+  </a-entity>
+   <a-entity id="desks and chairs 3" position="-53 0 -9.8" rotation="0 180 0">
+    
+  <a-entity mixin="desk"  position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-3.82902 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.64932 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-3.78503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.60503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-3.77079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.57079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-7.08779 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80935 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-6.88699 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.60855 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-6.76185 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.46393 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-7.18053 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80253 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -15.60670"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk"  position="-10.35321 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+  </a-entity>
+
+  <a-entity mixin="wall" position="-14.76701 0.5 -14.71882"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="smartBoard" position="-14.55576 2 -17"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.76701 0.5 -24.73433"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-10 0.5 -23.46337"  ></a-entity>
+   <a-entity mixin="wall" position="0 0.5 -23.46337"  ></a-entity>
+  <a-entity mixin="wall" position="4.74337 0.5 -24.73433"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="window" position="4.74337 0.5 -14.71882"   rotation="0 90 0"></a-entity>
+  
+  <a-entity mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
+  
+ <a-entity mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 14.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-19.77271 0.5 14.64688"  ></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 14.64688"  ></a-entity>
+   <a-entity mixin="doorOpen" position="-20.0001 0.5 0" rotation="0 180 0"></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 0"  ></a-entity>
+  <a-entity mixin="wall" position="-20 0.5 -10"></a-entity>
+    <a-entity mixin="wall" position="-30 0.5 -10"></a-entity>
+    <a-entity mixin="doorOpen" position="-40 0.5 -10"></a-entity>
+    <a-entity mixin="wall" position="-50 0.5 -10"></a-entity>
+  <a-entity mixin="wall" position="-50 0.5 -29.79756"  ></a-entity>
+  <a-entity mixin="wall" position="-40 0.5 -29.79756"  ></a-entity>
+  <a-entity mixin="wall" position="-30 0.5 -29.79756"  ></a-entity>
+  <a-entity mixin="wall" position="-20 0.5 -29.79756"  ></a-entity>
+  <a-entity mixin="wall" position="-54.79982 0.5 -14.71882"   rotation="0 90 0"></a-entity>
+    <a-entity mixin="wall" position="-54.79982 0.5 -24.71882"   rotation="0 90 0"></a-entity>
+  <a-entity position="0 6 0"><a-entity mixin="wall" position="-20 0.5 -10"></a-entity>
+    <a-entity mixin="wall" position="-30 0.5 -10"></a-entity>
+    <a-entity mixin="wall" position="-40 0.5 -10"></a-entity>
+    <a-entity mixin="wall" position="-50 0.5 -10"></a-entity>
+  <a-entity mixin="window" position="-50 0.5 -29.79756"  ></a-entity>
+  <a-entity mixin="window" position="-40 0.5 -29.79756"  ></a-entity>
+  <a-entity mixin="window" position="-30 0.5 -29.79756"  ></a-entity>
+  <a-entity mixin="window" position="-20 0.5 -29.79756"  ></a-entity>
+  <a-entity mixin="window" position="-54.79982 0.5 -14.71882"   rotation="0 90 0"></a-entity>
+    <a-entity mixin="window" position="-54.79982 0.5 -24.71882"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.76701 0.5 -14.71882"   rotation="0 90 0"></a-entity>
+    <a-entity mixin="wall" position="-14.76701 0.5 -24.73433"   rotation="0 90 0"></a-entity>
+  </a-entity>
+  <a-entity id="3-3" position="-5.69419 6 18.55469" rotation="0 90 0">
+    
+  <a-entity mixin="desk" position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.82902 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.64932 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.78503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.60503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.77079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.57079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-7.08779 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80935 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-6.88699 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.60855 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-6.76185 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.46393 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-7.18053 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80253 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+  </a-entity>
+  <a-entity id="3-2" position="4.25383 6 0.17122">
+    
+  <a-entity mixin="desk" position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.82902 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.64932 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.78503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.60503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.77079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.57079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-7.08779 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80935 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-6.88699 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.60855 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-6.76185 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.46393 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-7.18053 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80253 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+  </a-entity>
+  <a-entity id="desks and chairs 3-2" position="-34.83564 6 -9.47184" rotation="0 180 0">
+    
+  <a-entity mixin="desk" position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.82902 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.64932 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.78503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.60503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.77079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.57079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-7.08779 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80935 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-6.88699 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.60855 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-6.76185 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.46393 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-7.18053 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80253 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+  </a-entity>
+  <a-entity id="desks and chairs 3" position="-52.72652 6 -8.80056" rotation="0 180 0">
+    
+  <a-entity mixin="desk" position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.82902 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.64932 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.78503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.60503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-3.77079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-2.57079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-7.08779 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80935 0.5 -11.92854"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-6.88699 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.60855 0.5 -15.29655"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-6.76185 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.46393 0.5 -18.52877"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-7.18053 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-5.80253 0.5 -21.76184"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -18.44821"   rotation="0 180 0"></a-entity>
+<a-entity mixin="desk" position="-10.35321 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+<a-entity mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
+  </a-entity>
+  <a-entity mixin="wall" position="13.0459 0.5 4.77"   rotation="0 90 0"></a-entity>
+  <a-entity position="-20">  
+  <a-entity mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
+  
+ <a-entity mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 14.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-19.77271 0.5 14.64688"  ></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 14.64688"  ></a-entity>
+   <a-entity mixin="doorOpen" position="-20.0001 0.5 0" rotation="0 180 0"></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 0"  ></a-entity></a-entity>
+  <a-entity mixin="wall" position="4.74337 6.5 -4.71433"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="4.74337 6.5 4.7"   rotation="0 90 0"></a-entity>
+   <a-entity mixin="wall" position="4.74337 6.5 14.7"   rotation="0 90 0"></a-entity>
+  <a-entity position="-20 6">  
+  <a-entity mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="windowOpen" position="-34.6 0.5 -5.03838"   rotation="0 90 0"></a-entity>
+ <a-entity mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="window" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 14.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-19.77271 0.5 14.64688"  ></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 14.64688"  ></a-entity>
+   <a-entity mixin="doorOpen" position="-20.0001 0.5 0" rotation="0 180 0"></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 0"  ></a-entity></a-entity>
+  <a-entity position="0.0327 6">  
+  <a-entity mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
+  
+ <a-entity mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 14.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-19.77271 0.5 14.64688"  ></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 14.64688"  ></a-entity>
+   <a-entity mixin="doorOpen" position="-20.0001 0.5 0" rotation="0 180 0"></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 0"  ></a-entity></a-entity>
+  <a-entity position="-14.68997 6 53.77028" rotation="0 -90 0">  
+  <a-entity mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
+  
+ <a-entity mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 14.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-19.77271 0.5 14.64688"  ></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 14.64688"  ></a-entity>
+   <a-entity mixin="doorOpen" position="-20.0001 0.5 0" rotation="0 180 0"  ></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 0"  ></a-entity></a-entity>
+  <a-entity position="-29.17697 6 -9.79842" rotation="0 180 0">  
+  <a-entity mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
+  
+ <a-entity mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
+  <a-entity mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="windowOpen" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-34.6 0.5 14.8"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="-19.77271 0.5 14.64688"  ></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 14.64688"  ></a-entity>
+   <a-entity mixin="doorOpen" position="-20.0001 0.5 0" rotation="0 180 0"  ></a-entity>
+  <a-entity mixin="wall" position="-29.77271 0.5 0"  ></a-entity></a-entity>
+  <a-entity mixin="wall" position="-1.87 6.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="-11.87 6.5 39.69092"  ></a-entity>
+  <a-entity mixin="wall" position="13.0459 0.5 -5.23"   rotation="0 90 0"></a-entity>
+  <a-entity mixin="wall" position="9.64443 0.5 -9.98176"  ></a-entity>
+  <a-box src="#roof"  position="-20.82457 12.5 15" material="repeat: 7 5" static-body roughness="1" scale="70 1 50" ></a-box>
+  <a-entity mixin="wall" position="9.64443 6.5 -9.98176"  ></a-entity>
+  <a-entity mixin="wall" position="13.0459 6.5 -5.23"   rotation="0 90 0"></a-entity>
+
+  <a-box src="#roof"  position="-25 12.5 -20" material="repeat: 6 2" roughness="1" scale="60 1 20" static-body ></a-box>
+  <a-box src="#tile"  position="-5 6.1 -20" material="repeat: 2 2" roughness="1" scale="20 1 20" static-body></a-box>
+  <a-entity mixin="lockers" position="-47.14526 0.5 -1" rotation="0 90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-23.94933 0.5 -9" rotation="0 -90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-46.40294 0.5 -9" rotation="0 -90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-46.40294 6.5 -9" rotation="0 -90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-38.15802 6.5 -9" rotation="0 -90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-29.23532 6.5 -9" rotation="0 -90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-19.30183 6.5 -9" rotation="0 -90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-47.14526 6.5 -1" rotation="0 90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-33.77054 6.5 -1" rotation="0 90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-25.6092 6.5 -1" rotation="0 90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-2.12197 6.5 -9" rotation="0 -90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-13.97518 6.5 3.96897"  ></a-entity>
+  <a-entity mixin="lockers" position="-13.97518 6.5 11.38607"  ></a-entity>
+  <a-entity mixin="lockers" position="-13.97518 6.5 18.84863"  ></a-entity>
+  <a-entity mixin="lockers" position="-13.97518 6.5 26.82811"  ></a-entity>
+  <a-entity mixin="lockers" position="-9.87233 6.5 38.80225" rotation="0 90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="-1.67712 6.5 38.80225" rotation="0 90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="6.52465 6.5 38.80225" rotation="0 90 0"  ></a-entity>
+  <a-entity mixin="lockers" position="4.1615 6.5 -5.5386"   rotation="0 180 0"></a-entity>
+  <a-entity mixin="lockers" position="4.1615 6.5 2.37573"   rotation="0 180 0"></a-entity>
+  <a-entity mixin="lockers" position="4.1615 6.5 10.64309"   rotation="0 180 0"></a-entity>
+  </a-entity>
+
+      </a-scene>
+    
+      

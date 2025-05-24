@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta name="robots" content="noindex">
+    <title>Beta Testing | MmSpicy io</title>
+    <link rel="icon" href="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon2.png?v=1734826395336">
+  </head>
+  <body>
+    <h1>Beta Testing</h1>
+     <div id="testing">
+      
+    </div>
+    <script>
+    let code = prompt("Please put in the beta tester code:")
+    let testing = document.getElementById("testing")
+    if(code === "helloWorld") {
+      testing.innerHTML = "<p>Thank you for being an mmspicy beta tester. Please don't share your code with anyone. This page is for testing new mmspicy features, try them out below and please give feedback in the <a href='/contact'>contact page.</a></p><h1>Laser Tag</h1><a href='/laserTag?join=random'>Join a laser tag game</a>"
+    } else {
+      testing.innerHTML = "Incorrect Code"
+    }
+    </script>
+     <footer style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  padding: 6px 5px;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  color: #666;
+  z-index: 1000;
+  white-space: nowrap;
+  overflow-x: auto;
+">
+  <a href="/" style="margin: 0 6px; color: inherit; text-decoration: none;">Home</a> |
+  <a href="/play" style="margin: 0 6px; color: inherit; text-decoration: none;">Play</a> |
+  <a href="/create" style="margin: 0 6px; color: inherit; text-decoration: none;">Create</a> |
+  <a href="/create/editor" style="margin: 0 6px; color: inherit; text-decoration: none;">Editor</a> |
+  <a href="/about" style="margin: 0 6px; color: inherit; text-decoration: none;">About</a> |
+  <a href="/contact" style="margin: 0 6px; color: inherit; text-decoration: none;">Contact</a> |
+  <a href="/privacy" style="margin: 0 6px; color: inherit; text-decoration: none;">Privacy</a> |
+  <a href="/terms-of-use.txt" style="margin: 0 6px; color: inherit; text-decoration: none;">Terms</a>
+</footer>
+
+  </body>
+</html>

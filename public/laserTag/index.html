@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <meta charset="utf-8">
+      <meta name="description" content="MmSpicy io is a multiplayer 3d tag game that can be played online against strangers, or you can create a private game to play with friends.">
+    <meta name="keywords" content="multiplayer, tag, online, 3d, first-person, io, play, free, game">
+   <script src="/redirect-mobile.js"></script>
+    <link rel="icon" href="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon2.png?v=1734826395336">
+  <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+  <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/instanced-mesh@v0.7.4/src/instanced-mesh.min.js"></script>
+  <title>Laser Tag</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .progress-ring {
+  width: 120px;  /* Double the size */
+  height: 120px; /* Double the size */
+  position: absolute;
+  bottom: 20px;  /* Adjust the distance from the bottom */
+  left: 50%;
+  transform: translateX(-50%); /* Centers the element horizontally */
+  z-index: 60;
+}
+
+.progress-ring circle {
+  fill: none;
+  stroke-width: 24;  /* Double the stroke width */
+  cx: 60;  /* Adjust cx and cy for the new size */
+  cy: 60;
+  r: 48;   /* Double the radius */
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-ring-bg {
+  stroke: #e6e6e6;
+}
+
+.progress-ring-fg {
+  stroke: #4caf50;
+  stroke-dasharray: 301.44;  /* Adjusted for new radius */
+  stroke-dashoffset: calc(301.44 * var(--percent, 0.75));
+  transition: stroke-dashoffset 0.5s ease;
+}
+.message {
+  background: green;
+  border-radius: 7px;
+  color:black;
+    word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+     #crosshair {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: white;
+    pointer-events: none; 
+    user-select: none;
+    z-index: 9999;
+  }
+    .notit {
+      color: lightgreen;
+      margin-left: 20px;
+      margin-right: 5px;
+    }
+    .it {
+      color: red;
+      margin-left: 20px;
+      margin-right: 5px;
+    }
+    #timeleft {
+      margin-left: 5px;
+    }
+    .gameinfo {
+      position: absolute;
+      top: 0;
+      display: flex;
+      left: 50%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      color: white;
+      border-radius: 5px;
+      user-select: none;
+      z-index: 3; /* Place the overlay above the scene */
+    }
+    .messageme {
+      background: blue;
+  border-radius: 7px;
+  color:black;
+        word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+    }
+    .name {
+      color: black
+    }
+    a-scene {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2; /* Scene will be behind the overlay */
+    }
+    
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: calc(100% - 20px);
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      color: white;
+      padding: 10px;
+      z-index: 3; /* Place the overlay above the scene */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+.overlayunder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: calc(100% - 20px);
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      color: white;
+      padding: 10px;
+      z-index: 1; /* Place the overlay above the scene */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    #chat-content {
+      flex: 1; /* Take available vertical space */
+      overflow-y: auto;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    #chat-input-container {
+      display: flex;
+      align-items: center;
+    }
+
+    #chat-input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff5722;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="gameinfo">
+  <h1 id="timeleft">
+    1:00
+  </h1>
+  <h1 id="it" class="notit">
+    connecting...
+  </h1>
+  </div>
+  <div class="overlay" id="overlay">
+    <div id="chat-content">
+      <!-- Chat messages will appear here -->
+    </div>
+    <div id="chat-input-container">
+      <button onclick="sendMessage()">Send</button>
+      <input type="text" id="chat-input" placeholder="Type a message...">
+    </div>
+  </div>
+     <div class="progress-ring" id="health" style="--percent: 0;">
+    <svg width="120" height="120" viewbox="0 0 120 120">
+      <circle class="progress-ring-bg" r="48" cx="60" cy="60"/>
+      <circle class="progress-ring-fg" id="ring" style="stroke: lime" r="48" cx="30" cy="60"/>
+    </svg>
+  </div>
+    <div id="crosshair">+</div>
+     <script src="/getPlayerData.js"></script>
+   <script src="/laserTag/multiplayer.js"></script>
+  <script src="/stairs.js"></script>
+  <script src="/movement.js"></script>
+  <script src="/animation.js"></script>
+  <script src="/spawn.js"></script>
+  <script src="/chat.js"></script>
+  <script src="/laserTag/laserTag.js"></script>
+    <script src="/laserTag/blaster.js"></script>
+  </body>
+</html>

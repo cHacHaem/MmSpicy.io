@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta name="robots" content="noindex">
+    <title>Admin | MmSpicy io</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>
+      Games Played:
+    </h1>
+    <h1 id="played">
+      loading
+    </h1><br>
+    <input id="banName">
+    <button onclick="banName()">
+      Ban Name
+    </button><br>
+    <input id="banId" placeholder="player id">
+    <input id="banTime" placeholder="ban time ms">
+    <input id="banReason" placeholder="ban reason">
+    <button onclick="banPlayer()">
+      Ban Player
+    </button>
+    <h1>
+      Requests:
+    </h1>
+    <div id="requests">
+    </div>
+    <script src="/admin/admin.js"></script>
+  </body>
+</html>

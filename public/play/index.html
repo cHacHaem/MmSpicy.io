@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+    <meta name="description" content="MmSpicy io is a multiplayer 3d tag game that can be played online against strangers, or you can create a private game to play with friends.">
+    <meta name="keywords" content="multiplayer, tag, online, 3d, first-person, io, play, free, game">
+      <script src="/redirect-mobile.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <title>MmSpicy io</title>
+    
+      <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/instanced-mesh@v0.7.0/src/instanced-mesh.min.js"></script>
+    <link rel="icon" href="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon2.png?v=1734826395336">
+ <link rel="stylesheet" href="/play/style.css">
+  </head>
+  <body>
+    
+   <h1 align="center" id="titleTop">
+     
+     MmSpicy <div class="io">io</div> 
+    </h1>
+    <div class="rightBar">
+      <h1 class="sideBarHeading">
+        Skins
+      </h1>
+      <div id="skinContainer">
+  <button onclick="cowboySkin()" class="regbutton" style="background: brown; color: gold">
+       Cowboy Skin
+      </button>
+      <button onclick="sweaterSkin()" class="regbutton" style="background: blue; color: black">
+       Sweater Skin
+      </button>
+      <button onclick="knightSkin()" class="regbutton" style="background: black; color: gold">
+       Knight Skin
+      </button>
+        <button onclick="pjSkin()" class="regbutton" style="background: black; color: red">
+       PJ Skin
+      </button>
+        <button onclick="soccerSkin()" class="regbutton" style="background: darkblue; color: orange">
+       Soccer Player Skin
+      </button>
+        <button onclick="astronautSkin()" class="regbutton" style="background: white; color: darkblue">
+       Astronaut Skin
+      </button>
+      
+</div>
+<button onclick="requestSkin()" class="regbutton" style="font-size: 150%">
+        Request a skin
+      </button>
+      <input class="otherInput" id="skinRequest" placeholder="skins can't be inappropriate or copyrighted">
+      <h2 class="sideBarHeading">Updates</h2>
+    
+    <ul>
+      <li>You can type /report in the chat to report the chat logs.</li>
+      <li>Fixed banning bugs.</li>
+      <li>There is now anti-camping in the school map and it will result in getting tagged.</li>
+      <li>Old accounts will be removed after 10 days.</li>
+      <li>We've updated our <a href="/privacy">privacy policy</a>.</li>
+      <li>We've implemented a new banning system.</li>
+      <li>There are now new spawn points on the city map.</li>
+      <li>We've implemented a new name filtering system, names that don't meet our <a href="/terms" target="_blank">Terms</a> will be removed.</li>
+      <li>We've implemented a new chat filtering system.</li>
+      <li>New school map!</li><li>We've updated our <a href="/terms" target="_blank">Terms of Use</a>.</li>
+      <li>Laser tag coming soon!</li><li>Check out the new leaderboard!</li>
+      <li>Fixed movement bug.</li>
+      <li>New Astronaut Skin!</li>
+      <li>Fixed chat bugs.</li>
+      <li>New Soccer Player Skin!</li>
+       <li>Fixed random tagging bug.</li>
+      <li>Pressing shift will give you a 3 second boost. There is a 10 second cooldown though.</li>
+      <li>Tree or roof camping in the city map will get you kicked from the game.</li>
+      <li>Added custom map <a href="/create/editor">editor</a> with <a href="/create">HTML and A-Frame library Tutorial</a></li>
+      <li>There is now a 16 character name limit.</li>
+      <li>Tree camping in the forest map will get you kicked from the game.</li>
+      <li>Fixed tag arrow bug in the cave map.</li>
+      <li>Fixed crash when tagging at the end of a game.</li>
+  <li>New pj skin! Scroll down in the skin menu to add it.</li>
+  <li>New cave map!</li>
+  <li>Fixed time to start bug.</li>
+      <li>Added 2 second cooldown for tagging.</li>
+</ul>  
+      <h1 class="sideBarHeading">
+        Did you know
+      </h1>
+      <p id="facts" class="shortp">
+        
+      </p>
+      
+    </div>
+    <div class="leftBar">
+    <h2 class="sideBarHeading">Join</h2>
+       <select class="regbutton" id="gameModeSelect">
+      <option value="tag">Tag</option>
+      <option value="laserTag">Laser Tag</option>
+</select>
+    <button onclick="joinRandomTagGame()" class="regbutton">Join/Create a public game</button>
+    <hr>
+    <select class="regbutton" id="tagMapSelect" style="width: calc(50% - 20px);">
+      <option value="city">City</option>
+  <option value="forest">Forest</option>
+      <option value="cave">Cave</option>
+      <option value="school">School</option>
+</select>
+      <select class="regbutton" style="width: calc(50% - 20px);" id="tagTimeSelect">
+        <option value="60">1 Minute</option>
+  <option value="30">30 Seconds</option>
+        <option value="180">3 Minutes</option>
+        <option value="300">5 Minutes</option>
+</select>
+    <button onclick="createPrivateTagGame()" class="regbutton">Create a private game</button>
+    <hr>
+      <button onclick="joinPrivateTagGame()" class="regbutton">
+      Join a private game
+    </button>
+    <input id="joinPrivateTag" class="otherInput" placeholder="Game Code (just the last 5 letters)">
+      <h1 class="sideBarHeading">Leaderboard</h1>
+      <div id="leaderboard" class="board"></div>
+    </div>
+      <div id="scene" align="center">
+        <a-scene embedded xr-mode-ui="enabled: false">
+      
+    <a-camera position="0 0 1" look-controls="enabled: false" wasd-controls="enabled: false"></a-camera>
+<script src="/play/skin.js"></script>
+  </a-scene>
+    </div>
+    <div align="center">
+      <input id="playerName" onchange="changeName()" >
+    
+    </div>
+  
+    <script src="/getPlayerData.js"></script>
+    <script src="/play/script.js"></script>
+    <script src="/animation.js"></script>
+   <footer style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  padding: 6px 5px;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  color: #666;
+  z-index: 500;
+  white-space: nowrap;
+  overflow-x: auto;
+">
+  <a href="/" style="margin: 0 6px; color: inherit; text-decoration: none;">Home</a> |
+  <a href="/play" style="margin: 0 6px; color: inherit; text-decoration: none;">Play</a> |
+  <a href="/create" style="margin: 0 6px; color: inherit; text-decoration: none;">Create</a> |
+  <a href="/create/editor" style="margin: 0 6px; color: inherit; text-decoration: none;">Editor</a> |
+    <a href="/about" style="margin: 0 6px; color: inherit; text-decoration: none;">About</a> |
+  <a href="/contact" style="margin: 0 6px; color: inherit; text-decoration: none;">Contact</a> |
+  <a href="/privacy" style="margin: 0 6px; color: inherit; text-decoration: none;">Privacy</a> |
+  <a href="/terms" style="margin: 0 6px; color: inherit; text-decoration: none;">Terms</a>
+</footer>
+
+
+  </body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Create | MmSpicy io</title>
+        <meta name="description" content="MmSpicy io is a multiplayer 3D tag game that can be played online against strangers, or you can create a private game to play with friends.">
+    <meta name="keywords" content="multiplayer, tag, online, 3D, first-person, io, play, free, game">
+     <script src="/redirect-mobile.js"></script>
+    <link rel="icon" href="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon2.png?v=1734826395336">
+    <link rel="stylesheet" href="/create/style.css">
+  </head>
+  <body>
+    <h1 id="titleTop">Create Your Own Maps With HTML</h1>
+    <p  >
+      Thanks to the <a href="https://aframe.io">A-Frame</a> library, it's super easy to add 3D experiences to your browser using just HTML tags!
+    </p>
+    <p  >
+      If you're already familiar with HTML, check out our guide on <a href="/create#maps">creating custom maps with A-Frame</a>. 
+      Or, if you'd like to learn HTML, explore our short guide on <a href="/create#html">how to code with HTML</a>.
+    </p>
+    <h1 id="html">How to Code with HTML</h1>
+     <p>
+      Before we explain how to code with HTML it's important to explain that this page is not going to go into high detail on the many tags, attributes, and CSS styles.
+      This is why there are so many other reference pages and other resources out there. If you don't know how to do something, just look it up.
+      Some good places to look are, <a href="https://www.w3schools.com/">W3 Schools</a> or <a href="https://developer.mozilla.org">MDN Webdocs</a>.
+      If it's not a matter of forgetting the name of something, look or ask a question on a forum like <a href="https://stackoverflow.com/">Stack Overflow</a>. 
+      Some of my personal favorites are AI tools <a href="https://chat.openai.com">Chat GPT</a> or <a href="https://gemini.google.com">Gemini</a>
+    </p>
+    <p  >
+      HTML is the foundational markup language used by 96.7% of all websites, with 94.4% specifically utilizing HTML5. It's easy to learn and use.
+      HTML is written using tags, where each set of tags represents an element on the page. Some <a href="/create#elements">elements</a> are visible, while others alter the page’s structure or behavior.
+      <a href="/create#attributes">Attributes</a> specify little details that change what elements do.
+    </p> 
+    <h1 id="elements">
+      Elements
+    </h1>
+    <p>
+      Elements have an opening tag: <code>&lt;tagname&gt;</code> and most have a closing tag: <code>&lt;/tagname&gt;</code>. Opening tags have a <code>&lt;</code>, the element name, then a <code>&gt;</code>. Closing tags are the same except they have a <code>/</code> after the <code>&lt;</code>.
+      The stuff inside the two tags is the elements's content. For example: <code>&lt;p&gt;This is a paragraph of text.&lt;/p&gt;</code> Result:
+    </p>
+<iframe srcdoc="<p>
+        This is a paragraph of text.
+    </p>" width="100%"></iframe>
+    <p  >
+      There are many different tags like the h1 tag that creates a big heading:
+    </p>
+    <code>&lt;h1&gt;This is a heading&lt;/h1&gt;</code>
+    <p  >
+      Result:
+    </p><iframe srcdoc="<h1>
+        This is a heading
+    </h1>" width="100%"></iframe>
+    <p  >
+      Or the button tag that creates a button:
+    </p>
+    <code>&lt;button&gt;This is a button&lt;/button&gt;</code>
+    <p  >
+      Result:
+    </p><iframe srcdoc="<button>This is a button</button>" width="100%"></iframe>
+     <p  >
+      Those (and many more tags) are the building blocks of a website and they work on their own. If you were to open an index.html file with
+       <code>&lt;button&gt;This is a button&lt;/button&gt;&lt;h1&gt;This is a heading&lt;/h1&gt;</code>, it would look like this: </p>
+    <iframe srcdoc="<button>This is a button</button><h1>
+  This is a heading
+  </h1>" width="100%"></iframe>
+   
+    <p  >
+      However, websites should have a structure. First you need the thing at the top like this: <code>&lt;!DOCTYPE html&gt;</code>
+      (It doesn't have a closing tag.) 
+      Then right after it there is the html tag that looks like this <code>&lt;html lang="en"&gt; &lt;/html&gt;</code>. 
+      Inside the html tag is where we put the head tag and body tag. The head tag is the head of the page, it will hold some
+      of our scripts, the title, favicon, CSS, meta tags, and all the stuff we don't see directly.
+      The other tag inside the html tag is the body tag. This holds all the stuff we get to see like button and h1 tags. 
+      You can put some scripts that directly modify the page in there too. Here's an example of a page:
+    </p>
+  <code align="left">&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="en"&gt;<br>
+&lt;head&gt;<br>
+&lt;title&gt;Example Page&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&lt;h1&gt;This is an example&lt;/h1&gt;<br>
+&lt;p&gt;Cool right?&lt;/p&gt;<br>
+&lt;button&gt;You can click me, but without JavaScript, nothing happens.&lt;/button&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</code>
+    <p  >
+      Result:
+    </p>
+    <iframe srcdoc="<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Example Page</title>
+</head>
+<body>
+<h1>This is an example</h1>
+<p>Cool right?</p>
+<button>You can click me, but without JavaScript, nothing happens.</button>
+</body>
+</html>" width="100%" height="200px"></iframe>
+    <p  >
+      You could do this, but we can't do that much. This is why we have attributes.
+    </p>
+    <h1 id="attributes">
+      Attributes
+    </h1>
+    <p  >
+      Attributes help us specify the details on elements. 
+      Attributes can set the id, class, style, alignment, source, width, height, and many more details of a element.
+      Attributes are added in the opening tag of an element after the name of it. You put the name of the tag, an = sign, and inside quotes the value of the attribute. 
+      For example, we can set the id of the heading tag to coolHeading like this: <code>&lt;h1 id="coolHeading"&gt;A Cool Heading/h1&gt;</code> 
+      I know you're probably wondering though, why would you want to set the id attribute of an element? It's not like it changes how it looks.
+      Elements have id and class attributes to identify them from other tags. This way you can use them in javascript and CSS. 
+      These can change how the element looks.
+    </p>
+    <p  >
+      There are some attributes that change an element on their own though, like the src attribute on an img tag. 
+      It sets the source of the image. The image tag is self-closing, so it doesn't need a closing tag. The link is the source to the image: <code>&lt;img src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon.png?v=1734742942629"&gt;</code> 
+      Result:
+    </p>
+     <iframe srcdoc="<img src='https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon.png?v=1734742942629'>" width="100%" height="100px"></iframe>
+    <p>
+      One thing to remember though is not all attributes work on all tags. 
+      For example, the src attribute will also work on a script tag to set the source of a script, but not on an h1 tag.
+    </p>
+    <p>
+      There are also other attributes like the align attribute that aligns an element on a page: <code>&lt;h1 align="center"&gt;Center Heading&lt;/h1&gt;</code> Result:
+    </p>
+    <iframe srcdoc="<h1 align='center'>Center Heading</h1>" width="100%" height="100px"></iframe>
+    <p>
+      Or the href attribute that works on a tags. It sets the link that the a tag takes you to: <code>&lt;a href="https://mmspicyio.xyz"&gt;mm spicy io&lt;/a&gt;</code> Result:
+    </p>
+    <iframe srcdoc="<a href='https://mmspicyio.site'>mm spicy io</a>" width="100%" height="300px"></iframe>
+    <p>
+      Or the style attribute that adds CSS quickly to an element: <code>&lt;h1 style="color: yellow"&gt;Mm Spicy io&lt;/h1&gt;</code> Result
+    </p>
+     <iframe srcdoc="<h1 style='color: yellow'>mm spicy io</a>" width="100%" height="300px"></iframe>
+    <p>
+      There are many other ways to add CSS but we won't go into them since we're just teaching HTML right now.
+    </p>
+    <p>
+      There are many other HTML elements and attributes. Once again, for more lessons and detail on this check out resources like <a href="https://www.w3schools.com/">W3 Schools</a> or <a href="https://developer.mozilla.org">MDN Webdocs</a>. 
+      This was just an introductory course to HTML, I know that you really came to make 3D games.
+    </p>
+    <h1 id="maps">
+  How to Make Custom Maps with HTML
+</h1>
+<p>
+  Mm Spicy io is made with the <a href="https://aframe.io">A-Frame library</a>. 
+  It makes 3D development on the web super easy for people who aren't familiar with JavaScript and the <a href="https://threejs.org">Three.js library.</a>
+</p>
+    <p>
+      To add the A-Frame library to our page we include the CDN script in the head tag. <code>   &lt;script src="https://aframe.io/releases/1.7.0/aframe.min.js"&gt;&lt;/script&gt;</code>
+      A CDN helps us add code to our page that's hosted externally.
+    </p>
+    <p>
+      Then we add an a-scene tag. <code>   &lt;a-scene&gt;&lt;/a-scene&gt;</code> 
+      Inside this tag is where we add the shapes in our 3D scene. 
+      A-Frame has a lot of primitives. We'll cover the most commonly used and basic ones. 
+      To find a full list of A-Frame primitives, components, and more, check the <a href="https://aframe.io/docs/1.7.0/introduction/">A-Frame documentation.</a>
+    </p>
+    <p>
+      There are a bunch of 3D shapes like the box, sphere, cylinder, plane, and torus. You can also add 3D models (gltf/glb) 
+      with the a-gltf-model element. 
+      If we add our a-scene with those elements inside to our full html template, it'll look like this: <code align="left">&lt;html&gt; <br>
+  &lt;head&gt;<br>
+    &lt;script src="https://aframe.io/releases/1.7.0/aframe.min.js"&gt;&lt;/script&gt;<br>
+  &lt;/head&gt;<br>
+  &lt;body&gt;<br>
+    &lt;a-scene&gt;<br>
+      &lt;a-box&gt;&lt;/a-box&gt;<br>
+      &lt;a-sphere&gt;&lt;/a-sphere&gt; <br>
+    &lt;/a-scene&gt;<br>
+  &lt;/body&gt;<br>
+&lt;/html&gt;</code> <br> And the result will look like this: (back up a bit using the back arrow key to see something)
+    </p>
+     <iframe srcdoc="<html>
+  <head>
+    <script src='https://aframe.io/releases/1.7.0/aframe.min.js'></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-box></a-box>
+      <a-sphere></a-sphere>
+    </a-scene>
+  </body>
+</html>" width="100%" height="300px"></iframe>
+    <p>
+      This is super cool, you can even move around to see the objects! But everthing has no color, and they're on top of each other.
+      Just like with regular HTML, you can add attributes to change things about the objects. In A-Frame, these are called components.
+      Here are some commonly used components: The position component changes the 3D position. Y being up and down (+ is up and - is down), Z being forward and backward (+ is backward and - is forward), and X being left and right (+ is left and - is right).
+      In the component though, whenever you are specifying x, y, and z. The order is X Y Z—alphabetical, and leave a space between each number.
+      You can use the material component for advanced materials or just the color component for basic coloring.
+      The scale component changes how big an object is on the x, y, and z axes. The rotation component changes the rotation. Here is another example using these components: <code align="left">&lt;html&gt;<br>
+  &lt;head&gt;<br>
+    &lt;script src="https://aframe.io/releases/1.7.0/aframe.min.js"&gt;&lt;/script&gt;<br>
+  &lt;/head&gt;<br>
+  &lt;body&gt;<br>
+    &lt;a-scene&gt;<br>
+      &lt;a-box position="0 -1 0" scale="20 1 20" color="brown"&gt;&lt;/a-box&gt;<br>
+     &lt;a-sphere position="5 2 3" color="red"&gt;&lt;/a-sphere&gt;<br>
+    &lt;a-torus position="-5 2 -3" rotation="45 0 0" color="purple" scale="3 3 3"&gt;&lt;/a-torus&gt;<br>
+    &lt;/a-scene&gt;<br>
+  &lt;/body&gt;<br>
+&lt;/html&gt;</code><br>And it'll look like this:
+    </p>
+    <iframe srcdoc="<html>
+  <head>
+    <script src='https://aframe.io/releases/1.7.0/aframe.min.js'></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-box position='0 -1 0' scale='20 1 20' color='brown'></a-box>
+     <a-sphere position='5 2 3' color='red'></a-sphere>
+    <a-torus position='-5 2 -3' rotation='45 0 0' color='purple' scale='3 3 3'></a-torus>
+    </a-scene>
+  </body>
+</html>" width="100%" height="300px"></iframe>
+    <p>
+      You can also add gltf/glb models with the a-gltf-model primitive. 
+      Just set the src attribute to the path to the model, and just like that, it's in the game. 
+      The src attribute can also be used as an image path to add image textures on shapes. 
+      <code align="left">&lt;html&gt;<br>
+  &lt;head&gt;<br>
+    &lt;script src="https://aframe.io/releases/1.7.0/aframe.min.js"&gt;&lt;/script&gt;<br>
+  &lt;/head&gt;<br>
+  &lt;body&gt;<br>
+    &lt;a-scene&gt;<br>
+      &lt;a-box position="0 -1 0" scale="20 1 20" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/groundSmaller.png?v=1732580199929"&gt;&lt;/a-box&gt;<br>
+     &lt;a-sphere position="5 2 3" color="red"&gt;&lt;/a-sphere&gt;<br>
+    &lt;a-torus position="-5 2 -3" rotation="45 0 0" color="purple" scale="3 3 3"&gt;&lt;/a-torus&gt;<br>
+      &lt;a-gltf-model position="2 0 -5" rotation="0 70 0" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/car.glb?v=1740160365174"&gt;&lt;/a-gltf-model&gt;<br>
+    &lt;/a-scene&gt;<br>
+  &lt;/body&gt;<br>
+&lt;/html&gt;</code> Now we have a car in our scene:
+    </p>
+    <iframe srcdoc="<html>
+  <head>
+    <script src='https://aframe.io/releases/1.7.0/aframe.min.js'></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-box position='0 -1 0' scale='20 1 20' src='https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/groundSmaller.png?v=1732580199929'></a-box>
+     <a-sphere position='5 2 3' color='red'></a-sphere>
+    <a-torus position='-5 2 -3' rotation='45 0 0' color='purple' scale='3 3 3'></a-torus>
+      <a-gltf-model position='2 0 -5' rotation='0 70 0' src='https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/car.glb?v=1740160365174'></a-gltf-model>
+    </a-scene>
+  </body>
+</html>" width="100%" height="300px"></iframe>
+    <h1>
+      Physics
+    </h1>
+    <p>
+      This is cool but it's not like an Mm Spicy io map. To do this, we need to add physics.
+      First, we need our physics system CDN: <code>&lt;script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"&gt;&lt;/script&gt;</code>
+      Then we'll turn on debug mode in our scene: <code>&lt;a-scene physics="debug: true"&gt;</code> This will add red lines around our physics bodies to show their collisions. Just set it to false to remove them. Now all we have to do is give our objects the <code>static-body</code> or <code>dynamic-body</code> component
+       and the object will be a physics body. A static-body will stay still even if there is nothing below it.
+      You can use it for floors and walls. A dynamic-body will change and move like a regular object. In Mm Spicy io maps, the only dynamic body is the player,
+      but for the sake of this example, we'll just set the floor as a static-body. <code align="left">
+      &lt;html&gt;<br>
+  &lt;head&gt;<br>
+    &lt;script src="https://aframe.io/releases/1.7.0/aframe.min.js"&gt;&lt;/script&gt;<br>
+      &lt;script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"&gt;&lt;/script&gt;<br>
+  &lt;/head&gt;<br>
+  &lt;body&gt;<br>
+    &lt;a-scene physics="debug: true"&gt;<br>
+      &lt;a-box position="0 -1 0" scale="20 1 20" color="brown" static-body&gt;&lt;/a-box&gt;<br>
+     &lt;a-sphere position="5 20 3" color="red" dynamic-body="shape: sphere"&gt;&lt;/a-sphere&gt;<br>
+    &lt;a-box position="-5 5 -3" rotation="42 0 0" color="purple" scale="3 3 3" dynamic-body="shape: box"&gt;&lt;/a-box&gt;<br>
+    &lt;/a-scene&gt;<br>
+  &lt;/body&gt;<br>
+&lt;/html&gt;</code>
+      Now the objects fall from the sky when we load the page:
+    </p>
+    <script>function resetsim(id) {
+  const iframe = document.getElementById(id);
+  const originalContent = iframe.srcdoc;
+  iframe.srcdoc = ""; // Clear first to force reload
+  setTimeout(() => {
+    iframe.srcdoc = originalContent;
+  }, 0);
+}
+
+</script>
+    <button onclick="resetsim('physicsSim')">
+      Reload Page
+    </button>
+     <iframe id="physicsSim" srcdoc="  <html>
+  <head>
+    <script src='https://aframe.io/releases/1.7.0/aframe.min.js'></script>
+      <script src='https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js'></script>
+  </head>
+  <body>
+    <a-scene physics='debug: true'>
+      <a-box position='0 -1 0' scale='20 1 20' color='brown' static-body></a-box>
+     <a-sphere position='5 20 -3' color='red' dynamic-body='shape:sphere'></a-sphere>
+    <a-box position='-5 5 -3' rotation='42 0 0' color='purple' scale='3 3 3' dynamic-body='shape:box'></a-box>
+    </a-scene>
+  </body>
+</html>" width="100%" height="300px"></iframe>
+    <p>
+      Setting a 3D model as a physics body is a bit harder to do. 
+      If you just give an a-gltf-model the static or dynamic body component, you'll get an error and the physics won't work.
+      First, we have to set the shape to none: <code>static-body="shape: none"</code> (this can all be done with a static or dynamic body)
+      Then, for every shape we add, we insert a new component. We name these components shape__ and then whatever we want to name the shape.
+      This could be shape__main or shape__handle or shape__one. Whatever you want as long as it starts with shape__.
+      We then specify the attributes of the shape: <code>shape__main="shape: box; offset: 0 1 0; halfExtents: 2 2 2"</code>
+      When specifying the shape, include the value you are specifying, then a colon <code> : </code>
+      then what you want to set it to, and finish it with a semicolon <code> ; </code> 
+      Here is a table describing these components and what they do: <br>
+     <table class="physics-table">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Applies To</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>shape</code></td>
+      <td>—</td>
+      <td><code>box</code></td>
+      <td>Shape of the physics body: <code>box</code>, <code>sphere</code>, or <code>cylinder</code>.</td>
+    </tr>
+    <tr>
+      <td><code>offset</code></td>
+      <td>—</td>
+      <td><code>0 0 0</code></td>
+      <td>Position of shape relative to the body.</td>
+    </tr>
+    <tr>
+      <td><code>orientation</code></td>
+      <td>—</td>
+      <td><code>0 0 0 1</code></td>
+      <td>Rotation of shape relative to the body (quaternion).</td>
+    </tr>
+    <tr>
+      <td><code>radius</code></td>
+      <td><code>sphere</code></td>
+      <td><code>1</code></td>
+      <td>Sphere radius.</td>
+    </tr>
+    <tr>
+      <td><code>halfExtents</code></td>
+      <td><code>box</code></td>
+      <td><code>1 1 1</code></td>
+      <td>Half-extents of the box. Use <code>0.5 0.5 0.5</code> for a 1×1×1 box.</td>
+    </tr>
+    <tr>
+      <td><code>radiusTop</code></td>
+      <td><code>cylinder</code></td>
+      <td><code>1</code></td>
+      <td>Top radius of the cylinder.</td>
+    </tr>
+    <tr>
+      <td><code>radiusBottom</code></td>
+      <td><code>cylinder</code></td>
+      <td><code>1</code></td>
+      <td>Bottom radius of the cylinder.</td>
+    </tr>
+    <tr>
+      <td><code>height</code></td>
+      <td><code>cylinder</code></td>
+      <td><code>1</code></td>
+      <td>Height of the cylinder.</td>
+    </tr>
+    <tr>
+      <td><code>numSegments</code></td>
+      <td><code>cylinder</code></td>
+      <td><code>8</code></td>
+      <td>Number of cylinder subdivisions.</td>
+    </tr>
+  </tbody>
+</table>
+    <small>
+  Reference adapted from <a href="https://github.com/c-frame/aframe-physics-system" target="_blank">aframe-physics-system</a> by C-Frame (MIT License).
+</small>
+    
+    </p>
+
+  <p>
+    We don't have to use all of these components because most of them depend on the shape we are using. For example, numSegments will only be used on a cylinder.
+    Now, if we add the car back in with a collision. Our code will look like this: <code align="left">
+      &lt;html&gt;<br>
+  &lt;head&gt;<br>
+    &lt;script src='https://aframe.io/releases/1.7.0/aframe.min.js'&gt;&lt;/script&gt;<br>
+    &lt;script src='https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js'&gt;&lt;/script&gt;<br>
+  &lt;/head&gt;<br>
+  &lt;body&gt;<br>
+    &lt;a-scene physics='debug: true'&gt;<br>
+      &lt;a-box position='0 -1 0' scale='20 1 20' color='brown' static-body&gt;&lt;/a-box&gt;<br>
+      &lt;a-sphere position='5 20 3' color='red' dynamic-body='shape: sphere'&gt;&lt;/a-sphere&gt;<br>
+      &lt;a-box position='-5 5 -3' rotation='42 0 0' color='purple' scale='3 3 3' dynamic-body='shape: box'&gt;&lt;/a-box&gt;<br>
+      &lt;a-gltf-model position='0 5 -5' rotation='10 70 0' src='https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/car.glb?v=1740160365174' dynamic-body='shape: none' shape__main='shape: box; offset: 0 1.3 1.5; halfExtents: 1.5 1.3 2.5' shape__hood='shape: box; offset: 0 1 -2.3; halfExtents: 1.5 1 1.3'&gt;&lt;/a-gltf-model&gt;<br>
+    &lt;/a-scene&gt;<br>
+  &lt;/body&gt;<br>
+&lt;/html&gt;
+</code> The hitboxes don’t need to perfectly match the shape of the object, as shown in the result below.
+  </p>
+  <button onclick="resetsim('physicsSim2')">
+      Reload Page
+    </button>
+   <iframe id="physicsSim2" srcdoc="<html>
+  <html>
+  <head>
+    <script src='https://aframe.io/releases/1.7.0/aframe.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js'></script>
+  </head>
+  <body>
+    <a-scene physics='debug: true'>
+      <a-box position='0 -1 0' scale='20 1 20' color='brown' static-body></a-box>
+      <a-sphere position='5 20 3' color='red' dynamic-body='shape: sphere'></a-sphere>
+      <a-box position='-5 5 -3' rotation='42 0 0' color='purple' scale='3 3 3' dynamic-body='shape: box'></a-box>
+      <a-gltf-model position='0 5 -5' rotation='10 70 0' src='https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/car.glb?v=1740160365174' dynamic-body='shape: none' shape__main='shape: box; offset: 0 1.3 1.5; halfExtents: 1.5 1.3 2.5' shape__hood='shape: box; offset: 0 1 -2.3; halfExtents: 1.5 1 1.3'></a-gltf-model>
+    </a-scene>
+  </body>
+</html>" width="100%" height="300px"></iframe>
+  <p>
+    In an actual MmSpicy io map, all the objects except the player are static bodies. So when making custom maps, make sure to do that.
+    This is what the player entity looks like: <code>&lt;a-sphere id='player' position='0 5 0' visible='false' player-controls&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;a-camera position='0 1.6 0' look-controls='pointerLockEnabled: true' wasd-controls='enabled: false' id='cam'&gt;&lt;/a-camera&gt;<br>
+&lt;/a-sphere&gt;
+</code>
+    The dynamic-body component is added in later with a spawn script.
+    <h1>
+      Assets
+  </h1>
+  </p>
+<p>
+   To avoid delays or popping in when your map loads, preload all assets (like images and 3D models) inside the a-assets tag at the top of the scene. Image textures are loaded inside the img tag.
+ <code>&lt;a-assets&gt;&lt;img src="link or path to your image" id="name for the image"&gt;&lt;/a-assets&gt;</code>
+3D models are loaded with the a-asset-item tag. <code>&lt;a-assets&gt;&lt;a-asset-item src="link or path to your model" id="name for the model"&gt;&lt;/a-asset-item&gt;&lt;/a-assets&gt;</code>
+   To use a loaded asset, set the src attribute of your entity to the asset’s ID with a # in front.<code align="left">&lt;html&gt;<br>
+  &lt;head&gt;<br>
+    &lt;script src="https://aframe.io/releases/1.7.0/aframe.min.js"&gt;&lt;/script&gt;<br>
+  &lt;/head&gt;<br>
+  &lt;body&gt;<br>
+    &lt;a-scene&gt;<br>
+      &lt;a-assets&gt;<br>
+        &lt;a-asset-item src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/car.glb?v=1740160365174" id="car"&gt;&lt;/a-asset-item&gt;<br>
+        &lt;img id="ground" crossorigin="anonymous" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/ground.001.png?v=1725831593424"&gt;<br>
+      &lt;/a-assets&gt;<br>
+      &lt;a-box position="0 -1 0" scale="100 1 100" static-body src="#ground" material="shader: flat"&gt;&lt;/a-box&gt;<br>
+      &lt;a-gltf-model position="0 0 -5" src="#car"&gt;&lt;/a-gltf-model&gt;<br>
+      &lt;a-sky color="lightblue"&gt;&lt;/a-sky&gt;<br>
+    &lt;/a-scene&gt;<br>
+  &lt;/body&gt;<br>
+&lt;/html&gt;<br>
+</code>
+As you can see, everything still works fine:
+</p>
+   
+<iframe srcdoc="<html>
+ <html>
+  <head>
+    <script src='https://aframe.io/releases/1.7.0/aframe.min.js'></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-asset-item src='https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/car.glb?v=1740160365174' id='car'></a-asset-item>
+        <img id='ground' crossorigin='anonymous' src='https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/ground.001.png?v=1725831593424'>
+      </a-assets>
+      <a-box position='0 -1 0' scale='100 1 100' static-body src='#ground' material='shader: flat'></a-box>
+      <a-gltf-model  src='#car' position='0 0 -10'></a-gltf-model>
+      <a-sky color='lightblue'></a-sky>
+    </a-scene>
+  </body>
+</html>
+" width="100%" height="300px"></iframe>
+<h1 id="editor">
+  Using The Editor
+</h1>
+<p>
+  Now, you can create custom maps in the <a href="/create/editor">editor.</a> 
+  In the starter template, you'll see a simple aframe scene with a movment and spawn script attached.
+  Every time you make an edit, it's shown on the right preview panel and saved to your computer with local storage. 
+  To download the html file, click the download button. To request that the map you made be put in the game, click the request map button.
+  To reset your code back to the template, click reset. Click the refresh button to refresh the preview window. It should automatically refresh though, to turn this off, uncheck the auto refresh.
+</p>
+    <p>
+     Remember, if you ever need to know something, check the <a href="https://aframe.io/docs/1.7.0/introduction/">A-Frame documentation</a> or ask an AI chatbot like <a href="https://chat.openai.com">Chat GPT</a> or <a href="https://gemini.google.com">Gemini.</a> 
+      Just keep in mind: AI sometimes makes mistakes. It’s best to understand the code and prompts you're working with. That way, you can build better, more reliable maps!
+     Now you’re ready to build awesome 3D maps for <a href="/">MmSpicy io.</a> Good luck—and happy coding!
+    </p>
+ <footer style="
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  color: #666;
+  z-index: 1000;
+  white-space: nowrap;
+  overflow-x: auto;
+">
+  <a href="/" style="margin: 0 6px; color: inherit; text-decoration: none;">Home</a> |
+  <a href="/play" style="margin: 0 6px; color: inherit; text-decoration: none;">Play</a> |
+  <a href="/create" style="margin: 0 6px; color: inherit; text-decoration: none;">Create</a> |
+  <a href="/create/editor" style="margin: 0 6px; color: inherit; text-decoration: none;">Editor</a> |
+    <a href="/about" style="margin: 0 6px; color: inherit; text-decoration: none;">About</a> |
+  <a href="/contact" style="margin: 0 6px; color: inherit; text-decoration: none;">Contact</a> |
+  <a href="/privacy" style="margin: 0 6px; color: inherit; text-decoration: none;">Privacy</a> |
+  <a href="/terms" style="margin: 0 6px; color: inherit; text-decoration: none;">Terms</a>
+</footer>
+  </body>
+</html>

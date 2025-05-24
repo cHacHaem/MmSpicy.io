@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Editor | MmSpicy io</title>
+     <script src="/redirect-mobile.js"></script>
+     <script src="/socket.io/socket.io.js"></script>
+    <link
+      rel="icon"
+      href="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon2.png?v=1734826395336"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/html-hint.min.js"></script>
+    <style>
+      body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.top-bar {
+  width: 100%;
+  height: 40px;
+  background-color: orange;
+  background-image: linear-gradient(135deg, #ff4500, #ffd700);
+  color: #f4f4f4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  font-size: 18px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.top-bar .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.top-bar .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - 40px);
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.editor-container {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}
+
+.divider {
+  width: 2px;
+  background: orange;
+}
+
+.CodeMirror {
+  height: 100%;
+  font-size: 16px;
+}
+
+iframe {
+  flex: 1;
+  height: 100%;
+  border: none;
+}
+
+#home {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.rightbutton {
+  font-size: 115%;
+  text-decoration: none;
+  color: black;
+  height: 85%;
+  padding: 5px 10px;
+  background: linear-gradient(to bottom, #ffd700, #ffa500);
+  border: 2px solid orange;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.rightbutton:hover {
+  background: linear-gradient(to bottom, #ffa500, #ff8c00);
+  transform: scale(1.05);
+}
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+  <div class="left">
+    Editor | <a href="/" id="home">MmSpicy io</a>
+  </div>
+  <div class="right">
+    <button onclick="download()" class="rightbutton">Download Project</button>
+    <button onclick="requestMap()" class="rightbutton">Request Map</button>
+    <button onclick="reset()" class="rightbutton">Reset</button>
+    <a class="rightbutton" href="/create#editor">Help</a>
+    
+    Auto Refresh:
+    <input type="checkbox" checked="true" id="autoRefresh" class="rightButton">
+    <button onclick="update()" class="rightbutton">
+      Refresh
+    </button>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="editor-container">
+        <textarea id="editor" onchange="update()">
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+    <a-scene physics="debug: true">
+      <a-assets>
+      <img id="ground" crossorigin="anonymous" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/ground.001.png?v=1725831593424">
+      </a-assets>
+      <a-box position="0 -1 0" scale="100 1 100" static-body src="#ground" material="shader: flat"></a-box>
+      <a-sphere position="3 1 -10" static-body radius="2" color="blue">
+      </a-sphere>
+      <a-box position="-3 1.5 -10" static-body color="green" rotation="45 45 45" scale="2.5 2.5 2.5"></a-box>
+      <a-sky color="lightblue"></a-sky>
+      <a-sphere id="player" position="0 5 0" visible="false" player-controls>
+      <a-camera position="0 1.6 0" look-controls="pointerLockEnabled: true" wasd-controls="enabled: false" id="cam" ></a-camera>
+    </a-sphere>
+    </a-scene>
+    <script src="/create/editor/editorScript.js"> </script>  
+  </body>
+</html>
+      </textarea
+        >
+      </div>
+      <div class="divider"></div>
+      <iframe id="result"></iframe>
+    </div>
+    <script src="/create/editor/editor.js"></script>
+    <script src="/getPlayerData.js"></script>
+     <footer style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  padding: 6px 5px;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  color: #666;
+  z-index: 1000;
+  white-space: nowrap;
+  overflow-x: auto;
+">
+  <a href="/" style="margin: 0 6px; color: inherit; text-decoration: none;">Home</a> |
+  <a href="/play" style="margin: 0 6px; color: inherit; text-decoration: none;">Play</a> |
+  <a href="/create" style="margin: 0 6px; color: inherit; text-decoration: none;">Create</a> |
+  <a href="/create/editor" style="margin: 0 6px; color: inherit; text-decoration: none;">Editor</a> |
+    <a href="/about" style="margin: 0 6px; color: inherit; text-decoration: none;">About</a> |
+  <a href="/contact" style="margin: 0 6px; color: inherit; text-decoration: none;">Contact</a> |
+  <a href="/privacy" style="margin: 0 6px; color: inherit; text-decoration: none;">Privacy</a> |
+  <a href="/terms" style="margin: 0 6px; color: inherit; text-decoration: none;">Terms</a>
+</footer>
+  </body>
+</html>

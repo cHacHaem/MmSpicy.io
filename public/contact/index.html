@@ -1,0 +1,178 @@
+<html>
+  <head>
+    <title>Contact | MmSpicy io</title>
+    <link rel="icon" href="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon2.png?v=1734826395336">
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: sans-serif;
+        background-color: orange;
+        background-image: linear-gradient(135deg, #ff4500, #ffd700);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        color: white;
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 2px #000;
+      }
+
+      p {
+        color: white;
+        margin-top: 0;
+        margin-bottom: 20px;
+        text-align: center;
+        max-width: 400px;
+        text-shadow: 1px 1px 2px #000;
+      }
+
+      form {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #ff4500;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      button:hover {
+        background-color: #e03e00;
+      }
+
+      #feedback {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      #feedback.success {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      #feedback.error {
+        background-color: #f44336;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Contact Us</h1>
+    <p>Have a question, found a bug, want a new feature, or just want to say hi? Send us a message below!</p>
+    <form id="contactForm">
+      <label>
+        Name:
+        <input type="text" name="name" id="name" placeholder="Your name">
+      </label>
+      <label>
+        Email:
+        <input type="text" name="email" id="email" placeholder="Your email">
+      </label>
+      <label>
+        Message:
+        <textarea name="message" rows="5" id="message" placeholder="Your message"></textarea>
+      </label>
+      <button type="button" onclick="send(event)">Send</button>
+    </form>
+
+    <!-- Feedback Message Section -->
+    <div id="feedback"></div>
+
+    <script>
+      let socket = io();
+let sent = false;
+      function send(event) {
+        if(sent) return;
+        sent = true;
+        // Prevent form submission
+        event.preventDefault();
+
+        // Emit data to server
+        socket.emit("contact", {
+          name: document.getElementById("name").value,
+          message: document.getElementById("message").value,
+          email: document.getElementById("email").value
+        });
+
+        // Clear feedback initially
+        document.getElementById("feedback").textContent = '';
+
+        // Handle socket response
+        socket.on("issue", () => {
+          showFeedback('There was an issue sending your message. Please reload the page and try again later.', 'error');
+        });
+
+        socket.on("complete", () => {
+          showFeedback('Your message has been sent successfully!', 'success');
+        });
+      }
+
+      // Function to show feedback messages
+      function showFeedback(message, type) {
+        const feedbackElement = document.getElementById("feedback");
+        feedbackElement.textContent = message;
+        feedbackElement.className = type; // 'success' or 'error'
+      }
+    </script>
+     <footer style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  padding: 6px 5px;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  color: #666;
+  z-index: 1000;
+  white-space: nowrap;
+  overflow-x: auto;
+">
+  <a href="/" style="margin: 0 6px; color: inherit; text-decoration: none;">Home</a> |
+  <a href="/play" style="margin: 0 6px; color: inherit; text-decoration: none;">Play</a> |
+  <a href="/create" style="margin: 0 6px; color: inherit; text-decoration: none;">Create</a> |
+  <a href="/create/editor" style="margin: 0 6px; color: inherit; text-decoration: none;">Editor</a> |
+  <a href="/about" style="margin: 0 6px; color: inherit; text-decoration: none;">About</a> |
+  <a href="/contact" style="margin: 0 6px; color: inherit; text-decoration: none;">Contact</a> |
+  <a href="/privacy" style="margin: 0 6px; color: inherit; text-decoration: none;">Privacy</a> |
+  <a href="/terms-of-use.txt" style="margin: 0 6px; color: inherit; text-decoration: none;">Terms</a>
+</footer>
+
+  </body>
+</html>
