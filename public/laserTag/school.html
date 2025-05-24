@@ -1,6 +1,6 @@
-    <a-scene physics="debug: false; resitution: 0; gravity: -20">
+<a-scene physics="debug: false; resitution: 0; gravity: -20">
     <a-assets>
-      
+
       <img src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tileFloor.png?v=1744815782696" id="tile" >
       <img src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tileRoof.png?v=1744900957819" id="roof" >
      <img src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/basketBallCourt.png?v=1745783434418" id="bBallCourt" >
@@ -25,7 +25,7 @@
    <img id="concrete" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/concrete.png?v=1739042861945" >
       <a-mixin id="chair"  instanced-mesh-member="mesh:#chairIn" static-body="shape:none" shape__main="offset: 0 0.4 0; halfExtents: 0.5 0.4 0.5" shape__back="offset: -0.45 1.2 0; halfExtents: 0.05 0.5 0.3"></a-mixin>
  <a-mixin id="smartBoard"  instanced-mesh-member="mesh:#smartBoardIn" static-body="shape:none" shape__main="offset: 0 1.1 0.15; halfExtents: 2 1 0.05"></a-mixin>
- 
+
       <a-mixin id="tree" instanced-mesh-member="mesh:#treeIn" position="0 0 5" static-body="shape: none; sphereRadius: NaN" shape__trunk="shape: cylinder; offset: 0 2.5 0; height: 5" shape__leaves="shape: sphere; offset: 0 6.3 0; radius: 2"  ></a-mixin>
    <a-mixin id="wall"  instanced-mesh-member="mesh:#wallIn" static-body="shape:none" shape__main="offset: 0 3 0; halfExtents: 5 3 0.25"></a-mixin>
 <a-mixin id="window" instanced-mesh-member="mesh:#windowIn" static-body="shape:none" shape__main="offset: 0 3 0; halfExtents: 5 3 0.25"></a-mixin>
@@ -100,7 +100,7 @@
       <a-entity  class="shootable" position="-67.90841 0 56.96075" mixin="tree" scale="0.9 0.9 0.9"></a-entity>
       <a-entity  class="shootable" position="-76.24963 0 46.68905" mixin="tree" ></a-entity>
       <a-entity  class="shootable" position="-69.6511 0 16.28548" mixin="tree" scale="1.2 1.2 1.2"></a-entity>
-   
+
 <a-box  class="shootable" scale="120 100 1" position="-20 50 -60" static-body visible="false"></a-box>
   <a-box  class="shootable" scale="1 100 120" position="40 50 0" static-body visible="false"></a-box>
   <a-box  class="shootable" scale="1 100 120" position="-80 50 0" static-body visible="false"></a-box>
@@ -183,7 +183,7 @@
 <a-entity  class="shootable" mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
   </a-entity>
   <a-entity id="desks and chairs 2" position="-33 0 -9.8" rotation="0 180 0">
-    
+
   <a-entity class="shootable" mixin="desk"  position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="desk"  position="-3.82902 0.5 -15.60670"   rotation="0 180 0"></a-entity>
@@ -210,7 +210,7 @@
 <a-entity  class="shootable" mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
   </a-entity>
    <a-entity id="desks and chairs 3" position="-53 0 -9.8" rotation="0 180 0">
-    
+
   <a-entity  class="shootable" mixin="desk"  position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="desk"  position="-3.82902 0.5 -15.60670"   rotation="0 180 0"></a-entity>
@@ -228,7 +228,7 @@
 <a-entity  class="shootable" mixin="desk"  position="-7.18053 0.5 -21.76184"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="chair" position="-5.80253 0.5 -21.76184"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="desk"  position="-10.35321 0.5 -12.18661"   rotation="0 180 0"></a-entity>
-<a-entity  class="shootable" mixin="chair" position="-8.98945 0.5 -12.18661"   rotation="0 180 0"></a-entity>
+<a-entity class="shootable"  mixin="chair" position="-8.98945 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity class="shootable"  mixin="desk"  position="-10.35321 0.5 -15.60670"   rotation="0 180 0"></a-entity>
 <a-entity class="shootable"  mixin="chair" position="-8.98945 0.5 -15.60670"   rotation="0 180 0"></a-entity>
 <a-entity class="shootable"  mixin="desk"  position="-10.35321 0.5 -18.44821"   rotation="0 180 0"></a-entity>
@@ -244,10 +244,10 @@
    <a-entity class="shootable"  mixin="wall" position="0 0.5 -23.46337"  ></a-entity>
   <a-entity  class="shootable" mixin="wall" position="4.74337 0.5 -24.73433"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="window" position="4.74337 0.5 -14.71882"   rotation="0 90 0"></a-entity>
-  
+
   <a-entity  class="shootable" mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
-  
+
  <a-entity class="shootable"  mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
@@ -280,7 +280,7 @@
     <a-entity class="shootable"  mixin="wall" position="-14.76701 0.5 -24.73433"   rotation="0 90 0"></a-entity>
   </a-entity>
   <a-entity id="3-3" position="-5.69419 6 18.55469" rotation="0 90 0">
-    
+
   <a-entity  class="shootable" mixin="desk" position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="desk" position="-3.82902 0.5 -15.6067"   rotation="0 180 0"></a-entity>
@@ -307,7 +307,7 @@
 <a-entity class="shootable"  mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
   </a-entity>
   <a-entity id="3-2" position="4.25383 6 0.17122">
-    
+
   <a-entity  class="shootable" mixin="desk" position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="desk" position="-3.82902 0.5 -15.6067"   rotation="0 180 0"></a-entity>
@@ -334,7 +334,7 @@
 <a-entity class="shootable"  mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
   </a-entity>
   <a-entity id="desks and chairs 3-2" position="-34.83564 6 -9.47184" rotation="0 180 0">
-    
+
   <a-entity class="shootable" mixin="desk" position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity class="shootable"  mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity class="shootable"  mixin="desk" position="-3.82902 0.5 -15.6067"   rotation="0 180 0"></a-entity>
@@ -361,11 +361,11 @@
 <a-entity  class="shootable" mixin="chair" position="-8.98945 0.5 -21.53852"   rotation="0 180 0"></a-entity>
   </a-entity>
   <a-entity id="desks and chairs 4" position="-52.72652 6 -8.80056" rotation="0 180 0">
-    
+
   <a-entity  class="shootable" mixin="desk" position="-3.75012 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="chair" position="-2.56932 0.5 -12.18661"   rotation="0 180 0"></a-entity>
 <a-entity class="shootable"  mixin="desk" position="-3.82902 0.5 -15.6067"   rotation="0 180 0"></a-entity>
-<a-entity  class="shootable" mixin="chair" position="-2.64932 0.5 -15.6067"   rotation="0 180 0"></a-entity>
+<a-entity class="shootable"  mixin="chair" position="-2.64932 0.5 -15.6067"   rotation="0 180 0"></a-entity>
 <a-entity class="shootable"  mixin="desk" position="-3.78503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="chair" position="-2.60503 0.5 -18.44821"   rotation="0 180 0"></a-entity>
 <a-entity  class="shootable" mixin="desk" position="-3.77079 0.5 -21.53852"   rotation="0 180 0"></a-entity>
@@ -391,14 +391,14 @@
   <a-entity position="-20">  
   <a-entity  class="shootable" mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
-  
+
  <a-entity class="shootable"  mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-34.6 0.5 14.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-19.77271 0.5 14.64688"  ></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-29.77271 0.5 14.64688"  ></a-entity>
-   <a-entity  class="shootable" mixin="doorOpen" position="-20.0001 0.5 0" rotation="0 180 0"></a-entity>
+   <a-entity class="shootable"  mixin="doorOpen" position="-20.0001 0.5 0" rotation="0 180 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-29.77271 0.5 0"  ></a-entity></a-entity>
   <a-entity  class="shootable" mixin="wall" position="4.74337 6.5 -4.71433"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="4.74337 6.5 4.7"   rotation="0 90 0"></a-entity>
@@ -418,7 +418,7 @@
   <a-entity class="shootable"  position="0.0327 6">  
   <a-entity class="shootable"  mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity class="shootable"  mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
-  
+
  <a-entity class="shootable"  mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
   <a-entity class="shootable"  mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity class="shootable"  mixin="wall" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
@@ -430,7 +430,7 @@
   <a-entity  class="shootable" position="-14.68997 6 53.77028" rotation="0 -90 0">  
   <a-entity  class="shootable" mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
-  
+
  <a-entity  class="shootable" mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
   <a-entity class="shootable"  mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
@@ -442,7 +442,7 @@
   <a-entity  class="shootable" position="-29.17697 6 -9.79842" rotation="0 180 0">  
   <a-entity  class="shootable" mixin="wall" position="-14.82 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-14.82 0.5 14.8"   rotation="0 90 0"></a-entity>
-  
+
  <a-entity  class="shootable" mixin="smartBoard" position="-15.10415 2 7"   rotation="0 -90 0"></a-entity>
   <a-entity  class="shootable" mixin="wall" position="-14.76701 0.5 4.8"   rotation="0 90 0"></a-entity>
   <a-entity  class="shootable" mixin="windowOpen" position="-34.6 0.5 4.8"   rotation="0 90 0"></a-entity>
@@ -455,7 +455,7 @@
   <a-entity  class="shootable" mixin="wall" position="-11.87 6.5 39.69092"  ></a-entity>
   <a-entity  class="shootable" mixin="wall" position="13.0459 0.5 -5.23"   rotation="0 90 0"></a-entity>
   <a-entity class="shootable"  mixin="wall" position="9.64443 0.5 -9.98176"  ></a-entity>
-  <a-box  class="shootable" src="#roof"  position="-20.82457 12.5 15" material="repeat: 7 5" static-body roughness="1" scale="70 1 50" ></a-box>
+  <a-box class="shootable" src="#roof"  position="-20.82457 12.5 15" material="repeat: 7 5" static-body roughness="1" scale="70 1 50" ></a-box>
   <a-entity  class="shootable" mixin="wall" position="9.64443 6.5 -9.98176"  ></a-entity>
   <a-entity  class="shootable" mixin="wall" position="13.0459 6.5 -5.23"   rotation="0 90 0"></a-entity>
 
@@ -485,5 +485,3 @@
   </a-entity>
 
       </a-scene>
-    
-      
