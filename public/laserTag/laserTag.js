@@ -51,14 +51,27 @@ function insertHTMLFromFile(filePath) {
       const raycaster = el.components.raycaster;
       if (!raycaster) return;
 
-      raycaster.refreshObjects(); // Refresh objects to ensure we have latest shootable elements
+      // Get all meshes including instanced ones
+      const objects = Array.from(document.querySelectorAll('.shootable')).map(el => {
+        const mesh = el.getObject3D('mesh');
+        if (mesh) {
+          // Ensure mesh has reference to its element
+          mesh.el = el;
+          return mesh;
+        }
+        return null;
+      }).filter(Boolean);
+
       raycaster.raycaster.setFromCamera(pointer, sceneEl.camera);
-      
-      // Filter to only get shootable objects or players
-      const allIntersections = raycaster.raycaster.intersectObjects(raycaster.objects, true);
+      const allIntersections = raycaster.raycaster.intersectObjects(objects, true);
       const intersects = allIntersections.filter(intersection => {
-        const el = intersection.object.el;
-        return el && (el.classList.contains('shootable') || el.classList.contains('player'));
+        const obj = intersection.object;
+        while (obj && !obj.el) {
+          obj.el = obj.parent ? obj.parent.el : null;
+          if (!obj.parent) break;
+          obj = obj.parent;
+        }
+        return obj && obj.el && (obj.el.classList.contains('shootable') || obj.el.classList.contains('player'));
       });
 
       if (intersects.length > 0) {
