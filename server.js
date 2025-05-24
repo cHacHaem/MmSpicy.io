@@ -494,6 +494,7 @@ io.on("connection", (socket) => {
     if(code == adcode) {
     data[type].splice(index, 1);
       scheduleSave();
+      socket.emit("allRequests", {reports: data.reports, players: data.players, skinRequests: data.skinRequests, mapRequests: data.mapRequests, contact: data.contact})
     } 
     
   })
