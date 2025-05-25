@@ -46,27 +46,34 @@
       <a-box position="0 0 50" scale="100 50 2" static-body visible="false" class="shootable"></a-box>
       <a-box position="0 0 -50" scale="100 50 2" static-body visible="false" class="shootable"></a-box>
       <a-box id="floor" src="#ground" material="shader: flat" static-body="mass: 0" position="0 -0.5 0" width="100" height="1" depth="100" class="shootable"></a-box>
-    <a-entity mixin="treeHouse" position="-10 0 20" rotation="0 57 0" class="shootable"></a-entity>
-      <a-entity mixin="tree" class="shootable"></a-entity>
-      <a-entity mixin="treeHouseBridge" position="4 0 35" class="shootable"></a-entity>
-      <a-entity mixin="treeHouseBridge" position="25 0 10" rotation="0 90 0" class="shootable"></a-entity>
-       <a-entity mixin="treeHouseBridge" position="-30 0 -10" rotation="0 45 0" class="shootable"></a-entity>
-      <a-entity mixin="tree" position="-40 0 -10" scale="2 1.8 2" class="shootable"></a-entity>
-       <a-entity mixin="tree" position="27 0 -10" scale="2 2 2" class="shootable"></a-entity>
-       <a-entity mixin="tree" position="-40 0 17" scale="2 1.9 2" class="shootable"></a-entity>
-       <a-entity mixin="tree" position="34 0 -37" scale="2 2.3 2" class="shootable"></a-entity>
-      <a-entity mixin="tree" position="-34 0 -37" scale="2 2.5 2" class="shootable"></a-entity>
-      <a-entity mixin="tree" position="23 0 -37" scale="2 1 2" class="shootable"></a-entity>
-      <a-entity mixin="tree" position="-34 0 12" scale="2.7 3 2.7" class="shootable"></a-entity>
-      <a-entity mixin="tree" position="26 0 37" scale="2 1.5 2" class="shootable"></a-entity>
-      <a-entity mixin="tree" position="12 0 42" scale="2 2.1 2" class="shootable"></a-entity>
-      <a-entity mixin="tree" position="5 0 15" scale="2 1.5 2" class="shootable"></a-entity>
-       <a-entity mixin="tree" position="-28 0 5" scale="2 1.7 2" class="shootable"></a-entity>
-      <a-entity mixin="tree" position="-16 0 39" scale="3 3.3 3" class="shootable"></a-entity>
-<a-entity mixin="tree" position="8 0 -15" scale="2 2 2" class="shootable"></a-entity>
+    <a-entity mixin="treeHouse" position="-10 0 20" rotation="0 57 0" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="tree" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="treeHouseBridge" position="4 0 35" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="treeHouseBridge" position="25 0 10" rotation="0 90 0" class="shootable" shape-to-shootable></a-entity>
+       <a-entity mixin="treeHouseBridge" position="-30 0 -10" rotation="0 45 0" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="tree" position="-40 0 -10" scale="2 1.8 2" class="shootable" shape-to-shootable></a-entity>
+       <a-entity mixin="tree" position="27 0 -10" scale="2 2 2" class="shootable" shape-to-shootable></a-entity>
+       <a-entity mixin="tree" position="-40 0 17" scale="2 1.9 2" class="shootable" shape-to-shootable></a-entity>
+       <a-entity mixin="tree" position="34 0 -37" scale="2 2.3 2" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="tree" position="-34 0 -37" scale="2 2.5 2" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="tree" position="23 0 -37" scale="2 1 2" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="tree" position="-34 0 12" scale="2.7 3 2.7" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="tree" position="26 0 37" scale="2 1.5 2" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="tree" position="12 0 42" scale="2 2.1 2" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="tree" position="5 0 15" scale="2 1.5 2" class="shootable" shape-to-shootable></a-entity>
+       <a-entity mixin="tree" position="-28 0 5" scale="2 1.7 2" class="shootable" shape-to-shootable></a-entity>
+      <a-entity mixin="tree" position="-16 0 39" scale="3 3.3 3" class="shootable" shape-to-shootable></a-entity>
+<a-entity mixin="tree" position="8 0 -15" scale="2 2 2" class="shootable" shape-to-shootable></a-entity>
 
       <a-entity mixin="tree" position="-45 0 -37" scale="2 2 2" class="shootable"></a-entity>
       <a-entity mixin="treeHouse" position="-35 0 35" rotation="0 -32 0" class="shootable"></a-entity>
-      <a-entity mixin="rock"></a-entity>
+      <a-entity mixin="rock" shape-to-shootable></a-entity>
+      
+      <!-- Test entity with explicit shape attributes -->
+      <a-entity position="0 1.5 -5" 
+                shape__box="shape: box; halfExtents: 1 1 1" 
+                shape__sphere="shape: sphere; radius: 0.5" 
+                shape-to-shootable>
+      </a-entity>
     </a-entity>
   </a-scene>

@@ -43,46 +43,92 @@ function insertHTMLFromFile(filePath) {
     AFRAME.registerComponent('shape-to-shootable', {
       init: function () {
         const el = this.el;
-console.log("hello shootable")
+        console.log("shape-to-shootable initializing on:", el.id || el.tagName);
+        
+        // Check if the entity has attributes
+        console.log("Entity attributes count:", el.attributes ? el.attributes.length : 0);
+        
         // Loop through all attributes of the entity
+        let shapesFound = 0;
         for (let key in el.attributes) {
+          console.log("Checking attribute:", key);
           if (key.startsWith('shape__')) {
+            shapesFound++;
+            console.log("Found shape attribute:", key);
             const shapeData = el.getAttribute(key);
+            console.log("Shape data:", shapeData);
             const shapeParams = this.parseShapeData(shapeData);
+            console.log("Parsed shape params:", shapeParams);
 
             // Create a new entity based on the shape type
             let childEl;
             if (shapeParams.shape === 'box' && shapeParams.halfExtents) {
+              console.log("Creating box with half extents:", shapeParams.halfExtents);
               childEl = document.createElement('a-box');
               childEl.setAttribute('width', shapeParams.halfExtents[0] * 2);
               childEl.setAttribute('height', shapeParams.halfExtents[1] * 2);
               childEl.setAttribute('depth', shapeParams.halfExtents[2] * 2);
             } else if (shapeParams.shape === 'sphere' && shapeParams.radius) {
+              console.log("Creating sphere with radius:", shapeParams.radius);
               childEl = document.createElement('a-sphere');
               childEl.setAttribute('radius', shapeParams.radius);
             }
 
             if (childEl) {
+              console.log("Adding shootable child element");
               childEl.setAttribute('class', 'shootable');
+              childEl.setAttribute('material', 'opacity: 0.2; transparent: true');
               el.appendChild(childEl);
+            } else {
+              console.log("Failed to create child element for shape:", key);
             }
           }
+        }
+        console.log("Total shapes found:", shapesFound);
+        if (shapesFound === 0) {
+          console.log("No shape__ attributes found on this entity");
         }
       },
 
       parseShapeData: function (shapeData) {
+        console.log("Parsing shape data:", shapeData);
         const shapeInfo = {};
+        
+        if (!shapeData) {
+          console.log("Warning: shapeData is undefined or empty");
+          return shapeInfo;
+        }
+        
         const params = shapeData.split(';');
+        console.log("Split params:", params);
+        
         params.forEach(param => {
+          if (!param.includes(':')) {
+            console.log("Warning: malformed parameter (no colon):", param);
+            return;
+          }
+          
           const [key, value] = param.split(':').map(str => str.trim());
+          console.log("Parsed key/value:", key, value);
+          
           if (key === 'shape') {
             shapeInfo.shape = value;
           } else if (key === 'halfExtents') {
-            shapeInfo.halfExtents = value.split(' ').map(Number);
+            const numbers = value.split(' ').map(Number);
+            if (numbers.some(isNaN)) {
+              console.log("Warning: invalid halfExtents values:", value);
+            }
+            shapeInfo.halfExtents = numbers;
           } else if (key === 'radius') {
-            shapeInfo.radius = Number(value);
+            const radius = Number(value);
+            if (isNaN(radius)) {
+              console.log("Warning: invalid radius value:", value);
+            }
+            shapeInfo.radius = radius;
           }
         });
+        
+        console.log("Final shape info:", shapeInfo);
         return shapeInfo;
       }
     });
