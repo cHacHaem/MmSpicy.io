@@ -40,7 +40,54 @@ function insertHTMLFromFile(filePath) {
       console.error('Error loading file:', xhr.status);
     }
     //laser tag stuff
-    
+    AFRAME.registerComponent('shape-to-shootable', {
+      init: function () {
+        const el = this.el;
+console.log("hello shootable")
+        // Loop through all attributes of the entity
+        for (let key in el.attributes) {
+          if (key.startsWith('shape__')) {
+            const shapeData = el.getAttribute(key);
+            const shapeParams = this.parseShapeData(shapeData);
+
+            // Create a new entity based on the shape type
+            let childEl;
+            if (shapeParams.shape === 'box' && shapeParams.halfExtents) {
+              childEl = document.createElement('a-box');
+              childEl.setAttribute('width', shapeParams.halfExtents[0] * 2);
+              childEl.setAttribute('height', shapeParams.halfExtents[1] * 2);
+              childEl.setAttribute('depth', shapeParams.halfExtents[2] * 2);
+            } else if (shapeParams.shape === 'sphere' && shapeParams.radius) {
+              childEl = document.createElement('a-sphere');
+              childEl.setAttribute('radius', shapeParams.radius);
+            }
+
+            if (childEl) {
+              childEl.setAttribute('class', 'shootable');
+              el.appendChild(childEl);
+            }
+          }
+        }
+      },
+
+      parseShapeData: function (shapeData) {
+        const shapeInfo = {};
+        const params = shapeData.split(';');
+        params.forEach(param => {
+          const [key, value] = param.split(':').map(str => str.trim());
+          if (key === 'shape') {
+            shapeInfo.shape = value;
+          } else if (key === 'halfExtents') {
+            shapeInfo.halfExtents = value.split(' ').map(Number);
+          } else if (key === 'radius') {
+            shapeInfo.radius = Number(value);
+          }
+        });
+        return shapeInfo;
+      }
+    });
+
+
    AFRAME.registerComponent('raycaster-logger', {
   init: function () {
     const el = this.el;

@@ -27,6 +27,19 @@ socket.on("allRequests", (requests) => {
     container.appendChild(delBtn);
     container.appendChild(document.createElement("hr"));
   });
+  //new names
+  if(requests.newNames)Object.keys(requests.newNames).forEach((newName) => {
+    let name = document.createElement("h3")
+    name.innerHTML = "Id: " + newName + " Name: " + requests.newNames[newName]
+    let delBtn = document.createElement("button");
+    delBtn.textContent = "Delete";
+    delBtn.onclick = () => {
+      socket.emit("removeRequest", {code: code, type: "newNames", index: newName})
+    };
+    container.appendChild(name)
+    container.appendChild(delBtn);
+    container.appendChild(document.createElement("hr"));
+  });
   requests.contact.forEach((contact, index) => {
     let id = document.createElement("h1");
     id.textContent = "Name: " + contact.name + " Email: " + contact.email + " Message:";
@@ -37,7 +50,7 @@ socket.on("allRequests", (requests) => {
     let delBtn = document.createElement("button");
     delBtn.textContent = "Delete";
     delBtn.onclick = () => {
-      socket.emit("removeRequest", {code: code, type: "contact", index: index})
+      socket.emit("removeRequest", {code: code, type: "newNames", index: newName})
     };
 
     container.appendChild(id);

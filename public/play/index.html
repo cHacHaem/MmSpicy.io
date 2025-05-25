@@ -52,6 +52,8 @@
       <h2 class="sideBarHeading">Updates</h2>
     
     <ul>
+      <li>Try out the new laser tag game mode! Select it at the top of the join menu. More laser tag maps are on the way!</li>
+      <li>Get ready for the upcoming space map!</li>
       <li>You can type /report in the chat to report the chat logs.</li>
       <li>Fixed banning bugs.</li>
       <li>There is now anti-camping in the school map and it will result in getting tagged.</li>
@@ -90,7 +92,7 @@
     </div>
     <div class="leftBar">
     <h2 class="sideBarHeading">Join</h2>
-       <select class="regbutton" id="gameModeSelect">
+       <select class="regbutton" id="gameModeSelect" onchange="changeGamemode()">
       <option value="tag">Tag</option>
       <option value="laserTag">Laser Tag</option>
 </select>

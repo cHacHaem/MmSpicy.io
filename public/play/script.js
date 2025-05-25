@@ -12,6 +12,14 @@ function setFact() {
   document.getElementById("facts").innerHTML = fact
 }
 setFact()
+function changeGamemode() {
+  
+  if(gameModeSelect.value == "laserTag") {
+    document.getElementById("tagMapSelect").innerHTML = `<option value="forest">Forest</option>`
+  } else {
+    document.getElementById("tagMapSelect").innerHTML = `<option value="city">City</option><option value="forest">Forest</option><option value="cave">Cave</option><option value="school">School</option>`
+  }
+}
 function changeName() {
   name = playerNameInput.value
   if(name.length > 15) {

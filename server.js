@@ -72,7 +72,7 @@ let game = {
   laserTag: {},
 };   
 const tagMaps = ["forest", "city", "cave", "school"]
-const laserTagMaps = ["forest", "school"]
+const laserTagMaps = ["forest"]
 
 const { GITHUB_TOKEN, GITHUB_USER, GITHUB_REPO, GITHUB_FILE_PATH } = process.env;
 
@@ -142,6 +142,9 @@ Object.keys(data.players).forEach((playerId) => {
     playerData.lastUpdated = now;
   }
 });
+  if(data.bannedIds) Object.keys(data.bannedIds).forEach((id)=>{
+    if(data.bannedIds[id].until < Date.now()) delete data.bannedIds[id];
+  })
 scheduleSave()
 }; 
 run()
@@ -485,16 +488,20 @@ io.on("connection", (socket) => {
   socket.on("getAllRequests", (code)=>{
     let adcode = process.env.ADMINCODE || "spicy"
     if(code == adcode) {
-    socket.emit("allRequests", {reports: data.reports, players: data.players, skinRequests: data.skinRequests, mapRequests: data.mapRequests, contact: data.contact})
+    socket.emit("allRequests", {reports: data.reports, players: data.players, skinRequests: data.skinRequests, mapRequests: data.mapRequests, contact: data.contact, newNames: data.newNames})
     } 
     
   })
   socket.on("removeRequest", ({code, type, index})=>{
     let adcode = process.env.ADMINCODE || "spicy"
     if(code == adcode) {
-    data[type].splice(index, 1);
+      if(type == "newNames") {
+        delete data.newNames[index]
+      } else {
+        data[type].splice(index, 1);
+      }
       scheduleSave();
-      socket.emit("allRequests", {reports: data.reports, players: data.players, skinRequests: data.skinRequests, mapRequests: data.mapRequests, contact: data.contact})
+      socket.emit("allRequests", {reports: data.reports, players: data.players, skinRequests: data.skinRequests, mapRequests: data.mapRequests, contact: data.contact, newNames: data.newNames})
     } 
     
   })
@@ -553,6 +560,8 @@ socket.on("change name", ({playerId, name})=>{
     })
   socket.emit("change name", name)
     data.players[playerId].name = name
+  if(!data.newNames) data.newNames = {}
+    data.newNames[playerId] = name
     scheduleSave()
 })
   socket.on("ban name", ({code, name})=>{
