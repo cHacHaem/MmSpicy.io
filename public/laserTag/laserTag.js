@@ -161,7 +161,20 @@ function insertHTMLFromFile(filePath) {
       if (intersects.length > 0) {
         const worldPos2 = new THREE.Vector3();
         el.object3D.getWorldPosition(worldPos2);
-        worldPos2.x = worldPos2.x - 0.7
+        
+        // Get player rotation and calculate blaster position based on facing direction
+        const rotation = el.getAttribute("rotation");
+        const rotationY = rotation.y * (Math.PI / 180); // Convert to radians
+        
+        // Calculate offset based on rotation (blaster is to the left of player when facing forward)
+        const blasterOffset = {
+          x: -0.7 * Math.cos(rotationY), // Blaster offset in world coordinates
+          z: 0.7 * Math.sin(rotationY)   // Blaster offset in world coordinates
+        };
+        
+        worldPos2.x += blasterOffset.x;
+        worldPos2.z += blasterOffset.z;
+        
         socket.emit("zap", {end: intersects[0].point, start: worldPos2, who: playerId});
         const firstEl = intersects[0].object.el;
         if (firstEl && firstEl.classList.contains('player')) {
