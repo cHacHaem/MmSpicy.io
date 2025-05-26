@@ -2,7 +2,7 @@
 let player;
 function sceneLoaded2() {
 
-  
+
 
   reSpawn()
 
@@ -23,7 +23,23 @@ function reSpawn() {
     {x: -31.069098824968716, y: 1.0993160410094724, z: 11.007674495269415},
    {x: -27.148331145932122, y: 1.0993173581986149, z: 3.3916827952489617}
 ];
-player.setAttribute("position", spawnPositions[Math.floor(Math.random() * spawnPositions.length)]);
+const spawnPos = spawnPositions[Math.floor(Math.random() * spawnPositions.length)];
+  player.setAttribute("position", spawnPos);
+
+    player.setAttribute("dynamic-body", {
+      shape: "sphere",
+      linearDamping: 0.9,
+      angularDamping: 0.9
+    });
+
+    // Ensure physics body position is synchronized
+    setTimeout(() => {
+      if (player.body) {
+        player.body.position.set(spawnPos.x, spawnPos.y, spawnPos.z);
+        player.body.velocity.set(0, 0, 0);
+        player.body.angularVelocity.set(0, 0, 0);
+      }
+    }, 100);
     } else if (map == "forest") {
       const spawnPositions = [
 {x: -39.19753874872109, y: 5.199230518374396, z: 36.68359198971971},
@@ -44,7 +60,23 @@ player.setAttribute("position", spawnPositions[Math.floor(Math.random() * spawnP
         {x: -27.137405471794686, y: 0.9992784522141881, z: 27.261870140778115},
         {x: 2.579030078342313, y: 0.9992953564709164, z: -25.10748933012558}
 ];
-player.setAttribute("position", spawnPositions[Math.floor(Math.random() * spawnPositions.length)]);
+const spawnPos = spawnPositions[Math.floor(Math.random() * spawnPositions.length)];
+  player.setAttribute("position", spawnPos);
+
+    player.setAttribute("dynamic-body", {
+      shape: "sphere",
+      linearDamping: 0.9,
+      angularDamping: 0.9
+    });
+
+    // Ensure physics body position is synchronized
+    setTimeout(() => {
+      if (player.body) {
+        player.body.position.set(spawnPos.x, spawnPos.y, spawnPos.z);
+        player.body.velocity.set(0, 0, 0);
+        player.body.angularVelocity.set(0, 0, 0);
+      }
+    }, 100);
     } else if(map == "school") {
       const spawnPositions = [
 {x: -8.624332553501565, y: 0.9993259816400812, z: 50.76058065383363},
@@ -60,7 +92,23 @@ player.setAttribute("position", spawnPositions[Math.floor(Math.random() * spawnP
         {x: -33.65794886465514, y: 7.599295328344432, z: -7.846843269566696},
         {x: -35.99716024521204, y: 1.499294267534957, z: -6.140705362391948}
 ];
-player.setAttribute("position", spawnPositions[Math.floor(Math.random() * spawnPositions.length)]);
+const spawnPos = spawnPositions[Math.floor(Math.random() * spawnPositions.length)];
+  player.setAttribute("position", spawnPos);
+
+    player.setAttribute("dynamic-body", {
+      shape: "sphere",
+      linearDamping: 0.9,
+      angularDamping: 0.9
+    });
+
+    // Ensure physics body position is synchronized
+    setTimeout(() => {
+      if (player.body) {
+        player.body.position.set(spawnPos.x, spawnPos.y, spawnPos.z);
+        player.body.velocity.set(0, 0, 0);
+        player.body.angularVelocity.set(0, 0, 0);
+      }
+    }, 100);
       console.log(player.getAttribute("position"))
     } else if(map === "city") {
       const spawnPositions = [
@@ -85,7 +133,23 @@ player.setAttribute("position", spawnPositions[Math.floor(Math.random() * spawnP
         {x: -18.04399628785564, y: 1.0092898553936194, z: 0.8858478185662294},
         {x: -5.688651037314301, y: 3.799290557729943, z: -32.520608702516554}
       ]
-      player.setAttribute("position", spawnPositions[Math.floor(Math.random() * spawnPositions.length)]);
+      const spawnPos = spawnPositions[Math.floor(Math.random() * spawnPositions.length)];
+  player.setAttribute("position", spawnPos);
+
+    player.setAttribute("dynamic-body", {
+      shape: "sphere",
+      linearDamping: 0.9,
+      angularDamping: 0.9
+    });
+
+    // Ensure physics body position is synchronized
+    setTimeout(() => {
+      if (player.body) {
+        player.body.position.set(spawnPos.x, spawnPos.y, spawnPos.z);
+        player.body.velocity.set(0, 0, 0);
+        player.body.angularVelocity.set(0, 0, 0);
+      }
+    }, 100);
     } else {
       player.setAttribute("position", {x: 0, y: 32, z: 0});
     }
