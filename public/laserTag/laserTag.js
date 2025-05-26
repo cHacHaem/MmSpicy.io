@@ -159,10 +159,18 @@ function insertHTMLFromFile(filePath) {
       });
 
       if (intersects.length > 0) {
-        const worldPos2 = new THREE.Vector3();
-        el.object3D.getWorldPosition(worldPos2);
-        worldPos2.x = worldPos2.x - 0.7
-        socket.emit("zap", {end: intersects[0].point, start: worldPos2, who: playerId});
+        // Get the actual blaster position in world coordinates
+        const blasterEl = document.querySelector('#blaster');
+        const blasterWorldPos = new THREE.Vector3();
+        if (blasterEl && blasterEl.object3D) {
+          blasterEl.object3D.getWorldPosition(blasterWorldPos);
+        } else {
+          // Fallback to camera position with offset
+          el.object3D.getWorldPosition(blasterWorldPos);
+          blasterWorldPos.x = blasterWorldPos.x - 0.7;
+        }
+        
+        socket.emit("zap", {end: intersects[0].point, start: blasterWorldPos, who: playerId});
         const firstEl = intersects[0].object.el;
         if (firstEl && firstEl.classList.contains('player')) {
           socket.emit("player zapped", {zapper: playerId, zapped: firstEl.getAttribute("id")});
@@ -245,8 +253,9 @@ socket.on("zap", (evt)=>{
       color: 'red'
     });
   } else {
+    // For other players, use the blaster position they sent
     line.setAttribute('line', {
-      start: `${evt.start.x} ${evt.start.y-0.7} ${evt.start.z}`,
+      start: `${evt.start.x} ${evt.start.y} ${evt.start.z}`,
       end: `${evt.end.x} ${evt.end.y} ${evt.end.z}`,
       color: 'red'
     });
