@@ -161,8 +161,8 @@ function insertHTMLFromFile(filePath) {
       if (intersects.length > 0) {
         const worldPos2 = new THREE.Vector3();
         el.object3D.getWorldPosition(worldPos2);
-
-        socket.emit("zap", {end: intersects[0].point, start: worldPos2});
+        worldPos2.x = worldPos2.x - 0.7
+        socket.emit("zap", {end: intersects[0].point, start: worldPos2, who: playerId});
         const firstEl = intersects[0].object.el;
         if (firstEl && firstEl.classList.contains('player')) {
           socket.emit("player zapped", {zapper: playerId, zapped: firstEl.getAttribute("id")});
@@ -236,12 +236,22 @@ socket.on("time left", (left)=>{
   timeLeftEl.innerHTML = formatTime(left)
 })
 socket.on("zap", (evt)=>{
+
   const line = document.createElement('a-entity');
+  if(evt.who === playerId) {
     line.setAttribute('line', {
       start: `${evt.start.x} ${evt.start.y-0.01} ${evt.start.z}`,
       end: `${evt.end.x} ${evt.end.y} ${evt.end.z}`,
       color: 'red'
     });
+  } else {
+    line.setAttribute('line', {
+      start: `${evt.start.x} ${evt.start.y-0.7} ${evt.start.z}`,
+      end: `${evt.end.x} ${evt.end.y} ${evt.end.z}`,
+      color: 'red'
+    });
+  }
+    
     document.querySelector("a-scene").appendChild(line);
   setTimeout(()=>{
     document.querySelector("a-scene").removeChild(line);
