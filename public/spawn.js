@@ -61,6 +61,7 @@ player.setAttribute("position", spawnPositions[Math.floor(Math.random() * spawnP
         {x: -35.99716024521204, y: 1.499294267534957, z: -6.140705362391948}
 ];
 player.setAttribute("position", spawnPositions[Math.floor(Math.random() * spawnPositions.length)]);
+      console.log(player.getAttribute("position"))
     } else if(map === "city") {
       const spawnPositions = [
         {x: 0, y: 3.799290015084451, z: 0},

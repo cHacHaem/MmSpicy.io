@@ -72,7 +72,7 @@ let game = {
   laserTag: {},
 };   
 const tagMaps = ["forest", "city", "cave", "school"]
-const laserTagMaps = ["forest"]
+const laserTagMaps = ["forest", "city", "cave", "school"]
 
 const { GITHUB_TOKEN, GITHUB_USER, GITHUB_REPO, GITHUB_FILE_PATH } = process.env;
 

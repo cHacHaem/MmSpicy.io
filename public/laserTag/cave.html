@@ -1,0 +1,181 @@
+<a-scene physics="debug: false; resitution: 0; gravity: -20"  inspector="url: xxx">
+  <a-assets>
+     <a-asset-item id="arrow" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/arrow.glb?v=1726321834583"></a-asset-item>
+     <a-asset-item id="blasterModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/c2f6d2ed8412_a_laser_blaster.glb?v=1746915426004"></a-asset-item>
+  <a-asset-item id="caveWallDarkModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/caveWallDark.glb?v=1741306076086"></a-asset-item>
+  <a-asset-item id="caveWallLightModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/caveWallLight.glb?v=1741306087546"></a-asset-item>
+ <a-asset-item id="mineLightModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/mineLight.glb?v=1741470531453"></a-asset-item>
+    <a-asset-item id="crystalModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/crystal.glb?v=1731797408069"></a-asset-item>
+    <a-asset-item id="bigCaveWallDarkModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/bigCaveWallDark.glb?v=1741538394548"></a-asset-item>
+    <a-mixin id="CWD" instanced-mesh-member="mesh:#caveWallDarkIn"  static-body="shape: none" shape__main="shape:box;offset: 0 3 0; halfExtents:5 3 0.7"></a-mixin>
+    <a-mixin id="ML" instanced-mesh-member="mesh:#mineLightIn" ></a-mixin>
+    <a-mixin id="BCWD" instanced-mesh-member="mesh:#bigCaveWallDarkIn" static-body="shape:none" shape__main="shape:box;halfExtents:10 0.5 10"></a-mixin>
+ <a-mixin id="CR" instanced-mesh-member="mesh:#crystalIn" static-body="shape:none" shape__main="shape:box;halfExtents:1 0.5 1; offset:0 0.5 0"></a-mixin>
+  </a-assets>
+  <a-entity id="caveWallDarkIn" gltf-model="#caveWallDarkModel" instanced-mesh="positioning: world;capacity: 150;"></a-entity>
+  <a-entity id="crystalIn" gltf-model="#crystalModel" instanced-mesh="positioning: world"></a-entity>
+  <a-entity id="bigCaveWallDarkIn" gltf-model="#bigCaveWallDarkModel" instanced-mesh="positioning: world"></a-entity>
+  <a-entity id="mineLightIn" gltf-model="#mineLightModel" instanced-mesh="positioning: world"></a-entity>
+  <a-sphere id="player" position="0 5 0" material="opacity: 0; transparent: true"  player-controls>
+    <a-camera position="0 1.6 0" look-controls="pointerLockEnabled: true" wasd-controls="enabled: false" id="cam"
+  > <a-entity position="0.4, -0.5, -1"
+          rotation="0 -90 0"
+  gltf-model="#blasterModel"
+  scale="2 2 2"
+  blaster
+  ></a-entity> <a-entity id="playerRay"
+          raycaster="objects: .player; far: 100; autocast: false"
+          position="0 0 0"
+          direction="0 0 -1">
+  </a-entity>
+
+  <a-entity id="shootRay"
+          raycaster="far: 100; autocast: false; objects: .shootable"
+          position="0 0 0"
+          direction="0 0 -1">
+  </a-entity></a-camera>
+  </a-sphere>
+  <a-sky color="black"></a-sky>
+  <a-entity id="map" position="0 0 0">
+   <a-entity mixin="BCWD" position="0 -0.4 0"></a-entity>
+    <a-entity mixin="BCWD" position="17.3 -0.4 2.3" rotation="0 -30 0"></a-entity>
+    <a-entity mixin="BCWD" position="0 6.4 0"></a-entity>
+    <a-entity mixin="BCWD" position="-12.18832 4.95231 62.42085" rotation="-8.612128618611404 -57.43959191966016 6.567815205584626"></a-entity>
+    <a-entity mixin="BCWD" position="17.3 6.4 2.3" rotation="0 -30 0"></a-entity>
+    <a-entity mixin="BCWD" position="-10.9 0.5 29" rotation="90 64 0"></a-entity>
+     <a-entity mixin="BCWD" position="-0.1 0.5 23" rotation="90 -30 0"></a-entity>
+     <a-entity mixin="BCWD" position="21.5 0.5 34.3" rotation="90 -30 0"></a-entity>
+    <a-entity mixin="BCWD" position="-2.7 -9.5 33.1" rotation="0 -30 0"></a-entity>
+    <a-entity mixin="BCWD" position="14 -9.5 41.7" rotation="0 -30 0"></a-entity>
+    <a-entity mixin="BCWD" position="-2.7 9.8 33.1" rotation="0 -30 0"></a-entity>
+    <a-entity mixin="BCWD" position="14 9.8 41.7" rotation="0 -30 0"></a-entity>
+    <a-entity mixin="BCWD" position="12.1 -6 29.2" rotation="90 -19 0"></a-entity>
+    <a-entity mixin="BCWD" position="-6.22 -6 41.22" rotation="90 -27.32 0" ></a-entity>
+    <a-entity mixin="CWD" position="-8.976 1.90361 64.86244" rotation="0 -159.21694985772393 0" ></a-entity>
+    <a-entity mixin="BCWD" position="4.14047 2.1513 57.78152" rotation="-9.099142744472605 -28.48058608036296 -3.4904588879369753" ></a-entity>
+    <a-entity mixin="BCWD" position="-10.99748 2.60256 49.60631" rotation="0 -29.999999999999996 0"></a-entity>
+    <a-entity mixin="BCWD" position="6.70815 6.37259 48.24416" rotation="90 -29.999999999999996 0" ></a-entity>
+    <a-entity mixin="CWD" position="-5.63055 3.09293 47.23257" rotation="0 55.97396587971552 0"></a-entity>
+    <a-entity mixin="CWD" position="-13.34541 3.09293 42.88967" rotation="0 55.97396587971552 0"></a-entity>
+    <a-entity mixin="CWD" position="-20.45642 3.09293 45.90939" rotation="0 -5.963917689516739 0" ></a-entity>
+    <a-entity mixin="CR" position="-4.66185 1.87908 38.60811" scale="1.5 1.5 1.5"></a-entity>
+    <a-entity mixin="CR" position="0.59791 1.87 36.7725"></a-entity>
+    <a-entity mixin="CR" position="5.4511 1.87 35.22968" scale="1.2 1.2 1.2"></a-entity>
+    <a-entity mixin="CR" position="9.82287 1.87 32.1916" scale="1.4 1.4 1.4"></a-entity>
+    <a-entity mixin="BCWD" position="21.4 0.5 45.5" rotation="90 -125 0"></a-entity>
+    <a-entity mixin="BCWD" position="42 -6 45.5" rotation="90 -55 0"></a-entity>
+    <a-entity mixin="CWD" position="0 0 5"></a-entity>
+    <a-entity mixin="CWD" position="0 0 -5"></a-entity>
+    <a-entity mixin="CWD" position="8.771 0 7.2" rotation="0 -30 0"></a-entity>
+    <a-entity mixin="BCWD" position="-10.99748 2.60256 49.60631" rotation="0 -29.999999999999996 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-20.93908 3.093 54.10196" rotation="0 -14.703242938647186 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-12.58862 3.093 53.01119" rotation="0 29.32684474377119 0"   ></a-entity>
+    <a-entity mixin="BCWD" position="-27.69418 0.14806 40.28969" rotation="4.387137837316714 -28.443916781474588 18.448095087622246"   ></a-entity>
+    <a-entity mixin="BCWD" position="-18.11926 -0.4 -0.15649"   ></a-entity>
+    <a-entity mixin="BCWD" position="-37.89862 -0.4 -0.08983"   ></a-entity>
+    <a-entity mixin="BCWD" position="-40.09236 -0.4 18.77508"   ></a-entity>
+    <a-entity mixin="BCWD" position="-36.08164 -0.4 38.01745"   ></a-entity>
+    <a-entity mixin="BCWD" position="-22.60594 -0.4 18.80112" ></a-entity>
+    <a-entity mixin="CWD" position="-32.419 0.12258 16.14132" rotation="0 -159.20778253300185 0" ></a-entity>
+    <a-entity mixin="CWD" position="-32.48886 0.12258 23.34652" rotation="0 -159.20778253300185 0" ></a-entity>
+    <a-entity mixin="CWD" position="-23.72871 0.12258 20.15284" rotation="0 -159.20778253300185 0" ></a-entity>
+    <a-entity mixin="CWD" position="-20.67459 0.12258 13.35" rotation="0 -82.31340867967458 0" ></a-entity>
+    <a-entity mixin="CWD" position="-30.02466 4.64633 51.41339" rotation="0 -14.703 0"   ></a-entity>
+    <a-entity mixin="BCWD" position="17.75367 -10.29911 54.83693" rotation="90 -29.999999999999996 0" ></a-entity>
+    <a-entity mixin="ML" position="-14.92889 6 1.28806"></a-entity>
+    <a-entity mixin="ML" position="-23.47245 6 2.30284"></a-entity>
+    <a-entity mixin="ML" position="-32.42574 6 3.2747"></a-entity>
+    <a-entity mixin="ML" position="-40.18284 6 5.71612"></a-entity>
+    <a-entity mixin="ML" position="-41.96678 6 15.60707"></a-entity>
+    <a-entity mixin="ML" position="-42.04894 6 26.71301"></a-entity>
+    <a-entity mixin="ML" position="-40.93716 6 35.61862"></a-entity>
+    <a-entity mixin="ML" position="-36.83554 6 43.97682"></a-entity>
+    <a-entity mixin="ML" position="-32.65688 6 19.84774"></a-entity>
+    <a-entity mixin="ML" position="-24.52066 6 14.15655"></a-entity>
+    <a-entity mixin="ML" position="-32.12157 6 12.66626"></a-entity>
+    <a-entity mixin="ML" position="-38.54693 6 51.2326"></a-entity>
+    <a-entity mixin="ML" position="-39.36941 6 60.48282"></a-entity>
+    <a-entity mixin="ML" position="-31.77987 6 65.15278"></a-entity>
+    <a-entity mixin="ML" position="-22.1395 6 65.99383"></a-entity>
+    <a-entity mixin="ML" position="-28.63849 7.81405 47.392"></a-entity>
+    <a-entity mixin="ML" position="-19.43354 8.28081 50.1234"></a-entity>
+    <a-entity mixin="ML" position="-9.63426 8.07045 45.49483"></a-entity>
+<a-entity mixin="ML" position="-3.63005 3.4335 59.3775"></a-entity>
+    <a-entity mixin="ML" position="2.26297 1.3 52.53682"></a-entity>
+    <a-entity mixin="BCWD" position="-28.681 5.84325 64.476"  rotation="-9.802 0.346 -2.033"></a-entity>
+    <a-entity mixin="BCWD" position="-18.92503 6.4 0.0275" ></a-entity>
+    <a-entity mixin="BCWD" position="-27.0313 6.4 17.35652" ></a-entity>
+    <a-entity mixin="BCWD" position="-37.91701 6.4 0.17188" ></a-entity>
+    <a-entity mixin="BCWD" position="-43.83209 6.4 18.83262" ></a-entity>
+    <a-entity mixin="BCWD" position="-40.6998 6.4 35.38725"  rotation="0 28.890250903881498 0"></a-entity>
+    <a-entity mixin="BCWD" position="-42.95745 6.4 57.85979"  rotation="0 -67.68579616998467 0"></a-entity>
+    <a-entity mixin="BCWD" position="-32.25598 7.27132 48.58783" rotation="0.42112397942115504 -41.826492002345226 1.9595156593474155" ></a-entity>
+    <a-entity mixin="BCWD" position="-12.95346 9.1462 48.1083" rotation="0.421 -41.826 1.9600000000000002" ></a-entity>
+    <a-entity mixin="ML" position="-12.91364 4.63791 62.71838"></a-entity>
+    <a-entity mixin="CWD" position="-30.02466 -0.52589 51.41339" rotation="0 -14.703 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-28.39843 4.34852 43.73197" rotation="0 -21.316321810047146 0"   ></a-entity>
+    <a-entity mixin="BCWD" position="-20.00407 6.373 34.9312" rotation="90 -29.999999999999996 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-28.39843 -0.93844 43.73197" rotation="0 -21.316321810047146 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-35.17956 -0.52589 54.5895" rotation="0 80.22440455862761 0"   ></a-entity>
+    <a-entity mixin="BCWD" position="-36.33202 -0.4 56.55919"   ></a-entity>
+   <a-entity mixin="CWD" position="-34.79504 0.12258 37.74196" rotation="0 -64.4800973062277 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-36.79019 0.12258 29.04434" rotation="0 -90.26377104490989 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-36.79019 0.12258 13.74612" rotation="0 -90.26377104490989 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-32.36999 0.12258 9.04455" rotation="0 -172.65796677369795 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-22.74974 0.12258 7.82004" rotation="0 -172.65796677369795 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-31.83001 -0.526 61.10247" rotation="0 152.10425178896992 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-13.97388 0.12258 6.69016" rotation="0 -172.65796677369795 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-6.67629 0.12258 5.89968" rotation="0 -172.65796677369795 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-9.50186 0.12258 -4.77274" rotation="0 -172.65796677369795 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-18.21628 0.12258 -3.79768" rotation="0 -172.65796677369795 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-26.60414 0.12258 -2.87767" rotation="0 -172.65796677369795 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-34.57608 0.12258 -2.04964" rotation="0 -172.65796677369795 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-42.67853 0.12258 0.98753" rotation="0 -139.09295321934405 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-46.30388 0.12258 8.09051" rotation="0 -90.26377104490989 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-46.50314 0.12258 16.81394" rotation="0 -90.26377104490989 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-46.70457 0.12258 25.40501" rotation="0 -90.26377104490989 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-45.82718 0.12258 34.34895" rotation="0 -75.52557768075972 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-42.8232 0.12258 42.74198" rotation="0 -62.22264359341227 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-42.32362 0.07093 51.42775" rotation="0 80.224 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-44.2349 0.07093 59.99038" rotation="0 80.224 0"   ></a-entity>
+    <a-entity mixin="CWD" position="-40.70659 0.07093 65.56673" rotation="0 141.51140807259125 0"   ></a-entity>
+    <a-entity mixin="BCWD" position="4.7483 -7.38853 57.05495" rotation="-14.674595048890644 -29.318823334639355 0.6904141431326419"></a-entity>
+    <a-entity mixin="BCWD" position="-9.09763 -2.99564 63.88141" rotation="-17.27410456539919 -60.71118092985716 5.382938485254084"></a-entity>
+    <a-entity mixin="CWD" position="8.771 0 -2.8" rotation="0 -30 0"></a-entity>
+    <a-entity mixin="BCWD" position="-28.6813 -0.4 64.47628"  rotation="-9.801589001302993 0.34606650825901725 -2.0328542571241606"></a-entity>
+    <a-entity mixin="CWD" position="-0.49267 -9.65501 49.38359" rotation="0 -126.40709467735249 0" ></a-entity>
+    <a-entity mixin="CWD" position="-0.49267 -4.5222 49.38359" rotation="0 -126.40709467735249 0" ></a-entity>
+    <a-entity mixin="CWD" position="-7.18881 -6.55509 56.4069" rotation="0 -141.9319590942173 0" ></a-entity>
+    <a-entity mixin="CWD" position="-15.15048 -2.70755 59.69841" rotation="0 -176.04472030071622 0" ></a-entity>
+    <a-entity mixin="CWD" position="-24.35998 -1.13316 61.44296" rotation="0 -164.22345507157706 0" ></a-entity>
+    <a-entity mixin="CWD" position="-7.18881 -1.91801 56.4069" rotation="0 -141.9319590942173 0" ></a-entity>
+    <a-entity mixin="CWD" position="5.94352 -9.65501 53.08477" rotation="0 -126.40709467735249 0" ></a-entity>
+    <a-entity mixin="CWD" position="5.94352 -4.14984 53.08477" rotation="0 -126.40709467735249 0" ></a-entity>
+    <a-entity mixin="CWD" position="-0.66017 -6.55509 60.111" rotation="0 -141.9319590942173 0" ></a-entity>
+    <a-entity mixin="CWD" position="-0.66017 -1.54585 60.111" rotation="0 -141.9319590942173 0" ></a-entity>
+    <a-entity mixin="CWD" position="-8.976 -3.48726 64.86244" rotation="0 -159.21694985772393 0" ></a-entity>
+    <a-entity mixin="CWD" position="-17.826 -0.73074 68.22574" rotation="0 -159.21694985772393 0" ></a-entity>
+    <a-entity mixin="CWD" position="-27.541 1.22105 70.78207" rotation="0 178.35030246832267 0" ></a-entity>
+    <a-entity mixin="CWD" position="-35.57207 1.22105 69.17077" rotation="0 156.514880895887 0" ></a-entity>
+    <a-entity mixin="CWD" position="17.3 0 2.3" rotation="0 -30 0"></a-entity>
+    <a-entity mixin="CWD" position="11.8 0 13.8" rotation="0 -101 0"></a-entity>
+    <a-entity mixin="CWD" position="11.8 4 13.8" rotation="0 -101 0"></a-entity>
+    <a-entity mixin="CWD" position="20.3 0 9" rotation="0 -101 0"></a-entity>
+    <a-entity mixin="CWD" position="18 0.46 15.4" rotation="79 0 105"></a-entity>
+    <a-entity mixin="CWD" position="15.7 2.3 25" rotation="79 0 105"></a-entity>
+     <a-entity mixin="CWD" position="18 7.46 15.4" rotation="79 0 105"></a-entity>
+    <a-entity mixin="CWD" position="15.7 9.3 25" rotation="79 0 105"></a-entity>
+    <a-entity mixin="CWD" position="17.8 0.9 15.5" rotation="0 -107 0"></a-entity>
+    <a-entity mixin="CWD" position="15 2 25" rotation="0 -107 0"></a-entity>
+    <a-entity mixin="CWD" position="9.4 2 23.1" rotation="0 -107 0"></a-entity>
+    <a-entity mixin="CWD" position="15 4 25" rotation="0 -107 0"></a-entity>
+    <a-entity mixin="CWD" position="9.4 4 23.1" rotation="0 -107 0"></a-entity>
+    <a-entity mixin="ML" position="0 6 0"></a-entity>
+    <a-entity mixin="ML" position="8 6 2"></a-entity>
+    <a-entity mixin="ML" position="15 6 6.1"></a-entity>
+    <a-entity mixin="ML" position="14.8 6.8 14.3"></a-entity>
+    <a-entity mixin="ML" position="12.4 8 23.5"></a-entity>
+    <a-entity mixin="ML" position="8.2 9.2 33.7"></a-entity>
+    <a-entity mixin="ML" position="4.1 9.2 40.2"></a-entity>
+  </a-entity>
+</a-scene>

@@ -46,13 +46,13 @@
   scale="2 2 2"
   blaster
   ></a-entity> <a-entity id="playerRay"
-          raycaster="objects: .player; far: 100; autocast: false"
+          raycaster="objects: .player; far: 120; autocast: false"
           position="0 0 0"
           direction="0 0 -1">
   </a-entity>
 
   <a-entity id="shootRay"
-          raycaster="far: 100; autocast: false; objects: .shootable"
+          raycaster="far: 120; autocast: false; objects: .shootable"
           position="0 0 0"
           direction="0 0 -1">
   </a-entity></a-camera>
@@ -102,16 +102,16 @@
   <a-entity position="-76.24963 0 46.68905" mixin="tree" ></a-entity>
   <a-entity position="-69.6511 0 16.28548" mixin="tree" scale="1.2 1.2 1.2"></a-entity>
 
-<a-box scale="120 100 1" position="-20 50 -60" static-body visible="false"></a-box>
-<a-box scale="1 100 120" position="40 50 0" static-body visible="false"></a-box>
-<a-box scale="1 100 120" position="-80 50 0" static-body visible="false"></a-box>
-<a-box scale="120 100 1" position="-20 50 60" static-body visible="false"></a-box>
-<a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="60 1 30" velocity="" position="-25 0 -45"></a-box>
-<a-box scale="120 1 120" position="-20 -0.5 0" src="#grass" static-body material="repeat: 4 4" roughness="1" ></a-box>  <a-entity mixin="lockers" position="-10 0.5 -1" rotation="0 90 0"></a-entity>
+<a-box scale="120 100 1" position="-20 50 -60" static-body visible="false" class="shootable"></a-box>
+<a-box scale="1 100 120" position="40 50 0" static-body visible="false" class="shootable"></a-box>
+<a-box scale="1 100 120" position="-80 50 0" static-body visible="false" class="shootable"></a-box>
+<a-box scale="120 100 1" position="-20 50 60" static-body visible="false" class="shootable"></a-box>
+<a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="60 1 30" velocity="" position="-25 0 -45" class="shootable"></a-box>
+<a-box scale="120 1 120" position="-20 -0.5 0" src="#grass" static-body material="repeat: 4 4" roughness="1"class="shootable" ></a-box>  <a-entity mixin="lockers" position="-10 0.5 -1" rotation="0 90 0"></a-entity>
 <a-entity mixin="lockers" position="-34 0.5 -1" rotation="0 90 0"></a-entity>
 <a-entity mixin="lockers" position="-28 0.5 -1" rotation="0 90 0"></a-entity>
 <a-entity mixin="lockers" position="-10 0.5 -9" rotation="0 -90 0"></a-entity>
-<a-entity mixin="wall" position="-10 0.5 0"></a-entity>
+<a-entity mixin="wall" position="-10 0.5 0" id="testwall"></a-entity>
 <a-entity mixin="wall" position="-10 0.5 -10"></a-entity>
 <a-entity mixin="wall" position="13.0459 0.5 34.77"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="1 0.5 39.69092"  ></a-entity>
@@ -132,32 +132,32 @@
 <a-entity mixin="wall" position="-54.5258 6.5 24.33674"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="-49 6.5 39.69092"  ></a-entity>
 <a-entity position="9.3 6 19.8" stairs-generator="length: 6"> </a-entity>
-<a-box src="#tile"  position="-20.01 0 4.99" material="repeat: 20 20" scale="70 1 70" static-body></a-box>
+<a-box src="#tile"  position="-20.01 0 4.99" material="repeat: 20 20" scale="70 1 70" static-body class="shootable"></a-box>
 <a-entity position="-66.73891 0 32.70068" mixin="tree" scale="1 1 1"></a-entity>
     <a-entity position="-73.18072 0 -26.92708" mixin="tree" scale="1.2 1.2 1.2"></a-entity>
     <a-entity position="-64.67852 0 -19.14164" mixin="tree" scale="0.9 0.9 0.9"></a-entity>
     <a-entity position="-66.17225 0 -47.34343" mixin="tree" scale="3 3 3"></a-entity>
     <a-entity position="-75.69958 0 -54.95574" mixin="tree" scale="1.3 1.3 1.3"></a-entity>
-    <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="20.49011 1.72693 0.92537" velocity="" position="-5.32203 6.07479 -29.93526"></a-box>
-    <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="20.49011 1.72693 0.92537" velocity="" position="5.34165 6.11067 -20.09058" rotation="0 90 0"></a-box>
-    <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="50.82949 1.72693 0.92537" velocity="" position="-54.90158 6.11067 14.57652" rotation="0 90 0"></a-box>
+    <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="20.49011 1.72693 0.92537" velocity="" position="-5.32203 6.07479 -29.93526" class="shootable"></a-box>
+    <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="20.49011 1.72693 0.92537" velocity="" position="5.34165 6.11067 -20.09058" rotation="0 90 0" class="shootable"></a-box>
+    <a-box src="#concrete" roughness="1" static-body="sphereRadius: NaN" scale="50.82949 1.72693 0.92537" velocity="" position="-54.90158 6.11067 14.57652" rotation="0 90 0" class="shootable"></a-box>
 <a-entity instanced-mesh-member="mesh:#hoopIn" static-body="shape: none; sphereRadius: NaN" shape__main="shape:box;offset: 0 1 -1; halfExtents: 2 1 1" shape__hoop="shape:box;offset:0 0 0.7;halfExtents:0.5 0.5 0.5"  position="-17 5 -20" rotation="0 -90 0"></a-entity> <a-entity instanced-mesh-member="mesh:#hoopIn"  static-body="shape: none; sphereRadius: NaN" shape__main="offset: 0 1 -1; halfExtents: 2 1 1" shape__hoop="offset: 0 0 0.7"  position="-52.55892 5 -20" rotation="0 90 0"></a-entity> 
 <a-entity mixin="wall" position="4.74337 0.5 4.76969"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="4.74337 0.5 14.76969"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="4.74337 0.5 24.76969"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="9.56571 0.5 25.48986"  ></a-entity>
-<a-box src="#bBallCourt"  position="-35 0.14241 -20" scale="20 1.0728 40"  rotation="0 90 0"></a-box>  <a-box src="#roof"  position="-25 6 14.78393" material="repeat: 6 5" roughness="1" scale="60 1 50" static-body></a-box>
-<a-box src="#tile"  position="-25 6.1 15.08" material="repeat: 6 5" roughness="1" scale="60 1 50" static-body></a-box>
+<a-box src="#bBallCourt"  position="-35 0.14241 -20" scale="20 1.0728 40"  rotation="0 90 0" class="shootable"></a-box>  <a-box src="#roof"  position="-25 6 14.78393" material="repeat: 6 5" roughness="1" scale="60 1 50" static-body class="shootable"></a-box>
+<a-box src="#tile"  position="-25 6.1 15.08" material="repeat: 6 5" roughness="1" scale="60 1 50" static-body class="shootable"></a-box>
 <a-entity mixin="wall" position="13.0459 0.5 24.76969"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="13.0459 0.5 14.76969"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="3.0459 0.5 14.76969"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="13.0459 6.5 4.77"   rotation="0 90 0"></a-entity>
 <a-entity mixin="windowOpen" position="13.0459 6.5 34.77"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="8.12795 6.5 39.69092"  ></a-entity>
-<a-box src="#roof"  position="-5 6 -20" material="repeat: 2 2" roughness="1" scale="20 1 20" static-body></a-box>
+<a-box src="#roof"  position="-5 6 -20" material="repeat: 2 2" roughness="1" scale="20 1 20" static-body class="shootable"></a-box>
 <a-entity mixin="window" position="13.0459 6.5 24.76969"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="13.0459 6.5 14.76969"   rotation="0 90 0"></a-entity>
-<a-box src="#tile"  position="10 6.1 30" material="repeat: 1 2" roughness="1" scale="10 1 20" static-body></a-box>
+<a-box src="#tile"  position="10 6.1 30" material="repeat: 1 2" roughness="1" scale="10 1 20" static-body class="shootable"></a-box>
 <a-entity mixin="doorOpen" position="0 0.5 -10"></a-entity>
 <a-entity mixin="doorClosed" position="0 0.5 0"></a-entity>
 <a-entity id="desks and chairs 1">
@@ -459,12 +459,12 @@
 <a-entity mixin="wall" position="-11.87 6.5 39.69092"  ></a-entity>
 <a-entity mixin="wall" position="13.0459 0.5 -5.23"   rotation="0 90 0"></a-entity>
 <a-entity mixin="wall" position="9.64443 0.5 -9.98176"  ></a-entity>
-<a-box src="#roof"  position="-20.82457 12.5 15" material="repeat: 7 5" static-body roughness="1" scale="70 1 50" ></a-box>
+<a-box src="#roof"  position="-20.82457 12.5 15" material="repeat: 7 5" static-body roughness="1" scale="70 1 50"class="shootable"></a-box>
 <a-entity mixin="wall" position="9.64443 6.5 -9.98176"  ></a-entity>
 <a-entity mixin="wall" position="13.0459 6.5 -5.23"   rotation="0 90 0"></a-entity>
 
-<a-box src="#roof"  position="-25 12.5 -20" material="repeat: 6 2" roughness="1" scale="60 1 20" static-body ></a-box>
-<a-box src="#tile"  position="-5 6.1 -20" material="repeat: 2 2" roughness="1" scale="20 1 20" static-body></a-box>
+<a-box src="#roof"  position="-25 12.5 -20" material="repeat: 6 2" roughness="1" scale="60 1 20" static-body class="shootable"></a-box>
+<a-box src="#tile"  position="-5 6.1 -20" material="repeat: 2 2" roughness="1" scale="20 1 20" static-body class="shootable"></a-box>
 <a-entity mixin="lockers" position="-47.14526 0.5 -1" rotation="0 90 0"  ></a-entity>
 <a-entity mixin="lockers" position="-23.94933 0.5 -9" rotation="0 -90 0"  ></a-entity>
 <a-entity mixin="lockers" position="-46.40294 0.5 -9" rotation="0 -90 0"  ></a-entity>

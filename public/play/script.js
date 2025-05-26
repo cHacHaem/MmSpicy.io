@@ -15,7 +15,7 @@ setFact()
 function changeGamemode() {
   
   if(gameModeSelect.value == "laserTag") {
-    document.getElementById("tagMapSelect").innerHTML = `<option value="forest">Forest</option>`
+    document.getElementById("tagMapSelect").innerHTML = `<option value="city">City</option><option value="forest">Forest</option><option value="cave">Cave</option><option value="school">School</option>`
   } else {
     document.getElementById("tagMapSelect").innerHTML = `<option value="city">City</option><option value="forest">Forest</option><option value="cave">Cave</option><option value="school">School</option>`
   }
