@@ -190,9 +190,9 @@ function joinGameRoom(socket, playy, gameType, startGameCallback, roomType, mapC
       socket.join(world);
     socket.room = world; // Assign the room to socket.room for later access
     socket.playerId = playy.id;
+    if(!data.players[playy.id]) data.players[playy.id] = {name: randomName()}
     if(gameType == "tag") socket.emit("world", {world: world, map: game.tag[world].map, random: game.tag[world].random || "nothing", name: data.players[playy.id].name});
      if(gameType == "laserTag") socket.emit("world", {world: world, map: game.laserTag[world].map, random: game.laserTag[world].random || "nothing"});
-    if(!data.players[playy.id]) data.players[playy.id] = {name: randomName()}
      socket.to(world).emit("chat message", {
       message: `${data.players[playy.id].name} joined the game`,
       id: "server",
