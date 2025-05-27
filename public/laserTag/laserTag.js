@@ -161,7 +161,6 @@ function insertHTMLFromFile(filePath) {
       if (intersects.length > 0) {
         const worldPos2 = new THREE.Vector3();
         el.object3D.getWorldPosition(worldPos2);
-        worldPos2.x = worldPos2.x - 0.7
         socket.emit("zap", {end: intersects[0].point, start: worldPos2, who: playerId});
         const firstEl = intersects[0].object.el;
         if (firstEl && firstEl.classList.contains('player')) {

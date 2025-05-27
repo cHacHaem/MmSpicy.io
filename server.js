@@ -20,7 +20,7 @@ function banId(playerId, duration, reason = "rule violation") {
   if(!data.bannedIds) data.bannedIds = {}
   data.bannedIds[playerId] = {
   reason: reason,
-  until: Date.now() + 1000 * 60 * duration
+  until: Date.now() + 1000 * 60 * duration * 60
 };
 scheduleSave()
 }
