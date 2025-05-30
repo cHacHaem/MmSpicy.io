@@ -50,7 +50,7 @@ socket.on("allRequests", (requests) => {
     let delBtn = document.createElement("button");
     delBtn.textContent = "Delete";
     delBtn.onclick = () => {
-      socket.emit("removeRequest", {code: code, type: "newNames", index: newName})
+      socket.emit("removeRequest", {code: code, type: "contact", index: newName})
     };
 
     container.appendChild(id);

@@ -6,6 +6,7 @@ let gameStarted = false;
 let it = document.getElementById("it")
 let map;
 let cooldown;
+let zapCooldown = true;
 let ring = document.getElementById("ring")
 let healthEl = document.getElementById("health")
 let sceneLoaded3 = false;
@@ -161,11 +162,18 @@ function insertHTMLFromFile(filePath) {
       if (intersects.length > 0) {
         const worldPos2 = new THREE.Vector3();
         el.object3D.getWorldPosition(worldPos2);
-        socket.emit("zap", {end: intersects[0].point, start: worldPos2, who: playerId});
-        const firstEl = intersects[0].object.el;
-        if (firstEl && firstEl.classList.contains('player')) {
-          socket.emit("player zapped", {zapper: playerId, zapped: firstEl.getAttribute("id")});
+        if(zapCooldown) {
+          socket.emit("zap", {end: intersects[0].point, start: worldPos2, who: playerId});
+          const firstEl = intersects[0].object.el;
+          if (firstEl && firstEl.classList.contains('player')) {
+            socket.emit("player zapped", {zapper: playerId, zapped: firstEl.getAttribute("id")});
+          }
+          zapCooldown = false;
+          setTimeout(()=>{
+            zapCooldown = true;
+          }, 300)
         }
+          
       }
     });
   }
@@ -262,7 +270,7 @@ socket.on("player zapped", (evt) => {
     cooldown = true;
     setTimeout(()=>{
       cooldown = false;
-    }, 1000)
+    }, 800)
     if(health < 51) ring.setAttribute("style", "stroke: yellow")
     if(health < 21) ring.setAttribute("style", "stroke: red")
    healthEl.setAttribute("style", "--percent: " + (-(1 - (health / 100))) + ";");

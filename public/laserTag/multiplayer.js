@@ -146,7 +146,7 @@ raycastHitbox.setAttribute("class", "player shootable");
     player.targetPosition = stuff.position;
     player.targetRotationY = stuff.rotation.y + 180;
     if(gameStarted && stuff.health) {
-      if(stuff.health < 51) {
+      if(stuff.health < 51 && stuff.health > 21) {
         player.nameEntity.setAttribute("color", "yellow")
       } else if(stuff.health < 21) {
         player.nameEntity.setAttribute("color", "red")

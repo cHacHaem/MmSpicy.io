@@ -13,6 +13,32 @@ body {
   background: orange;
   z-index: 100;
 }
+.mobile-warning {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.mobile-warning h2 {
+  font-size: 2em;
+  color: orange;
+  margin-bottom: 10px;
+}
+
+.mobile-warning p {
+  font-size: 1.2em;
+  color: #ccc;
+  text-shadow: 0 0 5px #ccc;
+}
 a {
         color: #ffd700;
         text-decoration: none;

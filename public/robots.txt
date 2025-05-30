@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Specifically ensure ads.txt is crawlable
+Allow: /ads.txt
+
+# Optional: Block admin or backend paths if you want
+Disallow: /admin/
+Disallow: /beta-testers/

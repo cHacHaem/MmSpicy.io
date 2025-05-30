@@ -1,18 +1,18 @@
 <a-scene physics="debug: false; resitution: 0; gravity: -20"  inspector="url: xxx">
     <a-assets>
-      <img src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/grass.png?v=1739312061476" id="grass">
-      <a-asset-item id="roadModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/cityRoadAndSidewalk.glb?v=1735422104744"></a-asset-item>
-      <a-asset-item id="mcSpicySign" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/mcSpicySign.glb?v=1739230203829"></a-asset-item> 
-      <a-asset-item id="mcSpicyRoof" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/mcSpicyRoof.glb?v=1739572657357"></a-asset-item>
-      <a-asset-item id="cashRegisterModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/cashRegister.glb?v=1740349829050"></a-asset-item>
-      <a-asset-item id="crateModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/crate.glb?v=1739722673450"></a-asset-item>
-      <a-asset-item id="arrow" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/arrow.glb?v=1726321834583"></a-asset-item>
-  <a-asset-item id="benchModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/bench.glb?v=1739402500239"></a-asset-item>
-       <img id="concrete" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/concrete.png?v=1739042861945">
-     <a-asset-item id="carModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/car.glb?v=1740160365174"></a-asset-item>
-      <a-asset-item id="treeModel" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tree.glb?v=1725820185520"></a-asset-item>
-      <a-asset-item id="bricksBig" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/brickWallBig.glb?v=1738970948250"></a-asset-item>
-<a-asset-item id="bricksSmall" src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/smallBrickWall.glb?v=1739130897288"></a-asset-item>
+      <img src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/grass.png" id="grass">
+      <a-asset-item id="roadModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/cityRoadAndSidewalk.glb"></a-asset-item>
+      <a-asset-item id="mcSpicySign" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/mcSpicySign.glb"></a-asset-item> 
+      <a-asset-item id="mcSpicyRoof" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/mcSpicyRoof.glb"></a-asset-item>
+      <a-asset-item id="cashRegisterModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/cashRegister.glb"></a-asset-item>
+      <a-asset-item id="crateModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/crate.glb"></a-asset-item>
+      <a-asset-item id="arrow" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/arrow.glb"></a-asset-item>
+  <a-asset-item id="benchModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/bench.glb"></a-asset-item>
+       <img id="concrete" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/concrete.png">
+     <a-asset-item id="carModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/car.glb"></a-asset-item>
+      <a-asset-item id="treeModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/tree.glb"></a-asset-item>
+      <a-asset-item id="bricksBig" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/brickWallBig.glb"></a-asset-item>
+<a-asset-item id="bricksSmall" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/smallBrickWall.glb"></a-asset-item>
       <a-mixin id="BBW"  static-body="shape: none" shape__main="offset: 0 3 0; halfExtents: 5 3 0.25" instanced-mesh-member="mesh:#bigWallIn"></a-mixin>
       <a-mixin id="bench" gltf-model="#benchModel" material="color:green;roughness:0" static-body="shape: none" shape__main="shape:box;halfExtents:0.6 0.05 2;offset:0.4 1 0" shape__back="shape:box;halfExtents:0.05 0.5 2;offset:-0.2 1.5 0"></a-mixin>
       <a-mixin id="SBW" static-body="shape: none" shape__main="offset: 0 1.5 0; halfExtents: 2.5 1.5 0.25" instanced-mesh-member="mesh:#smallWallIn"></a-mixin>
@@ -32,6 +32,8 @@
   <a-entity gltf-model="#cashRegisterModel" id="cashRegIn" instanced-mesh="positioning: world"></a-entity>
   <a-entity gltf-model="#carModel" id="carIn" instanced-mesh="positioning: world;drainColor:true;decompose:true" ></a-entity>
     <a-entity id="map" position="0 0 0">
+      
+      <a-image src="poster" position="15.51298 3.94913 20.06515" scale="5 3 1" rotation="0 90 0" visible="false"></a-image>
       <a-entity mixin="car" instanced-mesh-member="mesh:#carIn; colors:black" position="5 0 26"></a-entity>
       <a-entity mixin="car" instanced-mesh-member="mesh:#carIn; colors:gray" position="-30 0 -6" rotation="0 90 0"></a-entity>
       <a-entity mixin="car" instanced-mesh-member="mesh:#carIn; colors:gray" position="-5 0 -31" rotation="0 180 0"></a-entity>

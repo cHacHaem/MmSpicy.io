@@ -258,7 +258,13 @@ function animatePlayers() {
 animatePlayers();
 }
 socket.on("kick", ()=>{
-  window.location.href = "/play"
+  showMessage({message: "You are currently on the game in another tab. Close that tab then join again.", id: "server", name: "server"})
+    timeLeftEl.innerHTML = "";
+  it.setAttribute("class", "it");
+  it.innerHTML = "Try Again";
+  setTimeout(()=>{
+    window.location.href = "/play"
+  }, 20000)
 })
 socket.on("banned", (banMes)=>{
     showMessage({message: banMes, id: "server", name: "server"})

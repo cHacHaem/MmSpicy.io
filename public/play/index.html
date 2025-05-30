@@ -4,7 +4,6 @@
   <meta charset="utf-8">
     <meta name="description" content="MmSpicy io is a fun multiplayer 3D game featuring different game modes. Play online against strangers or create private games with friends!">
     <meta name="keywords" content="multiplayer, tag, online, 3D, first-person, io, play, free, game, laser tag">
-      <script src="/redirect-mobile.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
@@ -15,7 +14,11 @@
  <link rel="stylesheet" href="/play/style.css">
   </head>
   <body>
+    <div id="mobile-warning">
     
+    </div>
+
+    <script src="/redirect-mobile.js"></script>
    <h1 align="center" id="titleTop">
      
      MmSpicy <div class="io">io</div> 
@@ -52,6 +55,7 @@
       <h2 class="sideBarHeading">Updates</h2>
     
     <ul>
+      <li>Fixed some laser tag bugs.</li>
       <li>Try out the new laser tag game mode! Select it at the top of the join menu.</li>
       <li>Get ready for the upcoming space map!</li>
       <li>You can type /report in the chat to report the chat logs.</li>

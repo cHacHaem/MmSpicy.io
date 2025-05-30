@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 const axios = require('axios');
 const tagCoolDown = 2000;
 const tagTime = 60;
-const laserTagTime = 60;
+const laserTagTime = 120;
 const tagWaitTime = 10; 
 const laserTagWaitTime = 1;
 const leoProfanity = require('leo-profanity');
@@ -155,7 +155,28 @@ server.listen(port, () => {
 
 
 app.use(express.static("public"));
- 
+ const pages = [
+   '/',
+   '/create/',
+   '/create/editor/',
+   '/play/',
+   '/about/',
+   '/contact/',
+   '/privacy/',
+   '/terms/',
+   '/tag/',
+   '/laserTag/',
+ ];
+ app.get('/sitemap.txt', (req, res) => {
+   const host = req.get('host'); 
+   const protocol = req.protocol;
+   const domain = `${protocol}://${host}`;
+
+   const sitemapTxt = pages.map(path => `${domain}${path}`).join('\n');
+
+   res.header('Content-Type', 'text/plain');
+   res.send(sitemapTxt);
+ });
 
 // Utility Functions
 function generateRandomString(length, jsLet, existingObjects) {
@@ -363,6 +384,26 @@ function startLaserTag(world1) {
     }
   }, 1000);
 }
+function startFreezeTag(world1) {
+  let world = game.laserTag[world1]
+  const players = world.players;
+  world.started = true;
+  world.timeLeft = world.timeLeft || laserTagTime;
+  io.to(world1).emit("game start");
+  const randomIndex = Math.floor(Math.random() * players.length);
+  game.freezeTag[world].freezer = players[randomIndex];
+  io.to(world).emit("game start", players[randomIndex]);
+  const gameTimer = setInterval(() => {
+    if(world && world.timeLeft){
+     world.timeLeft--;
+    io.to(world1).emit("time left", world.timeLeft);
+    if (world.timeLeft < 1) {
+      clearInterval(gameTimer);
+      endGame(world1, "freezeTag");
+    } 
+    }
+  }, 1000);
+}
 function endGame(world, gameType, noOneLeft) {
   io.to(world).emit("game over");
   if(!noOneLeft) {
@@ -397,27 +438,37 @@ function endGame(world, gameType, noOneLeft) {
     console.log(data.gamesPlayed)
     scheduleSave();
   } else if(gameType == "laserTag") {
-    let topPlayer = ["id", 0]
+    let topPlayers = [["id", 0]]
     if(game[gameType][world] && game[gameType][world].zapOuts) Object.keys(game[gameType][world].zapOuts).forEach((key)=>{
-      if(game[gameType][world].zapOuts[key] > topPlayer[1]) {
-        topPlayer[0] = key;
-        topPlayer[1] = game[gameType][world].zapOuts[key];
+      if(game[gameType][world].zapOuts[key] > topPlayers[0][1]) {
+        topPlayers = [[key, game[gameType][world].zapOuts[key]]];
+      } else if(game[gameType][world].zapOuts[key] === topPlayers[0][1]) {
+        topPlayers.push([key, game[gameType][world].zapOuts[key]]);
       }
     })
-    if(topPlayer[0] === "id") {
+    if(topPlayers[0][0] === "id") {
       io.to(world).emit("chat message", {
     id: "server",
     name: "server",
     message: "No one got any zapouts so there is no winner...",
   });
     } else {
-      io.to(world).emit("chat message", {
-    id: "server",
-    name: "server",
-    message: `${data.players[topPlayer[0]].name} won with ${
-       topPlayer[1]
-    } zapouts!`,
-  });
+      if (topPlayers.length > 1) {
+        const winners = topPlayers.map(player => data.players[player[0]].name).join(", ");
+        io.to(world).emit("chat message", {
+          id: "server",
+          name: "server",
+          message: `${winners} tied for first with ${topPlayers[0][1]} zapouts!`,
+        });
+      } else {
+        io.to(world).emit("chat message", {
+          id: "server",
+          name: "server",
+          message: `${data.players[topPlayers[0][0]].name} won with ${
+             topPlayers[0][1]
+          } zapouts!`,
+        });
+      }
     }
 data.gamesPlayed++
     console.log(data.gamesPlayed)
@@ -540,7 +591,11 @@ io.on("connection", (socket) => {
        if(!stuff.map) stuff.map = "forest"
       if(!stuff.time) stuff.time = 60;
       joinGameRoom(socket, stuff, "laserTag", () => startLaserTag(socket.room), stuff.room, stuff.map, stuff.time);
-    } 
+    } else if (stuff.world === "freezeTag") {
+      if(!stuff.map) stuff.map = "forest"
+      if(!stuff.time) stuff.time = 60;
+      joinGameRoom(socket, stuff, "freezeTag", () => startFreezeTag(socket.room), stuff.room, stuff.map, stuff.time);
+    }
     online[stuff.id] = true; 
   });
   socket.on("player update", function (data2) {
@@ -604,6 +659,7 @@ socket.on("change name", ({playerId, name})=>{
   })
   socket.on("player zapped out", (zappp) =>{
     const world = game.laserTag[socket.room];
+    if(!world.zapOuts) world.zapOuts = {}
     if(world && world.started) {
       if(world.zapOuts[zappp.zapper]) {
         world.zapOuts[zappp.zapper]++;    

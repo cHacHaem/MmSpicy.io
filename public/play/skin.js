@@ -14,27 +14,27 @@ function setSkin() {
     model.setAttribute("src", skin)
 }
 function cowboySkin() {
-  skin = "https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/cowboyAnimated.glb?v=1740935685550"
+  skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/cowboyAnimated.glb"
  setSkin()
 }
 function sweaterSkin() {
-  skin = "https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/Sweatshirt.glb?v=1725725228968"
+  skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/SweatshirtAnimated.glb"
  setSkin()
 }
 function knightSkin() {
-  skin = "https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/KnightAnimated.glb?v=1741303386909"
+  skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/KnightAnimated.glb"
   setSkin()
 }
 function pjSkin() {
-  skin = "https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/pjAnimated.glb?v=1743804546505"
+  skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/pjAnimated.glb"
 setSkin()
 }
 function soccerSkin() {
-  skin = "https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/soccerPlayerAnimated.glb?v=1745542998381"
+  skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/soccerPlayerAnimated.glb"
 setSkin()
 }
 function astronautSkin() {
-  skin = "https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/astronautAnimated.glb?v=1745702217861"
+  skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/astronautAnimated.glb"
   setSkin()
 }
 setTimeout(()=>{
