@@ -6,38 +6,40 @@ body {
   margin: 20px auto;
   width: 60%;
       }
+/* The sidebar menu */
 .sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1000; /* Stay on top */
+  top: 0; /* Stay at the top */
   left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 60px;
-  transition: 0.5s;
+  background-color: rgba(17, 17, 17, 0.9); /* Semi-transparent black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  border-right: 2px solid #ffd700; /* Add gold border to match theme */
 }
 
+/* The sidebar links */
 .sidebar a {
-  padding: 8px 8px 8px 32px;
+  padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
+  font-size: 20px;
+  color: #ffd700; /* Gold color to match theme */
   display: block;
-  transition: 0.3s;
+  transition: color 0.3s ease;
 }
 
+/* When you mouse over the navigation links, change their color */
 .sidebar a:hover {
-  color: #f1f1f1;
+  color: #fff8b0;
+  background-color: rgba(255, 215, 0, 0.1);
 }
 
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
+/* Style page content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
 }
 
 .openbtn {
