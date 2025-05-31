@@ -6,40 +6,43 @@ body {
   margin: 20px auto;
   width: 60%;
       }
-/* The sidebar menu */
 .sidebar {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 160px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1000; /* Stay on top */
-  top: 0; /* Stay at the top */
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
   left: 0;
-  background-color: rgba(17, 17, 17, 0.9); /* Semi-transparent black */
-  overflow-x: hidden; /* Disable horizontal scroll */
+  background-color: rgba(17, 17, 17, 0.9);
+  overflow-x: hidden;
   padding-top: 20px;
-  border-right: 2px solid #ffd700; /* Add gold border to match theme */
+  border-right: 2px solid #ffd700;
 }
 
-/* The sidebar links */
 .sidebar a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
-  color: #ffd700; /* Gold color to match theme */
+  color: #ffd700;
   display: block;
   transition: color 0.3s ease;
 }
 
-/* When you mouse over the navigation links, change their color */
 .sidebar a:hover {
   color: #fff8b0;
   background-color: rgba(255, 215, 0, 0.1);
 }
 
-/* Style page content */
 .main {
-  margin-left: 160px; /* Same as the width of the sidebar */
+  margin-left: 160px;
   padding: 0px 10px;
+}
+  ul {
+  margin-left: 0px;
+  font-size: 1.5rem;
+  color: #fff8b0;
+  line-height: 1.8;
+  text-align: left;
 }
 
 .openbtn {

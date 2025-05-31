@@ -10,12 +10,15 @@
   </head>
   <body>
     <div class="sidebar">
-      <h1>HIII</h1>
+      <h1>Create</h1>
       <a href="/create#titleTop">Introduction</a>
       <a href="/create#html">How to Code with HTML</a>
       <a href="/create#elements">Elements</a>
       <a href="/create#attributes">Attributes</a>
       <a href="/create#maps">How to Make Custom Maps with HTML</a>
+       <a href="/create#aframe">A-Frame</a>
+      <a href="/create#physics">Physics</a>
+      <a href="/create#assets">Assets</a>
       <a href="/create#editor">Using The Editor</a>
     </div>
     <h1 id="titleTop">Create Your Own Maps With HTML</h1>
@@ -153,6 +156,7 @@
     <h1 id="maps">
   How to Make Custom Maps with HTML
 </h1>
+    <h1 id="aframe">A-Frame</h1>
 <p>
   Mm Spicy io is made with the <a href="https://aframe.io">A-Frame library</a>. 
   It makes 3D development on the web super easy for people who aren't familiar with JavaScript and the <a href="https://threejs.org">Three.js library.</a>
@@ -255,7 +259,7 @@
     </a-scene>
   </body>
 </html>" width="100%" height="300px"></iframe>
-    <h1>
+    <h1 id="physics">
       Physics
     </h1>
     <p>
@@ -283,7 +287,7 @@
     <script>function resetsim(id) {
   const iframe = document.getElementById(id);
   const originalContent = iframe.srcdoc;
-  iframe.srcdoc = ""; // Clear first to force reload
+  iframe.srcdoc = ""; 
   setTimeout(() => {
     iframe.srcdoc = originalContent;
   }, 0);
@@ -432,7 +436,7 @@
 &lt;/a-sphere&gt;
 </code>
     The dynamic-body component is added in later with a spawn script.
-    <h1>
+    <h1 id="assets">
       Assets
   </h1>
   </p>
@@ -478,6 +482,7 @@ As you can see, everything still works fine:
   </body>
 </html>
 " width="100%" height="300px"></iframe>
+    <p>Our assets are stored in this github repository: <a href="https://github.com/cHacHaem/mmspicyassets">https://github.com/cHacHaem/mmspicyassets</a> To use them in your map, copy this cdn: <code>https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/</code>Then put the name of the file after the @main/. For example, to use the car model, you would put <code>https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/car.glb</code></p>
 <h1 id="editor">
   Using The Editor
 </h1>
@@ -485,9 +490,13 @@ As you can see, everything still works fine:
   Now, you can create custom maps in the <a href="/create/editor">editor.</a> 
   In the starter template, you'll see a simple aframe scene with a movment and spawn script attached.
   Every time you make an edit, it's shown on the right preview panel and saved to your computer with local storage. 
-  To download the html file, click the download button. To request that the map you made be put in the game, click the request map button.
-  To reset your code back to the template, click reset. Click the refresh button to refresh the preview window. It should automatically refresh though, to turn this off, uncheck the auto refresh.
-  Our assets are stored in this github repository: <a href="https://github.com/cHacHaem/mmspicyassets">https://github.com/cHacHaem/mmspicyassets</a> To use them in your map, copy this cdn: <code>https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/</code>Then put the name of the file after the @main/. For example, to use the car model, you would put <code>https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/car.glb</code>
+  <ul>
+    <li> To download the html file, click the download button.</li>
+    <li>To request that the map you made be put in the game, click the request map button.</li>
+    <li> To reset your code back to the template, click reset. </li>
+    <li>Click the refresh button to refresh the preview window.</li>
+    <li>It should automatically refresh though, to turn this off, uncheck the auto refresh.</li>
+  </ul>
 </p>
     <p>
      Remember, if you ever need to know something, check the <a href="https://aframe.io/docs/1.7.0/introduction/">A-Frame documentation</a> or ask an AI chatbot like <a href="https://chat.openai.com">Chat GPT</a> or <a href="https://gemini.google.com">Gemini.</a> 
