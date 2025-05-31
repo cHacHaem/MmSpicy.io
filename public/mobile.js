@@ -11,6 +11,7 @@ if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
   mobileWarning.style.justifyContent = 'center';
   mobileWarning.style.textAlign = 'center';
   mobileWarning.style.padding = '20px';
+  mobileWarning.style.marginBottom = '50px';
   mobileWarning.style.flexDirection = 'column';
   mobileWarning.innerHTML = `
     <h2>Mobile Not Supported</h2>
