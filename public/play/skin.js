@@ -37,6 +37,10 @@ function astronautSkin() {
   skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/astronautAnimated.glb"
   setSkin()
 }
+function pencilSkin() {
+  skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/pencilAnimated.glb"
+  setSkin()
+}
 setTimeout(()=>{
   setSkin()
 }, 500)

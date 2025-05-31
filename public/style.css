@@ -47,6 +47,7 @@ p {
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  color: black;
 }
 .regbutton:hover {
   background: linear-gradient(to bottom, #ffa500, #ff8c00);

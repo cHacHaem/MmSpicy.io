@@ -45,11 +45,11 @@
       top: 0;
       display: flex;
       left: 50%;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      background-color: rgba(0, 0, 0, 0.5);
       color: white;
       border-radius: 5px;
       user-select: none;
-      z-index: 3; /* Place the overlay above the scene */
+      z-index: 3;
     }
     .messageme {
       background: blue;
@@ -68,19 +68,19 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 2; /* Scene will be behind the overlay */
+      z-index: 2;
     }
-    
+
     .overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 300px;
       height: calc(100% - 20px);
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      background-color: rgba(0, 0, 0, 0.5);
       color: white;
       padding: 10px;
-      z-index: 3; /* Place the overlay above the scene */
+      z-index: 3;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -91,16 +91,16 @@
       left: 0;
       width: 300px;
       height: calc(100% - 20px);
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      background-color: rgba(0, 0, 0, 0.5);
       color: white;
       padding: 10px;
-      z-index: 1; /* Place the overlay above the scene */
+      z-index: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     #chat-content {
-      flex: 1; /* Take available vertical space */
+      flex: 1;
       overflow-y: auto;
       background-color: rgba(255, 255, 255, 0.2);
       padding: 10px;
@@ -142,7 +142,6 @@
   </div>
   <div class="overlay" id="overlay">
     <div id="chat-content">
-      <!-- Chat messages will appear here -->
     </div>
     <div id="chat-input-container">
       <button onclick="sendMessage()">Send</button>
