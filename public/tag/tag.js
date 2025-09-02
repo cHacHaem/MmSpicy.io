@@ -2,6 +2,7 @@
 let whoIt = "";
 let done = false;
 let gameStarted = false;
+const gameMode = "tag";
 let it = document.getElementById("it")
 let map;
 let sceneLoaded3 = false;
@@ -78,6 +79,8 @@ socket.on("world", (world)=>{
     insertHTMLFromFile("/tag/cave.html")
   }  else if(world.map == "school") {
     insertHTMLFromFile("/tag/school.html")
+  } else if(world.map == "noGravity") {
+    insertHTMLFromFile("/tag/noGravity.html")
   }
   if(world.world.includes("tag-private")) it.innerHTML = "game code: " + world.world.split("-")[2];
   it.innerHTML ="world: " + world.world

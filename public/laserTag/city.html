@@ -2,6 +2,7 @@
   <a-assets>
     <img src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/grass.png" id="grass">
           <a-asset-item id="roadModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/cityRoadAndSidewalk.glb"></a-asset-item>
+    <!--<img id="mcSpicyAd" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/notthemama.png">-->
           <a-asset-item id="mcSpicySign" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/mcSpicySign.glb"></a-asset-item> 
           <a-asset-item id="mcSpicyRoof" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/mcSpicyRoof.glb"></a-asset-item>
           <a-asset-item id="cashRegisterModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/cashRegister.glb"></a-asset-item>
@@ -49,6 +50,8 @@
 <a-entity gltf-model="#cashRegisterModel" id="cashRegIn" instanced-mesh="positioning: world"></a-entity>
 <a-entity gltf-model="#carModel" id="carIn" instanced-mesh="positioning: world;drainColor:true;decompose:true" ></a-entity>
   <a-entity id="map" position="0 0 0">
+   <!---<a-image src="#mcSpicyAd" position="15.5 4 20" scale="3 3 1" rotation="0 90 0"></a-image>-->
+    <a-text value="Place an ad like this for just $5 a month! Contact us through our contact page to place your ad." position="15.5 2 20" rotation="0 90 0" align="center" scale="1 1 1"></a-text>
     <a-entity mixin="car" instanced-mesh-member="mesh:#carIn; colors:black" position="5 0 26"></a-entity>
     <a-entity mixin="car" instanced-mesh-member="mesh:#carIn; colors:gray" position="-30 0 -6" rotation="0 90 0"></a-entity>
     <a-entity mixin="car" instanced-mesh-member="mesh:#carIn; colors:gray" position="-5 0 -31" rotation="0 180 0"></a-entity>

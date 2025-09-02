@@ -1,0 +1,108 @@
+ <a-scene physics="debug: false;">
+<a-assets>
+        <a-asset-item id="marioCart" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/raceCar3.glb"></a-asset-item>
+        <img id="concrete" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/concrete.png"/>
+         <img id="road" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/road.png"/>
+         <img id="grass" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/grass.png"/>
+
+         <a-asset-item id="barrierModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/raceTrackBarrier.glb"></a-asset-item>
+      <a-mixin id="barrier" gltf-model="#barrierModel" instanced-mesh-member="mesh:#barrierIn" static-body="shape:none" shape__main="shape:box;offset:0 0.5 0;halfExtents:2 0.5 0.3" shape__fence="shape:box;offset:0 2 0;halfExtents:2 1 0.05"></a-mixin>
+        </a-assets>
+      <!-- Car chassis -->
+       <a-entity gltf-model="#barrierModel" id="barrierIn" instanced-mesh="positioning: world"></a-entity>
+
+           <a-entity id="car" position="0 5 0"
+                     geometry="primitive: box; width: 1.5; height: 0.4; depth: 3"
+                     dynamic-body="mass: 800"
+                     gltf-model="#marioCart"
+                     rotation="0 0 0"
+                     raycast-vehicle>
+                     <a-camera wasd-controls="enabled: false" position="0 5 10" id="cam"></a-camera>
+                    </a-entity>
+                    
+
+      <!-- Ground -->
+       <a-entity mixin="barrier" position="0 0 -10" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="4 0 -10" rotation="0 0 0"></a-entity>
+        <a-entity mixin="barrier" position="-4 0 -10" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="0 0 3" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="4 0 3" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="0 0 3" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="-4 0 3" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="-7.78 0 2.33" rotation="0 -20 0"></a-entity>
+       <a-entity mixin="barrier" position="-7.78 0 -10.7" rotation="0 -20 0"></a-entity>
+       <a-entity mixin="barrier" position="-11.5 0 -12.06" rotation="0 -20 0"></a-entity>
+       <a-entity mixin="barrier" position="-11.5 0 0.95" rotation="0 -20 0"></a-entity>
+       <a-entity mixin="barrier" position="-14.9 0 -1.05" rotation="0 -40 0"></a-entity>
+        <a-entity mixin="barrier" position="-17.9 0 -3.58" rotation="0 -40 0"></a-entity>
+            <a-box scale="100 0.1 100" static-body src="#road" material="roughness: 1;" ></a-box>
+              <a-box scale="100 0.1 100" position="0 0 100" static-body src="#road" material="roughness: 1;" ></a-box>
+               <a-box scale="100 0.1 100" position="-100 0 100" static-body src="#road" material="roughness: 1;" ></a-box>
+            <a-box scale="100 0.1 100" position="-100 0 0" static-body src="#road" material="roughness: 1;" ></a-box>
+            <a-box position="-25.94783 0.09225 85.40359" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 128.04804580260716 0"></a-box>
+            <a-box position="-9.98975 0.09225 74.37486" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 128.04804580260716 0"></a-box>
+            <a-box position="-2.73876 0.23008 83.63968" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 128.04804580260716 0"></a-box>
+            <a-box position="-19.00463 0.23008 94.69273" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 128.04804580260716 0"></a-box>
+            <a-box position="-11.70265 0.34502 104.0227" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 128.04804580260716 0"></a-box>
+            <a-box position="4.33354 0.34502 92.97207" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 128.04804580260716 0"></a-box>
+            <a-box position="11.70233 0.19209 98.21305" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 160.19899951857818 0"></a-box>
+            <a-box position="20.4236 0.32759 97.46615" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -153.27938822678323 0"></a-box>
+            <a-box position="27.35479 0.42388 91.16442" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -121.73519681585576 0"></a-box>
+            <a-box position="28.65771 0.45646 82.34186" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -78.27291030841202 0"></a-box>
+            <a-box position="-4.61839 0.45052 111.79403" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 138.72683318825545 0"></a-box>
+            <a-box position="4.6691 0.35706 118.17397" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 153.35960231810154 0"></a-box>
+            <a-box position="14.39421 0.44942 120.73151" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -173.48990149222786 0"></a-box>
+            <a-box position="24.09813 0.35556 117.80217" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -144.31431760637122 0"></a-box>
+            <a-box position="32.71796 0.45049 110.50591" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -134.19359111318036 0"></a-box>
+            <a-box position="39.30001 0.52216 102.25171" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -119.55967606774402 0"></a-box>
+            <a-box position="43.48509 0.4946 92.25608" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -103.00864423979995 0"></a-box>
+            <a-box position="44.50041 0.56045 81.96271" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -83.78648317095593 0"></a-box>
+            <a-box position="42.48386 0.48234 71.2715" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -74.01067727043383 0"></a-box>
+            <a-box position="24.1527 0.56249 73.91813" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -47.0438456848065 0"></a-box>
+            <a-box position="37.62147 0.56249 62.59072" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -47.0438456848065 0"></a-box>
+            <a-box position="29.55013 0.58952 55.74413" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -34.30011840550674 0"></a-box>
+            <a-box position="15.63378 0.56249 67.90222" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -23.298182823404666 0"></a-box>
+            <a-box position="19.95791 0.67778 50.04203" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -26.575501411552974 0"></a-box>
+            <a-box position="9.43505 0.79626 46.25041" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -13.132192664398467 0"></a-box>
+            <a-box position="5.11289 0.56249 64.58974" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -12.81362813030573 0"></a-box>
+            <a-box position="-5.55176 0.56249 62.83633" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -6.032099667137307 0"></a-box>
+            <a-box position="-1.47813 0.90401 44.08018" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -7.583096418556445 0"></a-box>
+            <a-box position="-17.30433 0.65808 61.48667" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -6.032099667137307 0"></a-box>
+            <a-box position="-12.68062 0.99926 43.5116" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 0.5746766685162158 0"></a-box>
+            <a-box position="-23.31038 0.90792 45.00201" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 16.841521430075417 0"></a-box>
+            <a-box position="-27.45425 0.75851 62.55054" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 18.59706411435626 0"></a-box>
+            <a-box position="-33.96178 1.01776 48.34689" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 16.841521430075417 0"></a-box>
+            <a-box position="-45.2008 1.09423 51.74904" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 16.841521430075417 0"></a-box>
+            <a-box position="-40.06165 1.18215 65.73814" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 16.841521430075417 0"></a-box>
+            <a-box scale="29.58183 2 13.27093" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-36.98332 6.30177 53.64074" rotation="0 125.97336562643846 0"></a-box>
+            <a-box scale="30.33836 2 13.04293" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-36.8014 6.13819 53.82787" rotation="0 125.97336562643846 0"></a-box>
+            <a-box scale="14.09973 2 13.27093" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-24.61935 2.65073 70.61142" rotation="0 125.97336562643846 31.68"></a-box>
+           <a-box scale="10 2 9.33686" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-63 -0.49879 -17.32027" rotation="0 0 6.31"></a-box>
+           <a-box scale="10 2 9.33686" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-41.88904 0 -17.32027" rotation="0 0 -12.843421935652533"></a-box>
+          <a-box position="-45.44481 0.08669 -25.94091" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -8.046619274817282 0"></a-box>
+          <a-box position="-57.21977 0.05058 -25.41783" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity=""></a-box>
+          <a-box position="-45.73213 0.05058 -9.38554" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity=""></a-box>
+          <a-box position="-57.44272 0.0576 -9.38554" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity=""></a-box>
+          <a-box position="-68.02775 0.13043 -8.65691" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 9.366714034798697 0"></a-box>
+          <a-box position="-76.83359 0.2 -5.02195" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 33.626892996228015 0"></a-box>
+          <a-box position="-67.65971 0.12107 -24.8767" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 6.851429314174385 0"></a-box>
+          <a-box position="-78.54119 0.09401 18.08244" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 147.34182659584252 0"></a-box>
+          <a-box position="-61.48808 0.0524 12.29484" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 152.86399382531337 0"></a-box>
+          <a-box position="-71.0252 0.09401 25.00195" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 128.04804580260716 0"></a-box>
+          <a-box position="-63.71017 0.09225 34.34859" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 128.04804580260716 0"></a-box>
+          <a-box position="-53.22174 0.14235 17.84976" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 140.66056574682196 0"></a-box>
+          <a-box position="-46.27404 0.09225 24.83774" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 128.04804580260716 0"></a-box>
+          <a-box scale="14.09973 2 13.27093" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-48.86723 2.80074 37.20443" rotation="0 125.97336562643846 -31.68112832396374"></a-box>
+          <a-box position="-77.87768 0.184 -22.97538" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 18.759211170378283 0"></a-box>
+          <a-box position="-87.23712 0.09225 -19.3239" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 28.84269540688564 0"></a-box>
+          <a-box position="-80.14729 0.13043 1.05213" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 132.98751495443 0"></a-box>
+          <a-box position="-95.17506 0.09225 -13.4042" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 51.985606667809854 0"></a-box>
+          <a-box position="-99.53729 0.13269 -4.95999" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 94.87665425350815 0"></a-box>
+          <a-box position="-96.78087 0.09225 4.41494" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 132.10229516095285 0"></a-box>
+          <a-box position="-71.92763 0.03443 6.94438" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 152.86399382531337 0"></a-box>
+          <a-box position="-88.35057 0.09225 11.85244" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 147.34182659584252 0"></a-box>
+           <a-box position="-15.20694 0.05 -18.6981" scale="12.05 0.1 6.6" static-body="sphereRadius: NaN" src="#grass" material="roughness: 1" velocity="" rotation="0 -40 0"></a-box>
+   <a-box position="-25.93162 0.05 -6.15029" scale="12.05 0.1 6.6" static-body class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -40 0"></a-box>
+   <a-box position="-23.22921 0.11809 -22.8886" scale="12.05 0.1 6.6" static-body class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -12.288798789965897 0"></a-box>
+   <a-box position="-34.03411 0.05 -24.91389" scale="12.05 0.1 6.6" static-body class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -8.046619274817282 0"></a-box>
+   <a-box position="-34.44416 0.05544 -9.38929" scale="12.05 0.1 6.6" static-body class="grass" src="#grass" material="roughness: 1" velocity="" rotation="0 -1.8380486067796808 0"></a-box>        </a-scene>

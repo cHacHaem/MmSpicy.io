@@ -10,7 +10,7 @@
     <title>MmSpicy io</title>
     
       <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/instanced-mesh@v0.7.0/src/instanced-mesh.min.js"></script>
-    <link rel="icon" href="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon2.png?v=1734826395336">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/favicon.png">
  <link rel="stylesheet" href="/play/style.css">
   </head>
   <body>
@@ -30,6 +30,9 @@
   <button onclick="cowboySkin()" class="regbutton" style="background: brown; color: gold">
        Cowboy Skin
       </button>
+        <button onclick="pirateSkin()" class="regbutton" style="background: darkorange; color: darkblue">
+         Pirate Skin
+        </button>
       <button onclick="sweaterSkin()" class="regbutton" style="background: blue; color: black">
        Sweater Skin
       </button>
@@ -54,6 +57,13 @@
       <h2 class="sideBarHeading">Updates</h2>
     
     <ul>
+      <li>Bug fixes for names, joining games, and laser tag.</li>
+      <li>The leaderboards now reset every Monday, only show the top 20 players, and they are based on whatever game mode you have selected.</li>
+      <li>Use the Find Game feature to quickly join games across different game modes.</li>
+      <li>New Infection Game Mode!</li>
+      <li>New Low Gravity Map!</li>
+      <li>New pirate skin!</li>
+      <li>The naming bug has been fixed.</li>
       <li>New Pencil Skin!</li>
       <li>Fixed some laser tag bugs.</li>
       <li>Try out the new laser tag game mode! Select it at the top of the join menu.</li>
@@ -97,16 +107,19 @@
     <div class="leftBar">
     <h2 class="sideBarHeading">Join</h2>
        <select class="regbutton" id="gameModeSelect" onchange="changeGamemode()">
+         <option value="random">Find Game</option>
       <option value="tag">Tag</option>
       <option value="laserTag">Laser Tag</option>
+         <option value="infection">Infection</option>
 </select>
-    <button onclick="joinRandomTagGame()" class="regbutton">Join/Create a public game</button>
+    <button onclick="joinRandomGame()" class="regbutton">Join/Create a public game</button>
     <hr>
     <select class="regbutton" id="tagMapSelect" style="width: calc(50% - 20px);">
       <option value="city">City</option>
   <option value="forest">Forest</option>
       <option value="cave">Cave</option>
       <option value="school">School</option>
+      <option value="noGravity">No Gravity</option>
 </select>
       <select class="regbutton" style="width: calc(50% - 20px);" id="tagTimeSelect">
         <option value="60">1 Minute</option>
@@ -114,13 +127,13 @@
         <option value="180">3 Minutes</option>
         <option value="300">5 Minutes</option>
 </select>
-    <button onclick="createPrivateTagGame()" class="regbutton">Create a private game</button>
+    <button onclick="createPrivateGame()" class="regbutton">Create a private game</button>
     <hr>
-      <button onclick="joinPrivateTagGame()" class="regbutton">
+      <button onclick="joinPrivateGame()" class="regbutton">
       Join a private game
     </button>
     <input id="joinPrivateTag" class="otherInput" placeholder="Game Code (just the last 5 letters)">
-      <h1 class="sideBarHeading">Leaderboard</h1>
+      <h1 class="sideBarHeading" id="leadText">Leaderboard</h1>
       <div id="leaderboard" class="board"></div>
     </div>
       <div id="scene" align="center">
@@ -138,30 +151,30 @@
     <script src="/getPlayerData.js"></script>
     <script src="/play/script.js"></script>
     <script src="/animation.js"></script>
-   <footer style="
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  padding: 6px 5px;
-  background: #fff;
-  border-top: 1px solid #ccc;
-  color: #666;
-  z-index: 1000;
-  white-space: nowrap;
-  overflow-x: auto;
-">
-  <a href="/" style="margin: 0 6px; color: inherit; text-decoration: none;">Home</a> |
-  <a href="/play" style="margin: 0 6px; color: inherit; text-decoration: none;">Play</a> |
-  <a href="/create" style="margin: 0 6px; color: inherit; text-decoration: none;">Create</a> |
-  <a href="/create/editor" style="margin: 0 6px; color: inherit; text-decoration: none;">Editor</a> |
-    <a href="/about" style="margin: 0 6px; color: inherit; text-decoration: none;">About</a> |
-  <a href="/contact" style="margin: 0 6px; color: inherit; text-decoration: none;">Contact</a> |
-  <a href="/privacy" style="margin: 0 6px; color: inherit; text-decoration: none;">Privacy</a> |
-  <a href="/terms" style="margin: 0 6px; color: inherit; text-decoration: none;">Terms</a>
-</footer>
+    <footer style="
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      font-size: 12px;
+      text-align: center;
+      padding: 6px 5px;
+      background: #fff;
+      border-top: 1px solid #ccc;
+      color: #666;
+      z-index: 1000;
+      white-space: nowrap;
+      overflow-x: auto;
+    ">
+      <a href="/" style="margin: 0 6px; color: inherit; text-decoration: none;">Home</a> |
+      <a href="/play" style="margin: 0 6px; color: inherit; text-decoration: none;">Play</a> |
+      <a href="/create" style="margin: 0 6px; color: inherit; text-decoration: none;">Create</a> |
+      <a href="/create/editor" style="margin: 0 6px; color: inherit; text-decoration: none;">Editor</a> |
+      <a href="/about" style="margin: 0 6px; color: inherit; text-decoration: none;">About</a> |
+      <a href="/contact" style="margin: 0 6px; color: inherit; text-decoration: none;">Contact</a> |
+      <a href="/privacy" style="margin: 0 6px; color: inherit; text-decoration: none;">Privacy</a> |
+      <a href="/terms" style="margin: 0 6px; color: inherit; text-decoration: none;">Terms</a>
+    </footer>
 
 
   </body>

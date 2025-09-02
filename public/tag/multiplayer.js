@@ -92,7 +92,7 @@ socket.on("player update", (stuff) => {
     newPlayer.setAttribute("visible", "true");
     newPlayer.setAttribute("move", "clip: Idle");
     newPlayer.setAttribute("rotation", `0 ${stuff.rotation.y} 0`);
-    if(stuff.name == "ghost") {
+    if(stuff.name.toLowerCase().includes("ghost")) {
       newPlayer.addEventListener('model-loaded', () => {
   const mesh = newPlayer.getObject3D('mesh');
   mesh.traverse((node) => {
@@ -265,6 +265,14 @@ socket.on("kick", ()=>{
   setTimeout(()=>{
     window.location.href = "/play"
   }, 20000)
+})
+socket.emit("getName", playerId);
+socket.on("getName", (name1) => {
+  if (name1.name) {
+    name = name1.name;
+  } else {
+    name = "";
+  }
 })
 socket.on("banned", (banMes)=>{
     showMessage({message: banMes, id: "server", name: "server"})

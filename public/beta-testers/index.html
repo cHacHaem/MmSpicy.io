@@ -13,7 +13,7 @@
     let code = prompt("Please put in the beta tester code:")
     let testing = document.getElementById("testing")
     if(code === "helloWorld") {
-      testing.innerHTML = "<p>Thank you for being an mmspicy beta tester. Please don't share your code with anyone. This page is for testing new mmspicy features, try them out below and please give feedback in the <a href='/contact'>contact page.</a></p><h1>Laser Tag</h1><a href='/laserTag?join=random'>Join a laser tag game</a>"
+      testing.innerHTML = "<p>Thank you for being an mmspicy beta tester. Please don't share your code with anyone. This page is for testing new mmspicy features, try them out below and please give feedback in the <a href='/contact'>contact page.</a></p><h1>Infection</h1><a href='/infection?join=random'>Join an infection game</a><h1 style='color: red'>Players that don't leave feedback on our <a href='/contact'>contact page</a> will be revoked beta tester status.</h1>"
     } else {
       testing.innerHTML = "Incorrect Code"
     }

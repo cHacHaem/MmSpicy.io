@@ -13,15 +13,6 @@ if (typeof params.get("devtools") == "string") {
     };
   });
 }
-document.addEventListener("keydown", (event)=>{
-  if(event.key == "c" && chatVisible) {
-    overlay.setAttribute("class", "overlayunder");
-    chatVisible = false;
-  } else if(event.key == "c") {
-    overlay.setAttribute("class", "overlay");
-    chatVisible = true;
-  }
-})
 chatInput.addEventListener('keydown', function(event) {
     if(event.keyCode == 13) {
       sendMessage();

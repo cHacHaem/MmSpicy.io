@@ -4,13 +4,13 @@
   <meta charset="utf-8">
       <meta name="description" content="MmSpicy io is a multiplayer 3d tag game that can be played online against strangers, or you can create a private game to play with friends.">
     <meta name="keywords" content="multiplayer, tag, online, 3d, first-person, io, play, free, game">
-  <link rel="icon" href="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/tagIcon2.png?v=1734826395336">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/favicon.png">
   <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
   <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/instanced-mesh@v0.7.4/src/instanced-mesh.min.js"></script>
-  <title>Tag</title>
+  <title>Infection</title>
   <style>
     body, html {
       margin: 0;
@@ -33,6 +33,11 @@
       margin-right: 5px;
     }
     .it {
+      color: green;
+      margin-left: 20px;
+      margin-right: 5px;
+    }
+    .over {
       color: red;
       margin-left: 20px;
       margin-right: 5px;
@@ -149,12 +154,12 @@
     </div>
   </div>
   <script src="/getPlayerData.js"></script>
-   <script src="/tag/multiplayer.js"></script>
+   <script src="/infection/multiplayer.js"></script>
   <script src="/stairs.js"></script>
   <script src="/movement.js"></script>
   <script src="/animation.js"></script>
   <script src="/spawn.js"></script>
   <script src="/chat.js"></script>
-  <script src="/tag/tag.js"></script>
+  <script src="/infection/infection.js"></script>
 </body>
 </html>

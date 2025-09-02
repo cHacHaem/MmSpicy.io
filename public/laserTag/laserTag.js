@@ -3,6 +3,7 @@ let whoIt = "";
 let done = false;
 let health = 90;
 let gameStarted = false;
+const gameMode = "laserTag";
 let it = document.getElementById("it")
 let map;
 let cooldown;
@@ -10,6 +11,7 @@ let zapCooldown = true;
 let ring = document.getElementById("ring")
 let healthEl = document.getElementById("health")
 let sceneLoaded3 = false;
+let lastHit;
 let timeLeftEl = document.getElementById("timeleft")
 console.log("Hello! Please don't do any naughty stuff. I'm not going to try and stop you but I will remind you that if your cheating on a game like this it's just sad.")
 socket.on("game start", (itFirst)=>{
@@ -211,6 +213,8 @@ socket.on("world", (world)=>{
     insertHTMLFromFile("/laserTag/cave.html")
   }  else if(world.map == "school") {
     insertHTMLFromFile("/laserTag/school.html")
+  } else if(world.map == "noGravity") {
+    insertHTMLFromFile("/laserTag/noGravity.html")
   }
   if(world.world.includes("tag-private")) it.innerHTML = "game code: " + world.world.split("-")[2];
   it.innerHTML ="world: " + world.world
@@ -266,6 +270,7 @@ socket.on("zap", (evt)=>{
 })
 socket.on("player zapped", (evt) => {
   if(playerId === evt.zapped && !cooldown) {
+    lastHit = evt.zapper;
     health = health-10
     cooldown = true;
     setTimeout(()=>{

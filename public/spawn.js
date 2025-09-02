@@ -13,6 +13,30 @@ function sceneLoaded2() {
 }})
   }
 function reSpawn() {
+  const tagMessage = name + " fell in the void..."
+  if(gameStarted && gameMode === "tag") {
+     sendMessage(tagMessage);
+    if(whoIt != playerId) {
+      socket.emit("player tagged", playerId)
+    }
+  }
+  if(gameStarted && gameMode === "laserTag") {
+     sendMessage(tagMessage);
+    console.log(name)
+    if(lastHit) socket.emit("player zapped out", {zapper: lastHit, zapped: playerId})
+    lastHit = null;
+    console.log(it, playerId)
+    if(whoIt != playerId) {
+      socket.emit("player tagged", playerId)
+    }
+  }
+  if(gameStarted && gameMode === "infection") {
+    sendMessage(tagMessage);
+    if(!infected.includes(playerId)) {
+    socket.emit("player infected", playerId)
+    }
+     
+  }
   player = document.getElementById("player")
     if (map == "cave") {
  const spawnPositions = [
@@ -135,6 +159,41 @@ const spawnPos = spawnPositions[Math.floor(Math.random() * spawnPositions.length
       ]
       const spawnPos = spawnPositions[Math.floor(Math.random() * spawnPositions.length)];
   player.setAttribute("position", spawnPos);
+
+    player.setAttribute("dynamic-body", {
+      shape: "sphere",
+      linearDamping: 0.9,
+      angularDamping: 0.9
+    });
+
+    // Ensure physics body position is synchronized
+    setTimeout(() => {
+      if (player.body) {
+        player.body.position.set(spawnPos.x, spawnPos.y, spawnPos.z);
+        player.body.velocity.set(0, 0, 0);
+        player.body.angularVelocity.set(0, 0, 0);
+      }
+    }, 100);
+    } else if(map === "noGravity") {
+      const spawnPositions = [
+        {x: -9.597661819136206, y: 14.923020285403865, z: -23.31041001188405},
+        {x: -8.987375895225187, y: 3.0858293798354683, z: 2.857472189397907},
+        {x: -6.687006956126888, y: 9.216445226580307, z: 16.240221357686767},
+        {x: 7.58046408387863, y: 19.178467085796285, z: -18.610416183669052},
+        {x: 23.15225349449433, y: 1.128080412941084, z: -27.404651157781075},
+        {x: 8.211757605304165, y: 7.230819259773785, z: 19.49668600151738},
+        {x: 19.443264338160887, y: 9.416850711041546, z: -8.670965562224946},
+        {x: -4.662867423674139, y: 18.543499466984073, z: -33.29762327704333},
+        {x: 7.796728855188704, y: 17.632597614996563, z: -30.2922560167365},
+        {x: 7.271223013412605, y: 19.175891734240352, z: -18.467899510177677},
+        {x: 7.504398994873639, y: 17.333374204968507, z: -3.3871900674522197},
+         {x: -23.81230993559915, y: 20.00315886862913, z: 7.206482211556516},
+        {x: -22.478285725022065, y: 7.687795440363817, z: 16.01613794141038},
+        {x: -29.845661414770404, y: 7.174162573764939, z: -1.9702828664232483},
+        {x: -12.00488872697519, y: 8.539020488083686, z: -4.463482133390459}
+      ]
+      const spawnPos = spawnPositions[Math.floor(Math.random() * spawnPositions.length)];
+    player.setAttribute("position", spawnPos);
 
     player.setAttribute("dynamic-body", {
       shape: "sphere",

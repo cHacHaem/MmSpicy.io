@@ -1,3 +1,4 @@
+/* global io map playerId whoIt gameStarted skin showMessage */
 const socket = io();
 
 let players = {};
@@ -69,70 +70,106 @@ function sendUpdate() {
       rotation: rotation,
       movementState: movementState,
     }
-    if(!gameStarted) updateObject.name = name
     if(!gameStarted) updateObject.skin = skin
-    if(gameStarted) updateObject.health = health
     socket.emit("player update", updateObject);
   }
 }
+socket.emit("name", playerId)
+  socket.on("name", (name1)=>{
+    name = name1;
+    if (map === "forest") {
+      startCampingCheck(
+        () => player.getAttribute("position").y > 9,
+        name + " is currently tree camping. If they don't stop in the next 5 seconds, they will be infected.",
+        "You were warned, " + name + ", don't tree camp."
+      );
+    }
+    if (map === "city") {
+      console.log(name)
+      startCampingCheck(() => {
+          const pos = player.getAttribute("position");
+          return pos.y > 10 && pos.x > 11 && pos.z > 10;
+        },
+        name + " is currently roof camping. If they don't stop in the next 5 seconds, they will be infected.",
+        "You were warned, " + name + ", don't roof camp."
+      );
+      startCampingCheck(() => {
+          const pos = player.getAttribute("position");
+          return pos.y > 7 && pos.x < -11 && pos.z < -11;
+        },
+        name + " is currently tree camping. If they don't stop in the next 5 seconds, they will be infected.",
+        "You were warned, " + name + ", don't tree camp."
+      );
+      startCampingCheck(() => {
+          const pos = player.getAttribute("position");
+          return pos.y > 21;
+        },
+        name + " is currently border camping. If they don't stop in the next 5 seconds, they will be infected.",
+        "You were warned, " + name + ", don't border camp."
+      );
+    }
+      if (map === "school") {
+         startCampingCheck(() => {
+          const pos = player.getAttribute("position");
+          return (pos.y > 5 && pos.x > 15) || (pos.y > 5 && pos.z < -30) || (pos.y > 5 && pos.z > 41) || (pos.y > 5 && pos.x < -55);
+        },
+        name + " is currently tree camping. If they don't stop in the next 5 seconds, they will be infected.",
+        "You were warned, " + name + ", don't tree camp."
+      );
+        startCampingCheck(() => {
+          const pos = player.getAttribute("position");
+          return pos.y > 13;
+        },
+        name + " is currently roof camping. If they don't stop in the next 5 seconds, they will be infected.",
+        "You were warned, " + name + ", don't roof camp."
+      );
+    }
 
+  })
 socket.on("player update", (stuff) => {
   if (stuff.id !== playerId && !(stuff.id in players)) {
     let newPlayer = document.createElement("a-entity");
     let newPlayerHitbox = document.createElement("a-cylinder");
     let newPlayerName = document.createElement("a-text")
-    let newPlayerBlaster = document.createElement("a-entity");
     newPlayerName.setAttribute("value", stuff.name)
     newPlayerName.setAttribute("align", "center")
     newPlayerName.setAttribute("position", {x: 0, y: 1.3, z: 0})
     newPlayerName.setAttribute("look-at", "#cam")
     newPlayer.setAttribute("gltf-model", stuff.skin);
+    newPlayer.setAttribute("id", stuff.id+"-model");
     newPlayer.setAttribute("scale", "3 3 3");
     newPlayer.setAttribute("visible", "true");
     newPlayer.setAttribute("move", "clip: Idle");
     newPlayer.setAttribute("rotation", `0 ${stuff.rotation.y} 0`);
-    newPlayerBlaster.setAttribute("gltf-model", "#blasterModel")
-  newPlayerBlaster.setAttribute("position", {x: -0.2, y: 0.5, z: 0.2})
-     newPlayerBlaster.setAttribute("rotation", {x: 0, y: 90, z: 0})
-    newPlayerBlaster.setAttribute("scale", {x: 0.8, y: 0.8, z: 0.8})
-
-// Box for raycasting
-let raycastHitbox = document.createElement("a-box");
-raycastHitbox.setAttribute("width", "0.2");
-raycastHitbox.setAttribute("height", "1");
-raycastHitbox.setAttribute("depth", "0.2");
-raycastHitbox.setAttribute("position", "0 0.5 0");
-raycastHitbox.setAttribute("visible", "false");
-raycastHitbox.setAttribute("id", stuff.id);
-raycastHitbox.setAttribute("class", "player shootable");
-
-
-
     if(stuff.name.toLowerCase().includes("ghost")) {
       newPlayer.addEventListener('model-loaded', () => {
     const mesh = newPlayer.getObject3D('mesh');
     mesh.traverse((node) => {
-    if (node.isMesh) {
+    if (node.isMesh) { 
       node.material.transparent = true;
       node.material.opacity = 0.3;
     }
     });
     });
     }
-   
+
+    let itMarker = document.createElement("a-entity");
+    itMarker.setAttribute("gltf-model", "#arrow");
+    itMarker.setAttribute("id", "marker" + stuff.id);
+    itMarker.setAttribute("position", "0 1 0");
+    itMarker.setAttribute("visible", false);
 
     newPlayerHitbox.setAttribute("static-body", { shape: "cylinder" });
     newPlayerHitbox.setAttribute("visible", "false");
     newPlayerHitbox.setAttribute("position", "0 0.5 0");
     newPlayerHitbox.setAttribute("height", "3.1");
+    newPlayerHitbox.setAttribute("id", stuff.id);
+    newPlayerHitbox.setAttribute("class", "player");
     newPlayer.appendChild(newPlayerName)
     newPlayer.appendChild(newPlayerHitbox);
-    newPlayer.appendChild(raycastHitbox);
-    newPlayer.appendChild(newPlayerBlaster);
+    newPlayer.appendChild(itMarker);
     players[stuff.id] = {
       entity: newPlayer,
-      nameEntity: newPlayerName,
-      name: stuff.name,
       targetPosition: stuff.position,
       previousPosition: { ...stuff.position },
       targetRotationY: stuff.rotation.y + 180,
@@ -145,16 +182,7 @@ raycastHitbox.setAttribute("class", "player shootable");
     let player = players[stuff.id];
     player.targetPosition = stuff.position;
     player.targetRotationY = stuff.rotation.y + 180;
-    if(gameStarted && stuff.health) {
-      if(stuff.health < 51 && stuff.health > 21) {
-        player.nameEntity.setAttribute("color", "yellow")
-      } else if(stuff.health < 21) {
-        player.nameEntity.setAttribute("color", "red")
-      } else {
-        player.nameEntity.setAttribute("color", "lime")
-      }
-      player.nameEntity.setAttribute("value", player.name+" health: "+stuff.health)
-    }
+
     if (player.movementState !== stuff.movementState) {
       player.movementState = stuff.movementState;
 
@@ -183,6 +211,31 @@ raycastHitbox.setAttribute("class", "player shootable");
     }
   }
 });
+ function startCampingCheck(conditionFn, warningMessage, kickMessage) {
+  let isChecking = false;
+
+  let interval = setInterval(() => {
+    if (!isChecking && conditionFn() && !infected.includes(playerId) && gameStarted) {
+      isChecking = true;
+
+      setTimeout(() => {
+        if (conditionFn() && whoIt !== playerId && gameStarted) {
+          sendMessage(warningMessage);
+        setTimeout(() => {
+        if (conditionFn() && whoIt !== playerId && gameStarted) {
+          sendMessage(kickMessage);
+          socket.emit("player infected", playerId);
+        }
+        isChecking = false;
+      }, 5000);
+        } else {
+          isChecking = false;
+        } 
+      }, 5000);
+    }
+  }, 2000);
+}
+
 
 
 function animatePlayers() {
@@ -207,17 +260,6 @@ function animatePlayers() {
 
 animatePlayers();
 }
-setTimeout(()=>{
-  
-}) 
-socket.emit("getName", playerId);
-socket.on("getName", (name1) => {
-  if (name1.name) {
-    name = name1.name;
-  } else {
-    name = "";
-  }
-})
 socket.on("kick", ()=>{
   showMessage({message: "You are currently on the game in another tab. Close that tab then join again.", id: "server", name: "server"})
     timeLeftEl.innerHTML = "";
@@ -227,12 +269,20 @@ socket.on("kick", ()=>{
     window.location.href = "/play"
   }, 20000)
 })
-socket.on("banned", (banMes)=>{
-  showMessage({message: banMes, id: "server", name: "server"})
-  timeLeftEl.innerHTML = "";
-it.setAttribute("class", "it");
-it.innerHTML = "YOU ARE BANNED";
-setTimeout(()=>{
-  window.location.href = "/play"
-}, 20000)
+socket.emit("getName", playerId);
+socket.on("getName", (name1) => {
+  if (name1.name) {
+    name = name1.name;
+  } else {
+    name = "";
+  }
 })
+socket.on("banned", (banMes)=>{
+    showMessage({message: banMes, id: "server", name: "server"})
+    timeLeftEl.innerHTML = "";
+  it.setAttribute("class", "it");
+  it.innerHTML = "YOU ARE BANNED";
+  setTimeout(()=>{
+    window.location.href = "/play"
+  }, 20000)
+  })

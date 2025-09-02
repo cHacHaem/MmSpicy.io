@@ -2,17 +2,17 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
+require("dotenv").config();
 const port = process.env.PORT || 3000;
 const axios = require('axios');
 const tagCoolDown = 2000;
 const tagTime = 60;
 const laserTagTime = 120;
 const tagWaitTime = 10; 
-const laserTagWaitTime = 1;
+const laserTagWaitTime = 10;
 const leoProfanity = require('leo-profanity');
-let online = {};
 let chat = {};
-const customWords = ['niga', 'nigas', 'fucked', 'niger', 'nigar', 'nigers', 'ilikballs', 'ilikeballs', 'fucker', 'n!gers', 'n!ger', 'n1ga', 'n1ger', 'n1gas', 'n1gers', 'dih'];
+const customWords = ['niga', 'nigas', 'fucked', 'niger', 'nigar', 'nigers', 'ilikballs', 'ilikeballs', 'fucker', 'n!gers', 'n!ger', 'n1ga', 'n1ger', 'n1gas', 'n1gers', 'dih', 'dik', 'dick', 'd!ck', 'd!cks', 'd!ckhead', 'd!ckheads', 'd!cks', 'd!ckheads', 'd!ckhead', 'd!cks'];
 function randomName() {
   return `${(a=>a[Math.floor(Math.random()*a.length)])(['Dark','Silent','Lonely','Shining','Secret','Fun','Excited','Happy','Spicy'])} ${(b=>b[Math.floor(Math.random()*b.length)])(['Glitch','Frog','Bear','Pepper','io game'])}`
 }
@@ -70,9 +70,11 @@ function cleanProfanity(input) {
 let game = {   
   tag: {},
   laserTag: {},
+  infection: {},
+  racing: {}
 };   
-const tagMaps = ["forest", "city", "cave", "school"]
-const laserTagMaps = ["forest", "city", "cave", "school"]
+const tagMaps = ["forest", "city", "cave", "school", "noGravity"]
+const laserTagMaps = ["forest", "city", "cave", "school", "noGravity"]
 
 const { GITHUB_TOKEN, GITHUB_USER, GITHUB_REPO, GITHUB_FILE_PATH } = process.env;
 
@@ -131,7 +133,7 @@ function scheduleSave() {
 let data;
 const run = async () => {
   data = await getFileFromRepo();
-  const TEN_DAYS = 10 * 24 * 60 * 60 * 1000; // 10 days in milliseconds
+  const TEN_DAYS = 10 * 24 * 60 * 60 * 1000; 
 const now = Date.now();
 Object.keys(data.players).forEach((playerId) => {
   const playerData = data.players[playerId];
@@ -205,7 +207,6 @@ function removeString(array, str) {
 function joinGameRoom(socket, playy, gameType, startGameCallback, roomType, mapChoice, timeChoice) {
   let world;
   const playerId = playy.id;
-  const playerName = playy.name;
   const joinRoom = () => {
    if(game[gameType][world]) {
       socket.join(world);
@@ -214,6 +215,8 @@ function joinGameRoom(socket, playy, gameType, startGameCallback, roomType, mapC
     if(!data.players[playy.id]) data.players[playy.id] = {name: randomName()}
     if(gameType == "tag") socket.emit("world", {world: world, map: game.tag[world].map, random: game.tag[world].random || "nothing", name: data.players[playy.id].name});
      if(gameType == "laserTag") socket.emit("world", {world: world, map: game.laserTag[world].map, random: game.laserTag[world].random || "nothing"});
+      if(gameType == "racing") socket.emit("world", {world: world, map: game.racing[world].map});
+      if(gameType == "infection") socket.emit("world", {world: world, map: game.infection[world].map, random: game.infection[world].random || "nothing"});
      socket.to(world).emit("chat message", {
       message: `${data.players[playy.id].name} joined the game`,
       id: "server",
@@ -243,23 +246,32 @@ function joinGameRoom(socket, playy, gameType, startGameCallback, roomType, mapC
       startGameCallback();
       clearInterval(game[gameType][world].intervalStart);
     } else if (players.length > 1 && !game[gameType][world].started) {
-      if (game[gameType][world].intervalStart)
-        clearInterval(game[gameType][world].intervalStart);
-      game[gameType][world].timeToStart = tagWaitTime;
-      game[gameType][world].intervalStart = setInterval(() => {
-        if (game[gameType][world]) {
-          io.to(world).emit("time to start", game[gameType][world].timeToStart);
-          game[gameType][world].timeToStart--;
-          if (game[gameType][world].timeToStart < 1 && players.length > 1) {
-            startGameCallback();
-            clearInterval(game[gameType][world].intervalStart);
+      if(gameType === "infection") {
+        if(players.length > 2) {
+          join()
+        } else {
+           io.to(world).emit("time to start", "waiting for one more player...");
+        }   
+      } else {
+        join()
+      }
+      function join() {
+        if (game[gameType][world].intervalStart)
+          clearInterval(game[gameType][world].intervalStart);
+        game[gameType][world].timeToStart = tagWaitTime;
+        game[gameType][world].intervalStart = setInterval(() => {
+          if (game[gameType][world]) {
+            io.to(world).emit("time to start", game[gameType][world].timeToStart);
+            game[gameType][world].timeToStart--;
+            if (game[gameType][world].timeToStart < 1 && players.length > 1) {
+              startGameCallback();
+              clearInterval(game[gameType][world].intervalStart);
+            }
           }
-        }
-      }, 1000);
+        }, 1000);
+      }
     }
-   } else {
-     
-   }
+   } 
   };
   function addRocks(gameType, world) {
     let random = [];
@@ -305,6 +317,23 @@ if (roomType == "public") {
       cooldown: true,
         zapOuts: {"no one": -10}
     };
+    } else if (gameType == "racing") {
+      game[gameType][world] = {
+      players: [],
+      started: false,
+      timeToStart: laserTagWaitTime,
+      intervalStart: undefined,
+      map: "test"
+    };
+    } else if(gameType == "infection") {
+      game[gameType][world] = {
+        players: [],
+        started: false,
+        timeToStart: tagWaitTime,
+        intervalStart: undefined,
+        map: tagMaps[Math.floor(Math.random() * tagMaps.length)],
+        cooldown: true,
+      };
     }
     
     if(game[gameType][world].map == "forest") {
@@ -367,6 +396,12 @@ function startTag(world) {
     }
   }, 1000);
 }
+function startRacing(world1) {
+  let world = game.racing[world1]
+  const players = world.players;
+  world.started = true;
+  io.to(world1).emit("game start");
+}
 function startLaserTag(world1) {
   let world = game.laserTag[world1]
   const players = world.players;
@@ -384,27 +419,34 @@ function startLaserTag(world1) {
     }
   }, 1000);
 }
-function startFreezeTag(world1) {
-  let world = game.laserTag[world1]
+function startInfection(world1) {
+  let world = game.infection[world1]
   const players = world.players;
   world.started = true;
   world.timeLeft = world.timeLeft || laserTagTime;
-  io.to(world1).emit("game start");
   const randomIndex = Math.floor(Math.random() * players.length);
-  game.freezeTag[world].freezer = players[randomIndex];
-  io.to(world).emit("game start", players[randomIndex]);
+  setTimeout(()=>{
+    io.to(world1).emit("chat message", {
+      id: "server",
+      name: "server",
+      message: `${data.players[players[randomIndex]].name} is infected!`,
+    })
+  }, 2000)
+    io.to(world1).emit("game start", players[randomIndex]);
+  world.infected = [players[randomIndex]]
   const gameTimer = setInterval(() => {
     if(world && world.timeLeft){
      world.timeLeft--;
     io.to(world1).emit("time left", world.timeLeft);
     if (world.timeLeft < 1) {
       clearInterval(gameTimer);
-      endGame(world1, "freezeTag");
+      endGame(world1, "infection");
     } 
     }
   }, 1000);
+  world.gameTimer = gameTimer;
 }
-function endGame(world, gameType, noOneLeft) {
+function endGame(world, gameType, noOneLeft, twoPlayer) {
   io.to(world).emit("game over");
   if(!noOneLeft) {
   if (gameType === "tag") {
@@ -454,6 +496,10 @@ function endGame(world, gameType, noOneLeft) {
   });
     } else {
       if (topPlayers.length > 1) {
+        
+        topPlayers.forEach(player => {
+          data.players[player[0]].laserTagWins = 'laserTagWins' in data.players[player[0]] ? data.players[player[0]].laserTagWins + 1 : 1;
+        });
         const winners = topPlayers.map(player => data.players[player[0]].name).join(", ");
         io.to(world).emit("chat message", {
           id: "server",
@@ -461,6 +507,7 @@ function endGame(world, gameType, noOneLeft) {
           message: `${winners} tied for first with ${topPlayers[0][1]} zapouts!`,
         });
       } else {
+        data.players[topPlayers[0][0]].laserTagWins = 'laserTagWins' in data.players[topPlayers[0][0]] ? data.players[topPlayers[0][0]].laserTagWins + 1 : 1;
         io.to(world).emit("chat message", {
           id: "server",
           name: "server",
@@ -473,30 +520,61 @@ function endGame(world, gameType, noOneLeft) {
 data.gamesPlayed++
     console.log(data.gamesPlayed)
     scheduleSave();
+  } else if(gameType == "infection") {
+    let winners;
+  let losers;
+    let gameworld = game[gameType][world];
+  if(gameworld) {
+    losers = gameworld.infected;
+    winners = gameworld.players.filter(
+      (player) => !losers.includes(player)
+    );
+     let lose
+  if(typeof losers == "object" && losers.length > 1) {
+    lose = losers.map((id) => data.players[id].name).join(", ")
+  } else {
+    lose = data.players[losers].name
   }
-
- 
-} else {
+    let winnerText = "";
+    winners.forEach((id, index)=>{
+      data.players[id].infectionWins = 'infectionWins' in data.players[id] ? data.players[id].infectionWins + 1 : 1;
+      if (index+1 != winners.length) winnerText = winnerText+data.players[id].name+", "
+      if (index+1 === winners.length) winnerText = winnerText+"and "+data.players[id].name
+      if(winners.length === 1) winnerText = data.players[id].name
+    })
   io.to(world).emit("chat message", {
     id: "server",
     name: "server",
-    message: "No one left to finish the game! Sending you back...",
+    message: `${winnerText} won! And ${
+       lose
+    } lost!`,
   });
-}
-  delete game[gameType][world];
-}
-function getIP(reqOrSocket) {
-  // If it's a socket (from Socket.IO)
-  if (reqOrSocket.handshake) {
-    const forwarded = reqOrSocket.handshake.headers['x-forwarded-for'];
-    return (forwarded ? forwarded.split(',')[0] : null) || reqOrSocket.handshake.address;
+    data.gamesPlayed++
+    console.log(data.gamesPlayed)
+    gameworld.started = false;
+    clearInterval(gameworld.intervalStart);
+    clearInterval(gameworld.gameTimer);
+    gameworld.intervalStart = undefined;
+    gameworld.timeToStart = 30;
   }
-
-  // If it's an Express request
-  const forwarded = reqOrSocket.headers?.['x-forwarded-for'];
-  return (forwarded ? forwarded.split(',')[0] : null) || reqOrSocket.socket?.remoteAddress || '';
+  }
+} else {
+    if(twoPlayer) {
+      io.to(world).emit("chat message", {
+    id: "server",
+    name: "server",
+    message: "The game ended because there are only 2 players left.",
+  });
+    } else {
+      io.to(world).emit("chat message", {
+        id: "server",
+        name: "server",
+        message: "No one left to finish the game! Sending you back...",
+      });
+    }
 }
-
+  if(game[gameType][world]) delete game[gameType][world];
+}
 
 
 io.on("connection", (socket) => {
@@ -525,8 +603,69 @@ io.on("connection", (socket) => {
       socket.emit("issue")
     } 
   })
-  socket.on("leaderboard", ()=>{
+  socket.on("getName", (playerId)=>{
+    socket.emit("getName", data.players[playerId])
+  if(playerId === "50hV0UG2FP1ox14CYNXG") {
+    socket.emit("customSkin", "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/crock.glb")
+  }
+  })
+  socket.on("leaderboard", (gameType)=>{
+    if (gameType === "random") {
+      let leaderboard = Object.entries(data.players)
+        .map(([playerId, player]) => {
+          let totalWins = (player.tagWins || 0) + (player.laserTagWins || 0) + (player.infectionWins || 0);
+          return [playerId, { ...player, totalWins }];
+        })
+        .filter(([, player]) => player.totalWins > 0)
+        .sort(([, a], [, b]) => b.totalWins - a.totalWins)
+        .slice(0, 20)
+        .reduce((obj, [key, value]) => {
+          obj[key] = value;
+          return obj;
+        }, {});
+      if(Object.keys(leaderboard).length === 0) {
+        leaderboard = Object.entries(data.players).slice(0, 20)
+        .reduce((obj, [key, value]) => {
+          obj[key] = value;
+          return obj;
+        }, {});
+      }
+      socket.emit("leaderboard", leaderboard);
+      return;
+    } else {
+      let leaderboard = Object.entries(data.players)
+        .filter(([, player]) => player[`${gameType}Wins`] > 0)
+        .sort(([, a], [, b]) => (b[`${gameType}Wins`] || 0) - (a[`${gameType}Wins`] || 0))
+        .slice(0, 20)
+        .reduce((obj, [key, value]) => {
+          obj[key] = value;
+          return obj;
+        }, {});
+      if(Object.keys(leaderboard).length === 0) {
+        leaderboard = Object.entries(data.players).slice(0, 20)
+        .reduce((obj, [key, value]) => {
+          obj[key] = value;
+          return obj;
+        }, {});
+      }
+      socket.emit("leaderboard", leaderboard)
+    }
+
+  })
+  socket.on("allPlayers", ()=>{
     socket.emit("leaderboard", data.players)
+  })
+  
+  socket.on("resetWins", (code)=>{
+    let adcode = process.env.ADMINCODE || "spicy"
+    if(code == adcode) {
+      Object.keys(data.players).forEach((player)=>{
+        data.players[player].tagWins = 0;
+        data.players[player].laserTagWins = 0;
+        data.players[player].infectionWins = 0;
+      })
+      scheduleSave();
+    }
   })
   socket.on("mapRequest", ({playerId, mapCode})=>{
     data.mapRequests.push({playerId: playerId, request: mapCode})
@@ -546,7 +685,7 @@ io.on("connection", (socket) => {
   socket.on("removeRequest", ({code, type, index})=>{
     let adcode = process.env.ADMINCODE || "spicy"
     if(code == adcode) {
-      if(type == "newNames") {
+      if(type === "newNames") {
         delete data.newNames[index]
       } else {
         data[type].splice(index, 1);
@@ -556,7 +695,40 @@ io.on("connection", (socket) => {
     } 
     
   })
+  socket.on("findGame", ()=>{
+      let availableGames = [];
+      const gameTypes = ["tag", "laserTag", "infection"];
+      gameTypes.forEach((gameType) => {
+       
+        Object.keys(game[gameType]).forEach((world) => {
+          if (game[gameType][world] && world.split("-")[1] != "private" && !game[gameType][world].started) {
+            availableGames.push({ gameType, world });
+          }
+        });
+      });
+      if(availableGames.length < 1 && (Object.keys(game.tag).length > 0 || Object.keys(game.laserTag).length > 0 || Object.keys(game.infection).length > 0)) {
+        let shortestGame = null;
+        let shortestTime = Infinity;
+        gameTypes.forEach(gameType => {
+          Object.keys(game[gameType]).forEach(world => {
+            const currentGame = game[gameType][world];
+            if (currentGame && currentGame.started && currentGame.timeLeft < shortestTime) {
+              shortestTime = currentGame.timeLeft;
+              shortestGame = gameType;
+            }
+          });
+        });
+        socket.emit("world", shortestGame);
+      } else if(availableGames.length > 0) {
+        let chosenGame = availableGames[Math.floor(Math.random() * availableGames.length)];
+        socket.emit("world", chosenGame.gameType);
+      } else {
+        let randomGameType = gameTypes[Math.floor(Math.random() * gameTypes.length)];
+        socket.emit("world", randomGameType);
+      }
+  })
   socket.on("world", (stuff) => {
+    console.log(stuff)
     socket.playerId = stuff.id;
     if(data.players[stuff.id]) data.players[stuff.id].lastUpdated = Date.now();
   scheduleSave();
@@ -578,12 +750,7 @@ io.on("connection", (socket) => {
       return;
     }
   }
-    if(online[stuff.id]) {
-      socket.emit("kick")
-      socket.disconnect();
-      return;
-    }
-    if (stuff.world === "tag") {
+   if (stuff.world === "tag") {
       if(!stuff.map) stuff.map = "forest"
       if(!stuff.time) stuff.time = 60
       joinGameRoom(socket, stuff, "tag", () => startTag(socket.room), stuff.room, stuff.map, stuff.time);
@@ -591,12 +758,15 @@ io.on("connection", (socket) => {
        if(!stuff.map) stuff.map = "forest"
       if(!stuff.time) stuff.time = 60;
       joinGameRoom(socket, stuff, "laserTag", () => startLaserTag(socket.room), stuff.room, stuff.map, stuff.time);
-    } else if (stuff.world === "freezeTag") {
+    } else if (stuff.world === "infection") {
       if(!stuff.map) stuff.map = "forest"
       if(!stuff.time) stuff.time = 60;
-      joinGameRoom(socket, stuff, "freezeTag", () => startFreezeTag(socket.room), stuff.room, stuff.map, stuff.time);
+      joinGameRoom(socket, stuff, "infection", () => startInfection(socket.room), stuff.room, stuff.map, stuff.time);
+    } else if(stuff.world === "racing") {
+      if(!stuff.map) stuff.map = "test"
+      if(!stuff.time) stuff.time = 60;
+      joinGameRoom(socket, stuff, "racing", () => startRacing(socket.room), stuff.room, stuff.map, stuff.time);
     }
-    online[stuff.id] = true; 
   });
   socket.on("player update", function (data2) {
     let data3 = data2;
@@ -607,12 +777,20 @@ io.on("connection", (socket) => {
 socket.on("change name", ({playerId, name})=>{
   if(!data.players[playerId]) data.players[playerId] = {}
   if(cleanProfanity(name).bad) name = randomName()
+  if(!name) name = randomName()
   data.bannedNames.forEach((bannedName)=>{
     if(name.toLowerCase().includes(bannedName)) name = randomName()
   })
+  let nameCounter = 1;
+  console.log("changing name", name, playerId)
   Object.keys(data.players).forEach((key)=>{
-      if(data.players[key].name && normalizeName(name) === normalizeName(data.players[key].name)) name = name+" 2.0"
+      if(data.players[key].name && normalizeName(name).replace(/[0-9]/g, '') === normalizeName(data.players[key].name).replace(/[0-9]/g, '')) {
+        nameCounter++
+      }
     })
+  if(nameCounter > 1) {
+    name = name+nameCounter
+  }
   socket.emit("change name", name)
     data.players[playerId].name = name
   if(!data.newNames) data.newNames = {}
@@ -621,7 +799,7 @@ socket.on("change name", ({playerId, name})=>{
 })
   socket.on("ban name", ({code, name})=>{
     let adcode = process.env.ADMINCODE || "spicy"
-    if(code === adcode) {
+    if(code === adcode && name) {
       data.bannedNames.push(name.toLowerCase()) 
     Object.keys(data.players).forEach((key)=>{
       if(data.players[key].name.toLowerCase().includes(name.toLowerCase())) data.players[key].name = randomName()
@@ -645,6 +823,31 @@ socket.on("change name", ({playerId, name})=>{
       }, tagCoolDown)
     }
   });
+  socket.on("player infected", (tagged)=>{
+    const world = game.infection[socket.room];
+    if(world && world.started && !world.infected.includes(tagged)) {
+      world.infected.push(tagged)
+      io.to(socket.room).emit("player infected", tagged);
+      io.to(socket.room).emit("chat message", {
+        message: `${data.players[tagged].name} was infected!`,
+        id: "server",
+        name: "server",
+      });
+      if(world.infected.length+1 == world.players.length) {
+        clearInterval(world.intervalStart);
+         let winner = data.players[world.players.filter((player)=>!world.infected.includes(player))[0]].name
+        io.to(socket.room).emit("chat message", {
+          message: `Ending the game because everyone but ${winner} was infected!`,
+          id: "server",
+          name: "server",
+        })
+        setTimeout(()=>{
+          endGame(socket.room, "infection");
+        }, 3000)
+
+      }
+    }
+  })
   socket.on("player zapped", (data) =>{
     const world = game.laserTag[socket.room];
     if(world && world.started) {
@@ -696,52 +899,65 @@ if(chat[socket.room])   chat[socket.room].push(message)
    socket.on("ban player", (banData) => {
      let adcode = process.env.ADMINCODE || "spicy"
   if(banData.code === adcode) {
-    console.log(banData.id)
+    console.log("banned id", banData.id)
 banId(banData.id, banData.time, banData.reason); 
   }
      
   }); 
 socket.on("disconnecting", () => {
-    if (socket.playerId) {
-      delete online[socket.playerId];
-    }
+  disconnectPlayer(socket.playerId, socket.room)
   });
-  socket.on("disconnect", () => {
-  if (!socket.room) {
-    return;
-  }
-  const world = socket.room;
-  const playerId = socket.playerId;
-  const gameType = world.split("-")[0]
-  const gameworld = game[gameType][world]
-  delete online[socket.playerId];
-  if (gameworld) {
-    removeString(gameworld.players, playerId);
-    socket.to(world).emit("player left", playerId);
-    io.to(world).emit("chat message", {
-      message: `${data.players[playerId].name} left the game`,
-      id: "server",
-      name: "server",
-    });
-    if(gameType == "tag" && playerId === gameworld.whoIt) {
-      const randomIndex = Math.floor(Math.random() * gameworld.players.length);
-      gameworld.whoIt = gameworld.players[randomIndex]
-      io.to(world).emit("player tagged", gameworld.whoIt);
+  function disconnectPlayer(playerId, world) {
+    if (!socket.room) {
+      return;
+    }
+    const gameType = world.split("-")[0]
+    const gameworld = game[gameType][world]
+    if (gameworld) {
+      removeString(gameworld.players, playerId);
+      socket.to(world).emit("player left", playerId);
       io.to(world).emit("chat message", {
-        message: `${data.players[gameworld.whoIt].name} is it now!`,
+        message: `${data.players[playerId].name} left the game`,
         id: "server",
         name: "server",
       });
-    }
+      if(gameType == "tag" && playerId === gameworld.whoIt) {
+        const randomIndex = Math.floor(Math.random() * gameworld.players.length);
+        gameworld.whoIt = gameworld.players[randomIndex]
+        io.to(world).emit("player tagged", gameworld.whoIt);
+        io.to(world).emit("chat message", {
+          message: `${data.players[gameworld.whoIt].name} is it now!`,
+          id: "server",
+          name: "server",
+        });
+      } else if(gameType === "infection" && gameworld.players.length > 2 && gameworld.started && gameworld.infected.length == 1 && gameworld.infected[0] === playerId) {
+        const randomIndex = Math.floor(Math.random() * gameworld.players.length);
+        gameworld.infected = [gameworld.players[randomIndex]]
+        io.to(world).emit("player infected", gameworld.infected[0]);
+        io.to(world).emit("chat message", {
+          message: `${data.players[gameworld.infected[0]].name} is infected now!`,
+          id: "server",
+          name: "server",
+        });
+      } else if(gameType === "infection" && gameworld.started && gameworld.players.length < 3) {
+        gameworld.started = false;
+        clearInterval(gameworld.intervalStart);
+        gameworld.intervalStart = undefined;
+        gameworld.timeToStart = 30;
+        endGame(world, gameType, true, true);
+      }
 
-    if (gameworld.players.length < 2) {
-      gameworld.started = false;
-      clearInterval(gameworld.intervalStart);
-      gameworld.intervalStart = undefined;
-      gameworld.timeToStart = 30;
-      endGame(world, gameType, true);
-    } 
+      if (gameworld.players.length < 2) {
+        gameworld.started = false;
+        clearInterval(gameworld.intervalStart);
+        gameworld.intervalStart = undefined;
+        gameworld.timeToStart = 30;
+        endGame(world, gameType, true);
+      } 
+    }
   }
+  socket.on("disconnect", () => {
+    disconnectPlayer(socket.playerId, socket.room)
 });
 
 });

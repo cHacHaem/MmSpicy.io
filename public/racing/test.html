@@ -1,0 +1,216 @@
+ <a-scene physics="debug: false;">
+<a-assets>
+        <a-asset-item id="marioCart" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/raceCar3.glb"></a-asset-item>
+        <img id="concrete" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/concrete.png"/>
+         <img id="road" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/road.png"/>
+         <img id="grass" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/grass.png"/>
+
+         <a-asset-item id="barrierModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/raceTrackBarrier.glb"></a-asset-item>
+      <a-mixin id="barrier" gltf-model="#barrierModel" instanced-mesh-member="mesh:#barrierIn" static-body="shape:none" shape__main="shape:box;offset:0 0.5 0;halfExtents:2 0.5 0.3" shape__fence="shape:box;offset:0 2 0;halfExtents:2 1 0.05"></a-mixin>
+        </a-assets>
+      <!-- Car chassis -->
+       <a-entity gltf-model="#barrierModel" id="barrierIn" instanced-mesh="positioning: world"></a-entity>
+
+           <a-entity id="car" position="0 5 0"
+                     geometry="primitive: box; width: 1.5; height: 0.4; depth: 3"
+                     dynamic-body="mass: 800"
+                     gltf-model="#marioCart"
+                     rotation="0 0 0"
+                     raycast-vehicle>
+                     <a-camera wasd-controls="enabled: false" position="0 5 10" id="cam"></a-camera>
+                    </a-entity>
+                    
+
+      <!-- Ground -->
+       <a-entity mixin="barrier" position="0 0 -10" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="4 0 -10" rotation="0 0 0"></a-entity>
+        <a-entity mixin="barrier" position="-4 0 -10" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="0 0 3" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="4 0 3" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="0 0 3" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="-4 0 3" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="-7.78 0 2.33" rotation="0 -20 0"></a-entity>
+       <a-entity mixin="barrier" position="-7.78 0 -10.7" rotation="0 -20 0"></a-entity>
+       <a-entity mixin="barrier" position="-14.77 0 -13.93" rotation="0 -40 0"></a-entity>
+              <a-entity mixin="barrier" position="-17.83 0 -16.5" rotation="0 -40 0"></a-entity>
+       <a-entity mixin="barrier" position="-20.89 0 -19.07" rotation="0 -40 0"></a-entity>
+        <a-entity mixin="barrier" position="-21.25 0 -4.82" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="-25.23 0 -4.82" rotation="0 0 0"></a-entity>
+         <a-entity mixin="barrier" position="-29.26 0 -4.82" rotation="0 0 0"></a-entity>
+      <a-entity mixin="barrier" position="-33.29 0 -4.82" rotation="0 0 0"></a-entity>
+      <a-entity mixin="barrier" position="-33.29 0 -4.82" rotation="0 0 0"></a-entity>
+        <a-entity mixin="barrier" position="-37.32 0 -4.82" rotation="0 0 0"></a-entity>
+       <a-entity mixin="barrier" position="-41.35 0 -4.82" rotation="0 0 0"></a-entity>
+        <a-entity mixin="barrier" position="-45.38 0 -4.82" rotation="0 0 0"></a-entity>
+        <a-entity mixin="barrier" position="-49.41 0 -4.82" rotation="0 0 0"></a-entity>
+        <a-entity mixin="barrier" position="-53.44 0 -4.82" rotation="0 0 0"></a-entity>
+        <a-entity mixin="barrier" position="-57.47 0 -4.82" rotation="0 0 0"></a-entity>
+        <a-entity mixin="barrier" position="-61.5 0 -4.82" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-61.25 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-65.18 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-69.11 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-61.35 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-65.28 0 -27.58" rotation="0 10.7 0"></a-entity>
+<a-entity mixin="barrier" position="-69.5 0 -26.85" rotation="0 10.7 0"></a-entity>
+<a-entity mixin="barrier" position="-73.06 0 -26.11" rotation="0 10.7 0"></a-entity>
+<a-entity mixin="barrier" position="-76.97 0 -25.37" rotation="0 10.7 0"></a-entity>
+<a-entity mixin="barrier" position="-80.85 0 -24.64" rotation="0 10.7 0"></a-entity>
+<a-entity mixin="barrier" position="-84.39 0 -23.22" rotation="0 32.52 0"></a-entity>
+<a-entity mixin="barrier" position="-87.29 0 -20.76" rotation="0 46.14 0"></a-entity>
+<a-entity mixin="barrier" position="-90.04 0 -17.9" rotation="0 46.14 0"></a-entity>
+<a-entity mixin="barrier" position="-92.25 0 -14.73" rotation="0 64.36 0"></a-entity>
+<a-entity mixin="barrier" position="-93.97 0 -11.15" rotation="0 64.36 0"></a-entity>
+<a-entity mixin="barrier" position="-95.11 0 -7.49" rotation="0 80.9 0"></a-entity>
+<a-entity mixin="barrier" position="-95.74 0 -3.55" rotation="0 80.9 0"></a-entity>
+<a-entity mixin="barrier" position="-94.73 0 -0.42" rotation="0 132.71 0"></a-entity>
+<a-entity mixin="barrier" position="-92.02 0 2.51" rotation="0 132.71 0"></a-entity>
+<a-entity mixin="barrier" position="-89.31 0 5.44" rotation="0 132.71 0"></a-entity>
+<a-entity mixin="barrier" position="-86.6 0 8.37" rotation="0 132.71 0"></a-entity>
+<a-entity mixin="barrier" position="-83.89 0 11.3" rotation="0 132.71 0"></a-entity>
+<a-entity mixin="barrier" position="-81.19 0 14.22" rotation="0 132.71 0"></a-entity>
+<a-entity mixin="barrier" position="-78.48 0 17.15" rotation="0 132.71 0"></a-entity>
+<a-entity mixin="barrier" position="-75.8 0 20.06" rotation="0 132.71 0"></a-entity>
+          <a-entity mixin="barrier" position="-64.78 0 -3.56" rotation="0 42.75 0"></a-entity>
+  <a-entity mixin="barrier" position="-66.07 0 -0.48" rotation="0 93.13 0"></a-entity>
+          <a-entity mixin="barrier" position="-64.8 0 3" rotation="0 125 0"></a-entity>
+                      <a-entity mixin="barrier" position="-62.52 0 6.26" rotation="0 125 0"></a-entity>
+  <a-entity mixin="barrier" position="-60.25 0 9.51" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-58.01 0 12.75" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-55.74 0 15.99" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-53.47 0 19.24" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-51.2 0 22.48" rotation="0 125 0"></a-entity>
+      <a-entity mixin="barrier" position="-60.08 0.89 37.94" rotation="0 125 -31.68"></a-entity>
+       <a-entity mixin="barrier" position="-58.14 2.97 40.7" rotation="0 125 -31.68"></a-entity>
+        <a-entity mixin="barrier" position="-56.2 5.05 43.46" rotation="0 125 -31.68"></a-entity>
+        <a-entity mixin="barrier" position="-52.72 7.1 47.46" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-50.38 7.1 50.68" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-48.03 7.1 53.9" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-45.69 7.1 57.12" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-43.35 7.1 60.34" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-41 7.1 63.56" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-38.66 7.1 66.78" rotation="0 125 0"></a-entity>
+        <a-entity mixin="barrier" position="-35.48 6.18 71.18" rotation="0 125 31.68"></a-entity>
+         <a-entity mixin="barrier" position="-33.49 4.08 73.93" rotation="0 125 31.68"></a-entity>
+          <a-entity mixin="barrier" position="-31.5 2 76.68" rotation="0 125 31.68"></a-entity>
+           <a-entity mixin="barrier" position="-29.05 0 80.89" rotation="0 112.96 0"></a-entity>
+           <a-entity mixin="barrier" position="-27.48 0 84.58" rotation="0 112.96 0"></a-entity>
+           <a-entity mixin="barrier" position="-25.93 0 88.24" rotation="0 112.96 0"></a-entity>
+           <a-entity mixin="barrier" position="-23.99 0 91.65" rotation="0 125 0"></a-entity>
+           <a-entity mixin="barrier" position="-21.67 0 94.96" rotation="0 125 0"></a-entity>
+            <a-entity mixin="barrier" position="-19.35 0 98.27" rotation="0 125 0"></a-entity>
+              <a-entity mixin="barrier" position="-17.03 0 101.58" rotation="0 125 0"></a-entity>
+                <a-entity mixin="barrier" position="-14.71 0 104.89" rotation="0 125 0"></a-entity>
+                  <a-entity mixin="barrier" position="-12.39 0 108.2" rotation="0 125 0"></a-entity>
+                  <a-entity mixin="barrier" position="-10.07 0 111.51" rotation="0 125 0"></a-entity>
+                  <a-entity mixin="barrier" position="-7.22 0 113.9" rotation="0 155.47 0"></a-entity>
+                  <a-entity mixin="barrier" position="-3.6 0 115.54" rotation="0 155.47 0"></a-entity>
+                  <a-entity mixin="barrier" position="0 0 117.19" rotation="0 155.47 0"></a-entity>
+                  <a-entity mixin="barrier" position="3.62 0 118.85" rotation="0 155.47 0"></a-entity>
+                  <a-entity mixin="barrier" position="7.28 0 119.58" rotation="0 -177.66 0"></a-entity>
+                  <a-entity mixin="barrier" position="11.21 0 119.42" rotation="0 -177.66 0"></a-entity>
+                  <a-entity mixin="barrier" position="15.2 0 119.25" rotation="0 -177.66 0"></a-entity>
+                  <a-entity mixin="barrier" position="18.98 0 118.51" rotation="0 -159.8 0"></a-entity>
+                  <a-entity mixin="barrier" position="22.74 0 117.13" rotation="0 -159.8 0"></a-entity>
+                  <a-entity mixin="barrier" position="26.47 0 115.76" rotation="0 -159.8 0"></a-entity>
+              <a-entity mixin="barrier" position="-11.5 0 -12.06" rotation="0 -20 0"></a-entity>
+              <a-entity mixin="barrier" position="-49.81 0 26.03" rotation="0 96.76 0"></a-entity>
+              <a-entity mixin="barrier" position="-47.67 1.7 30.54" rotation="0 125.97 -31.68"></a-entity>
+              <a-entity mixin="barrier" position="-45.68 3.8 33.28" rotation="0 125.97 -31.68"></a-entity>
+              <a-entity mixin="barrier" position="-43.69 5.9 36.02" rotation="0 125.97 -31.68"></a-entity>
+              <a-entity mixin="barrier" position="-41.57 7.1 39.37" rotation="0 125.97 0"></a-entity>
+              <a-entity mixin="barrier" position="-39.21 7.1 42.62" rotation="0 125.97 0"></a-entity>
+              <a-entity mixin="barrier" position="-36.85 7.1 45.87" rotation="0 125.97 0"></a-entity>
+              <a-entity mixin="barrier" position="-34.48 7.1 49.12" rotation="0 125.97 0"></a-entity>
+              <a-entity mixin="barrier" position="-32.12 7.1 52.37" rotation="0 125.97 0"></a-entity>
+              <a-entity mixin="barrier" position="-29.75 7.1 55.62" rotation="0 125.97 0"></a-entity>
+              <a-entity mixin="barrier" position="-27.39 7.1 58.87" rotation="0 125.97 0"></a-entity>
+                    <a-entity mixin="barrier" position="30.17 0 114.39" rotation="0 -159.8 0"></a-entity>
+                    <a-entity mixin="barrier" position="33.73 0 112.7" rotation="0 -148.9 0"></a-entity>
+                    <a-entity mixin="barrier" position="37.14 0 110.64" rotation="0 -148.9 0"></a-entity>
+                    <a-entity mixin="barrier" position="40.16 0 108.2" rotation="0 -132.8 0"></a-entity>
+                    <a-entity mixin="barrier" position="40.16 0 108.2" rotation="0 -132.8 0"></a-entity>
+                    <a-entity mixin="barrier" position="42.47 0 105.05" rotation="0 -119.19 0"></a-entity>
+                    <a-entity mixin="barrier" position="44.41 0 101.58" rotation="0 -119.19 0"></a-entity>
+              <a-entity mixin="barrier" position="45.79 0 98.03" rotation="0 -104.1 0"></a-entity>
+              <a-entity mixin="barrier" position="46.75 0 94.21" rotation="0 -104.1 0"></a-entity>
+              <a-entity mixin="barrier" position="47.27 0 90.4" rotation="0 -90.68 0"></a-entity>
+<a-entity mixin="barrier" position="33.86 0 54.74" rotation="0 -43.52 0"></a-entity>
+<a-entity mixin="barrier" position="30.98 0 52.01" rotation="0 -43.52 0"></a-entity>
+<a-entity mixin="barrier" position="27.85 0 49.71" rotation="0 -29.04 0"></a-entity>
+<a-entity mixin="barrier" position="24.43 0 47.81" rotation="0 -29.04 0"></a-entity>
+<a-entity mixin="barrier" position="20.83 0 46.33" rotation="0 -14.29 0"></a-entity>
+<a-entity mixin="barrier" position="17.09 0 45.37" rotation="0 -14.29 0"></a-entity>
+<a-entity mixin="barrier" position="13.22 0 44.39" rotation="0 -14.29 0"></a-entity>
+<a-entity mixin="barrier" position="9.35 0 43.4" rotation="0 -14.29 0"></a-entity>
+<a-entity mixin="barrier" position="5.49 0 42.42" rotation="0 -14.29 0"></a-entity>
+<a-entity mixin="barrier" position="1.62 0 41.43" rotation="0 -14.29 0"></a-entity>
+<a-entity mixin="barrier" position="-2.14 0 40.47" rotation="0 -14.29 0"></a-entity>
+<a-entity mixin="barrier" position="-5.98 0 39.5" rotation="0 -14.29 0"></a-entity>
+<a-entity mixin="barrier" position="-9.83 0 39.1" rotation="0 2.77 0"></a-entity>
+<a-entity mixin="barrier" position="-13.78 0 39.29" rotation="0 2.77 0"></a-entity>
+<a-entity mixin="barrier" position="-17.7 0 39.48" rotation="0 2.77 0"></a-entity>
+<a-entity mixin="barrier" position="-21.6 0 39.67" rotation="0 2.77 0"></a-entity>
+<a-entity mixin="barrier" position="-25.55 0 39.86" rotation="0 2.77 0"></a-entity>
+<a-entity mixin="barrier" position="-29.33 0 40.64" rotation="0 21.33 0"></a-entity>
+<a-entity mixin="barrier" position="-20.92 0 -19.09" rotation="0 -40 0"></a-entity>
+<a-entity mixin="barrier" position="-23.92 0 -21.61" rotation="0 -40 0"></a-entity>
+<a-entity mixin="barrier" position="-26.94 0 -24.15" rotation="0 -40 0"></a-entity>
+<a-entity mixin="barrier" position="-30.04 0 -26.74" rotation="0 -40 0"></a-entity>
+<a-entity mixin="barrier" position="-33.39 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-37.39 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-41.39 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-45.39 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-49.39 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-53.39 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="-57.39 0 -27.96" rotation="0 0 0"></a-entity>
+<a-entity mixin="barrier" position="47.31 0 86.44" rotation="0 -90.68 0"></a-entity>
+<a-entity mixin="barrier" position="47.36 0 82.48" rotation="0 -90.68 0"></a-entity>
+<a-entity mixin="barrier" position="47.08 0 78.58" rotation="0 -80.74 0"></a-entity>
+<a-entity mixin="barrier" position="46.02 0 74.85" rotation="0 -68.14 0"></a-entity>
+<a-entity mixin="barrier" position="44.54 0 71.16" rotation="0 -68.14 0"></a-entity>
+<a-entity mixin="barrier" position="42.74 0 67.68" rotation="0 -57.16 0"></a-entity>
+<a-entity mixin="barrier" position="40.61 0 64.37" rotation="0 -57.16 0"></a-entity>
+<a-entity mixin="barrier" position="38.47 0 61.07" rotation="0 -57.16 0"></a-entity>
+       <a-entity mixin="barrier" position="-24.32 6.18 63.08" rotation="0 125.97 31.68"></a-entity>
+        <a-entity mixin="barrier" position="-22.32 4.08 65.83" rotation="0 125.97 31.68"></a-entity>
+        <a-entity mixin="barrier" position="-20.32 2 68.58" rotation="0 125.97 31.68"></a-entity>
+       <a-entity mixin="barrier" position="-11.5 0 0.95" rotation="0 -20 0"></a-entity>
+       <a-entity mixin="barrier" position="-14.9 0 -1.05" rotation="0 -40 0"></a-entity>
+        <a-entity mixin="barrier" position="-17.9 0 -3.58" rotation="0 -40 0"></a-entity>
+            <a-box scale="100 0.1 100" static-body src="#grass" material="roughness: 1; repeat: 3 3" class="grass" ></a-box>
+              <a-box scale="100 0.1 100" position="0 0 100" static-body src="#grass" material="roughness: 1; repeat: 3 3" class="grass"></a-box>
+               <a-box scale="100 0.1 100" position="-100 0 100" static-body src="#grass" material="roughness: 1; repeat: 3 3" class="grass" ></a-box>
+            <a-box scale="100 0.1 100" position="-100 0 0" static-body src="#grass" material="roughness: 1; repeat: 3 3" class="grass"></a-box>
+            <a-box position="0 0 -3.5" scale="12 0.4 12.5" static-body="sphereRadius: NaN" material="roughness: 1" src="#road" velocity=""></a-box>
+            <a-box position="-7.64031 0 -4.25177" scale="8 0.41 12.5" static-body="sphereRadius: NaN" material="repeat: 0.5 1; roughness: 1" src="#road" velocity="" rotation="0 -20 0"></a-box>
+            <a-box position="-20.63811 0 -12.46898" scale="12 0.41 10" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -40 0"></a-box>       <a-box position="-13.69065 0 -5.26267" scale="8 0.4 7.75897" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -40 0"></a-box>
+            <a-box position="-10.83735 0 -9.65704" scale="7.15509 0.42 3.95377" static-body="sphereRadius: NaN" material="repeat: 0.6 0.3; roughness: 1" src="#road" velocity="" rotation="0 -18.603366650102696 0"></a-box>
+
+<a-box scale="29.58183 2 13.27093" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-39.67481 6.33219 53.83075" rotation="0 125.97300000000001 0"></a-box>
+<a-box scale="14.09973 2 13.27093" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-27.74445 2.80074 70.24427" rotation="0 125.97336562643846 31.68"></a-box>
+           <a-box scale="10 2 9" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-63 -0.49879 -17" rotation="0 0 6.31"></a-box>
+           <a-box position="-31.65759 0 -17" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity=""></a-box>
+           <a-box position="-24.79449 0 -18.34403" scale="3.906 0.42 5.36482" static-body="sphereRadius: NaN" material="repeat: 0.3 0.3; roughness: 1" src="#road" velocity="" rotation="0 -20.912386564479917 0"></a-box>
+           <a-box position="-71.95125 0 -16.01751" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 10.695403161707077 0"></a-box>
+           <a-box position="-80.44832 0 -12.11097" scale="12 0.41 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 38.737676528794964 0"></a-box>
+           <a-box position="-84.50073 0 -5.19975" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 80.56531444673045 0"></a-box>
+                    <a-box position="-74.42366 0 10.15353" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 132.71536000174285 0"></a-box>
+          <a-box position="-74.42366 0 10.15353" scale="35.97602 0.41 9" static-body="sphereRadius: NaN" material="repeat: 2.9 0.6; roughness: 1" src="#road" velocity="" rotation="0 132.71536000174285 0"></a-box>
+          <a-box position="-59.12288 0 27.80852" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 125.00000000000001 0"></a-box>
+                    <a-box scale="10 2 9" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-41.88904 0 -17" rotation="0 0 -12.843421935652533"></a-box>
+              <a-box scale="14.09973 2 13.89" static-body="sphereRadius: NaN" src="#road" material="repeat: 0.1 0.1; roughness: 1" velocity="" position="-51.55918 2.80074 37.43406" rotation="0 125.97336562643846 -31.68112832396374"></a-box>  
+              <a-box position="-13.39727 0 89.79338" scale="36 0.4 9" static-body="sphereRadius: NaN" material="repeat: 3 0.6; roughness: 1" src="#road" velocity="" rotation="0 125.00000000000001 0"></a-box>
+              <a-box position="0.6155 0 105.84531" scale="12 0.41 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 152.76086142218983 0"></a-box>
+              <a-box position="9.25312 0 107.33652" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -172.19960053759328 0"></a-box>
+              <a-box position="19.52116 0 104.48084" scale="12 0.41 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -156.73776147819288 0"></a-box>
+              <a-box position="28.49478 0 99.03136" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -140.88688407589865 0"></a-box>
+              <a-box position="33.66221 0 91.60701" scale="12 0.41 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -108.96454052018485 0"></a-box>
+              <a-box position="34.41096 0 82.17554" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -80.69881361299593 0"></a-box>
+              <a-box position="31.1801 0 72.36026" scale="12 0.41 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -62.7881529372064 0"></a-box>
+              <a-box position="24.96585 0 63.88442" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -44.41339644736089 0"></a-box>
+              <a-box position="16.69833 0 58.58513" scale="12 0.41 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -21.025832207915823 0"></a-box>
+              <a-box position="5.99978 0 55.28417" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -13.269702535229866 0"></a-box>
+              <a-box position="-5.35573 0 52.60618" scale="12 0.41 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 -13.269702535229866 0"></a-box>
+              <a-box position="-15.39796 0 52.28345" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 8.967362451592514 0"></a-box>
+              <a-box position="-26.72421 0 54.07074" scale="12 0.41 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 8.967362451592514 0"></a-box>
+              <a-box position="-37.34824 0 56.66679" scale="12 0.4 9" static-body="sphereRadius: NaN" material="repeat: 0.6 0.6; roughness: 1" src="#road" velocity="" rotation="0 18.481899597534966 0"></a-box>

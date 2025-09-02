@@ -41,6 +41,10 @@ function pencilSkin() {
   skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/pencilAnimated.glb"
   setSkin()
 }
+function pirateSkin() {
+  skin = "https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/pirateAnimated.glb"
+  setSkin()
+}
 setTimeout(()=>{
   setSkin()
 }, 500)

@@ -1,25 +1,24 @@
 /* global playerId socket player players params */
+let whoIt = "";
 let done = false;
 let gameStarted = false;
+const gameMode = "tag";
 let it = document.getElementById("it")
 let map;
-const gameMode = "infection";
-let infected = [];
 let sceneLoaded3 = false;
 let timeLeftEl = document.getElementById("timeleft")
 console.log("Hello! Please don't do any naughty stuff. I'm not going to try and stop you but I will remind you that if your cheating on a game like this it's just sad.")
 socket.on("game start", (itFirst)=>{
   setTimeout(()=>{
-    it.innerHTML = "Run Away!";
-       tagPlayer(itFirst)
-    gameStarted = true;
+     tagPlayer(itFirst)
+  gameStarted = true;
   }, 2000)
 })
 if(params.get("join") == "random"){
-  socket.emit("world", { world: "infection", id: playerId, name: name, room: "public" });
+  socket.emit("world", { world: "racing", id: playerId, name: name, room: "public" });
 } else if(params.get("join") == "private") {
-  if(params.get("privateroom") != "create") socket.emit("world", { world: "infection", id: playerId, name: name, room: "tag-private-"+params.get("privateroom")});
-  if(params.get("privateroom") == "create") socket.emit("world", { world: "infection", id: playerId, name: name, room: "create", map: params.get("map"), time: params.get("time")});
+  if(params.get("privateroom") != "create") socket.emit("world", { world: "racing", id: playerId, name: name, room: "racing-private-"+params.get("privateroom")});
+  if(params.get("privateroom") == "create") socket.emit("world", { world: "racing", id: playerId, name: name, room: "create", map: params.get("map"), time: params.get("time")});
 socket.on("not found", ()=>{
           it.innerHTML = "Game Not Found"
   setTimeout(()=>{
@@ -35,22 +34,7 @@ function insertHTMLFromFile(filePath) {
       const targetElement = document.querySelector('body'); 
       targetElement.insertAdjacentHTML('beforeend', xhr.responseText); 
       sceneLoaded()
-      sceneLoaded2()
       sceneLoaded3 = "done";
-      player.addEventListener('collide', function (e) {
-  if(gameStarted) {
-    let otherDude = e.detail.body.el.id;
-  console.log(infected)
-  if (infected.includes(otherDude)) {
-    socket.emit("player infected", playerId);
-    console.log(otherDude)
-  } 
-  else if (otherDude in players && infected.includes(playerId)) {
-    socket.emit("player infected", otherDude);
-    console.log(otherDude)
-  }
-  }
-});
     } else {
       console.error('Error loading file:', xhr.status);
     }
@@ -65,26 +49,8 @@ function insertHTMLFromFile(filePath) {
 socket.on("world", (world)=>{
   map = world.map;
   name = world.name
-  if(world.map == "forest") {
-    insertHTMLFromFile("/tag/treeHouse.html")
-    setTimeout(()=>{
-    let map = document.getElementById("map")
-    world.random.forEach((r)=>{
-      let rock = document.createElement("a-entity")
-  rock.setAttribute("mixin", "rock")
-       rock.setAttribute("position", {x: r.xp, y: 0, z: r.yp})
-      rock.setAttribute("scale", {x: r.xs, y: r.ys, z: r.zs})
-  map.appendChild(rock)
-    })
-  }, 5000)
-  } else if(world.map == "city") {
-    insertHTMLFromFile("/tag/city.html")
-  }  else if(world.map == "cave") {
-    insertHTMLFromFile("/tag/cave.html")
-  }  else if(world.map == "school") {
-    insertHTMLFromFile("/tag/school.html")
-  } else if(world.map == "noGravity") {
-    insertHTMLFromFile("/tag/noGravity.html")
+  if(world.map == "test") {
+    insertHTMLFromFile("/racing/test.html")
   }
   if(world.world.includes("tag-private")) it.innerHTML = "game code: " + world.world.split("-")[2];
   it.innerHTML ="world: " + world.world
@@ -94,7 +60,7 @@ socket.on("world", (world)=>{
 socket.on("game over", (game)=>{
   gameStarted = false;
   timeLeftEl.innerHTML = "";
-  it.setAttribute("class", "over");
+  it.setAttribute("class", "it");
   it.innerHTML = "Game Over";
   setTimeout(()=>{
     window.location.href = "/play"
@@ -102,8 +68,6 @@ socket.on("game over", (game)=>{
 })
 socket.on("time to start", (time)=>{
   if(time == "waiting for players...") {
-    timeLeftEl.innerHTML = time;
-  } else if(time == "waiting for one more player...") {
     timeLeftEl.innerHTML = time;
   } else {
     timeLeftEl.innerHTML = "Time To Start: " + formatTime(time)
@@ -119,31 +83,37 @@ socket.on("time left", (left)=>{
   timeLeftEl.innerHTML = formatTime(left)
 })
 
-socket.on("player infected", (evt) => {
+socket.on("player tagged", (evt) => {
   tagPlayer(evt)
 });
 
 // Function to handle tagging logic
 function tagPlayer(taggedPlayer) {
+  // Remove the marker from the current "it" player
+  if (whoIt && whoIt !== playerId) {
+    const currentMarker = document.getElementById("marker" + whoIt);
+    if (currentMarker) {
+      currentMarker.setAttribute("visible", "false");
+    }
+  }
+
   // If the current player is not the one tagged
-  infected.push(taggedPlayer)
-  console.log(document.getElementById(taggedPlayer+"-model"))
   if (playerId !== taggedPlayer) {
-    const mesh = document.getElementById(taggedPlayer+"-model").getObject3D('mesh');
-    console.log(mesh)
-    mesh.traverse((node) => {
-      if (node.isMesh) {
-        node.material.color.set("green");
-      }
-    });
+    it.innerHTML = "Run Away!";
+    it.setAttribute("class", "notit");
   }
 
   // If the current player is tagged
   if (playerId === taggedPlayer) {
-    it.innerHTML = "You're Infected!";
+    it.innerHTML = "You're It!";
     it.setAttribute("class", "it");
-  } 
-
+  } else {
+    // Ensure the tagged player exists in the game
+    const newMarker = document.getElementById("marker" + taggedPlayer);
+    if (newMarker) {
+      newMarker.setAttribute("visible", "true");  // Add the marker to the tagged player
+    }
+  }
 
   whoIt = taggedPlayer;  // Update who is "it"
 }

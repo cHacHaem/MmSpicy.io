@@ -1,0 +1,264 @@
+    <a-scene physics="debug: false">
+      <a-assets>
+        <a-asset-item id="blasterModel" src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/laserBlaster.glb"></a-asset-item>
+        <img
+          id="ground"
+          crossorigin="anonymous"
+          src="https://cdn.glitch.global/756a4aaf-b43f-4a95-998c-1c3ac912e721/ground.001.png?v=1725831593424"
+        />
+        <a-asset-item
+          id="carModel"
+          src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/car.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="benchModel"
+          src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/bench.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="asteroidModel"
+          src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/asteroid.glb"
+        ></a-asset-item>
+        <a-mixin
+          id="bench"
+           instanced-mesh-member="mesh:#benchIn"
+          material="color:green;roughness:0"
+          static-body="shape: none"
+          shape__main="shape:box;halfExtents:0.6 0.05 2;offset:0.4 1 0"
+          shape__back="shape:box;halfExtents:0.05 0.5 2;offset:-0.2 1.5 0"
+        ></a-mixin>
+        <a-mixin
+          id="asteroid"
+          instanced-mesh-member="mesh:#asteroidIn" 
+          static-body="shape:none"
+          shape__main="shape:sphere;radius: 2;"
+        ></a-mixin>
+        <a-asset-item
+          id="treeModel"
+          src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/tree.glb"
+        ></a-asset-item>
+        <a-mixin
+          id="tree"
+          instanced-mesh-member="mesh:#treeIn" 
+          static-body="shape: none"
+          shape__trunk="shape: cylinder; offset: 0 2.5 0; height: 5"
+          shape__leaves="shape: sphere; offset: 0 6.3 0; radius: 2"
+        ></a-mixin>
+        <a-asset-item
+          id="crateModel"
+          src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/crate.glb"
+        ></a-asset-item>
+        <a-mixin
+          id="crate"
+           instanced-mesh-member="mesh:#crateIn"
+          static-body="shape:none"
+          shape__main="shape:box;offset:0 1 0;halfExtents:1 1 1"
+        ></a-mixin>
+        <a-asset-item
+          id="bricksBig"
+          src="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/brickWallBig.glb"
+        ></a-asset-item>
+        <a-mixin
+          id="BBW"
+          static-body="shape: none"
+          shape__main="offset: 0 3 0; halfExtents: 5 3 0.25"
+           instanced-mesh-member="mesh:#bigWallIn"
+        ></a-mixin>
+      </a-assets>
+       <a-entity gltf-model="#carModel" id="carIn" instanced-mesh="positioning: world;drainColor:true;decompose:true" ></a-entity>
+      <a-entity gltf-model="#crateModel" id="crateIn" instanced-mesh="positioning: world;capacity:10"></a-entity>
+       <a-entity gltf-model="#bricksBig" id="bigWallIn" instanced-mesh="positioning: world"></a-entity>
+       <a-entity gltf-model="#benchModel" id="benchIn" instanced-mesh="positioning: world"></a-entity>
+       <a-entity gltf-model="#treeModel" id="treeIn" instanced-mesh="positioning: world"></a-entity>
+      <a-entity gltf-model="#asteroidModel" id="asteroidIn" instanced-mesh="positioning: world"></a-entity>
+      <a-entity
+        mixin="asteroid"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="5.82143 17.06134 7.2896"
+      ></a-entity>
+      <a-entity
+        mixin="crate"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="-21.70663 5.03249 14.71549"
+        rotation="0 36.87957439918571 29.081618807455193"
+      ></a-entity>
+      <a-entity
+        mixin="BBW"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="-2.58234 15.55263 -31.5041"
+        rotation="-58.22740888796504 22.672512911121807 0"
+      ></a-entity>
+      <a-entity
+        mixin="tree"
+        position="5.90056 0 16.10185"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        rotation="47.1572913282424 31.26344209131337 0"
+      ></a-entity>
+      <a-entity
+        instanced-mesh-member="mesh: #carIn; colors: gray" 
+        static-body="shape: none; sphereRadius: NaN"
+        shape__main="offset: 0 1 0; halfExtents: 1.5 2 4"
+        velocity=""
+        position="-0.62531 0 -1.78301"
+        rotation="13.938917239942667 48.85439231741991 -11.886009459988928"
+      ></a-entity>
+      <a-entity
+        mixin="bench"
+        position="-8.37518 1 2.41265"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        rotation="0 39.28026756078385 42.39830388188579"
+      ></a-entity>
+      <a-entity
+        instanced-mesh-member="mesh: #carIn; colors: red" 
+        static-body="shape: none; sphereRadius: NaN"
+        shape__main="offset: 0 1 0; halfExtents: 1.5 2 4"
+        velocity=""
+        position="-6.02363 3.54435 14.76332"
+        rotation="-32.45462134739035 -21.33637533287673 4.5452741887728205"
+      ></a-entity>
+      <a-entity
+        instanced-mesh-member="mesh: #carIn; colors: black" 
+        static-body="shape: none; sphereRadius: NaN"
+        shape__main="offset: 0 1 0; halfExtents: 1.5 2 4"
+        velocity=""
+        position="-12.13388 3.54435 -6.8753"
+        rotation="-12.865194331867507 -3.7316741196870513 -28.309271699618844"
+      ></a-entity>
+      <a-entity
+        instanced-mesh-member="mesh: #carIn; colors: gray" 
+        static-body="shape: none; sphereRadius: NaN"
+        shape__main="offset: 0 1 0; halfExtents: 1.5 2 4"
+        velocity=""
+        position="10.62657 3.54435 -14.10584"
+        rotation="37.85990518665454 -175.39040249867682 153.69134488148228"
+      ></a-entity>
+      <a-entity
+        instanced-mesh-member="mesh: #carIn; colors: gray" 
+        static-body="shape: none; sphereRadius: NaN"
+        shape__main="offset: 0 1 0; halfExtents: 1.5 2 4"
+        velocity=""
+        position="16.34231 3.54435 3.71998"
+        rotation="-1.8787286102339693 -53.94856007392805 30.730018384046577"
+      ></a-entity>
+      <a-entity
+        mixin="bench"
+        position="20.40452 7.33103 -8.68902"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        rotation="0 39.28026756078385 42.39830388188579"
+      ></a-entity>
+      <a-entity
+        mixin="tree"
+        position="-0.80438 0 -20.2115"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        rotation="47.1572913282424 -117.1280431852088 0"
+      ></a-entity>
+      <a-entity
+        mixin="tree"
+        position="-25.00666 0 -0.20346"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        rotation="47.1572913282424 -117.1280431852088 0"
+      ></a-entity>
+      <a-entity
+        mixin="tree"
+        position="-7.28979 7.82898 -20.2115"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        rotation="47.1572913282424 -153.22266540506527 0"
+      ></a-entity>
+      <a-entity
+        mixin="BBW"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="24.43622 -2.08034 -24.8997"
+        rotation="-58.22740888796504 22.672512911121807 0"
+      ></a-entity>
+      <a-entity
+        mixin="bench"
+        position="7.37676 17.54386 -30.1908"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        rotation="-1.5733421054292405 -43.0566323884911 -168.27999626110335"
+      ></a-entity>
+      <a-entity
+        mixin="crate"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="7.29595 16.26403 -19.29529"
+        rotation="10.068014376038825 81.01966997826919 15.392511166189566"
+      ></a-entity>
+      <a-entity
+        mixin="BBW"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="11.98406 15.55263 -2.87909"
+        rotation="-82.94079746534284 62.62314109220872 -1.6913714112261902"
+      ></a-entity>
+      <a-entity
+        mixin="crate"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="-8.15288 16.26403 3.2141"
+        rotation="52.969948159844606 75.21446159800371 5.076406064859094"
+      ></a-entity>
+      <a-entity
+        mixin="bench"
+        position="-3.54495 17.54386 -9.7834"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        rotation="-38.575529472772935 -20.88832233708442 134.87082722702502"
+      ></a-entity>
+      <a-entity
+        mixin="BBW"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="-16.65962 20.21337 -8.95716"
+        rotation="-82.94079746534284 62.62314109220872 -1.6913714112261902"
+      ></a-entity>
+      <a-entity
+        mixin="asteroid"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="-23.23181 17.06134 7.2896"
+      ></a-entity>
+      <a-entity
+        mixin="crate"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        position="29.50764 16.11524 -2.78787"
+        rotation="52.969948159844606 75.21446159800371 5.076406064859094"
+      ></a-entity>
+      <a-entity
+        mixin="tree"
+        position="17.16906 18.21905 11.23262"
+        velocity=""
+        static-body="sphereRadius: NaN"
+        rotation="47.1572913282424 31.26344209131337 0"
+      ></a-entity>
+      <a-sky color="black"></a-sky>
+      <a-sphere id="player" position="0 5 0" material="opacity: 0; transparent: true"  player-controls>
+        <a-camera position="0 1.6 0" look-controls="pointerLockEnabled: true" wasd-controls="enabled: false" id="cam"
+      > <a-entity position="0.4, -0.5, -1"
+              rotation="0 -90 0"
+      gltf-model="#blasterModel"
+      scale="2 2 2"
+      blaster
+      ></a-entity> <a-entity id="playerRay"
+              raycaster="objects: .player; far: 100; autocast: false"
+              position="0 0 0"
+              direction="0 0 -1">
+      </a-entity>
+
+      <a-entity id="shootRay"
+              raycaster="far: 100; autocast: false; objects: .shootable"
+              position="0 0 0"
+              direction="0 0 -1">
+      </a-entity></a-camera>
+      </a-sphere>
+    </a-scene>

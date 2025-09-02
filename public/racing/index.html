@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-   <meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
       <meta name="description" content="MmSpicy io is a multiplayer 3d tag game that can be played online against strangers, or you can create a private game to play with friends.">
     <meta name="keywords" content="multiplayer, tag, online, 3d, first-person, io, play, free, game">
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/cHacHaem/mmspicyassets@main/favicon.png">
   <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
   <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/instanced-mesh@v0.7.4/src/instanced-mesh.min.js"></script>
-  <title>Laser Tag</title>
+  <title>Racing</title>
   <style>
     body, html {
       margin: 0;
@@ -19,36 +19,6 @@
       width: 100%;
       overflow: hidden;
     }
-    .progress-ring {
-  width: 120px;  /* Double the size */
-  height: 120px; /* Double the size */
-  position: absolute;
-  bottom: 20px;  /* Adjust the distance from the bottom */
-  left: 50%;
-  transform: translateX(-50%); /* Centers the element horizontally */
-  z-index: 60;
-}
-
-.progress-ring circle {
-  fill: none;
-  stroke-width: 24;  /* Double the stroke width */
-  cx: 60;  /* Adjust cx and cy for the new size */
-  cy: 60;
-  r: 48;   /* Double the radius */
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-}
-
-.progress-ring-bg {
-  stroke: #e6e6e6;
-}
-
-.progress-ring-fg {
-  stroke: #4caf50;
-  stroke-dasharray: 301.44;  /* Adjusted for new radius */
-  stroke-dashoffset: calc(301.44 * var(--percent, 0.75));
-  transition: stroke-dashoffset 0.5s ease;
-}
 .message {
   background: green;
   border-radius: 7px;
@@ -57,17 +27,6 @@
   overflow-wrap: break-word;
   white-space: normal;
 }
-     #crosshair {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    color: white;
-    pointer-events: none; 
-    user-select: none;
-    z-index: 9999;
-  }
     .notit {
       color: lightgreen;
       margin-left: 20px;
@@ -111,7 +70,7 @@
       height: 100%;
       z-index: 2; /* Scene will be behind the overlay */
     }
-    
+
     .overlay {
       position: absolute;
       top: 0;
@@ -170,10 +129,10 @@
       cursor: pointer;
     }
   </style>
-  </head>
-  <body>
-     <div id="mobile-warning"> </div><script src="/mobile.js"></script>
-    <div class="gameinfo">
+</head>
+<body>
+   <div id="mobile-warning"> </div><script src="/mobile.js"></script>
+<div class="gameinfo">
   <h1 id="timeleft">
     1:00
   </h1>
@@ -190,21 +149,12 @@
       <input type="text" id="chat-input" placeholder="Type a message...">
     </div>
   </div>
-     <div class="progress-ring" id="health" style="--percent: 0;">
-    <svg width="120" height="120" viewbox="0 0 120 120">
-      <circle class="progress-ring-bg" r="48" cx="60" cy="60"/>
-      <circle class="progress-ring-fg" id="ring" style="stroke: lime" r="48" cx="30" cy="60"/>
-    </svg>
-  </div>
-    <div id="crosshair">+</div>
-     <script src="/getPlayerData.js"></script>
-   <script src="/laserTag/multiplayer.js"></script>
+  <script src="/getPlayerData.js"></script>
+   <script src="/racing/multiplayer.js"></script>
   <script src="/stairs.js"></script>
-  <script src="/movement.js"></script>
   <script src="/animation.js"></script>
-  <script src="/spawn.js"></script>
   <script src="/chat.js"></script>
-  <script src="/laserTag/laserTag.js"></script>
-    <script src="/laserTag/blaster.js"></script>
-  </body>
+  <script src="/racing/racing.js"></script>
+   <script src="/racing/controls.js"></script>
+</body>
 </html>
