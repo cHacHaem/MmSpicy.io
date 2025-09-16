@@ -176,6 +176,55 @@
       <a href="/terms" style="margin: 0 6px; color: inherit; text-decoration: none;">Terms</a>
     </footer>
 
+<div id="announcement-overlay" role="dialog" aria-modal="true" aria-labelledby="announcement-title" aria-describedby="announcement-body" hidden>
+  <div class="card" role="document">
+    <div class="card-header">
+      <h2 id="announcement-title">Goodbye</h2>
+      <button class="close-btn" id="announcement-close" aria-label="Close announcement">✕</button>
+    </div>
 
+    <div class="card-body" id="announcement-body">
+      <p><strong>We're shutting down mmspicy</strong> Due to the fact that like no one plays this game anymore, and the fact that
+      even for the 10 people that still play there is no way to make money off of it. We tryed to sell custom skins but it wasn't 
+      advritised well and no one bought any. Contact us if you want one though for $5, maybe that'lll work. Google ads approval
+      doesn't work for this type of game either.
+    The domain and hosting costs are just not worth it, if you have any ideas or just want to say goodbye, contact us <a href="/contact">here.</a>
+  Our last domain <a href="https://mmspicyio.online">mmspicyio.online</a> expires 5/29/2026 so the game will be up until then. The rest of the 
+  domains expire sooner so if you want to keep playing go there.<br> 
+  Thanks for everything,
+  <br> we had a good run AMD
+
+</p>
+     
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const closeBtn = document.getElementById('announcement-close');
+const overlay = document.getElementById('announcement-overlay');
+  requestAnimationFrame(() => {
+    overlay.removeAttribute('hidden');
+    // small delay so CSS transition can run
+    setTimeout(()=> overlay.classList.add('open'), 10);
+  });
+
+  function close(save = true) {
+    overlay.classList.remove('open');
+    // wait for transition then hide
+    setTimeout(()=> {
+      overlay.setAttribute('hidden', '');
+    }, 260);
+  }
+
+  closeBtn.addEventListener('click', ()=> close(true));
+  // Click outside card closes (same as temporary close)
+  // Close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close(true);
+  });
+})();
+</script>
   </body>
 </html>
